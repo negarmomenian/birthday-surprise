@@ -1,0 +1,134 @@
+/* =========================
+   AUDIO CONTROLS
+   دکمه‌ی کنترل صدا
+   ========================= */
+
+.audio-toggle {
+    position: absolute;
+
+    top: calc(16px + env(safe-area-inset-top));
+    right: calc(16px + env(safe-area-inset-right));
+
+    z-index: 30;
+
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border: 1px solid rgba(255, 255, 255, 0.34);
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.18);
+
+    backdrop-filter: blur(14px) saturate(120%);
+    -webkit-backdrop-filter: blur(14px) saturate(120%);
+
+    box-shadow:
+        0 8px 22px rgba(0, 0, 0, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.42);
+
+    color: rgba(60, 50, 40, 0.9);
+
+    font-size: 20px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    pointer-events: auto;
+
+    appearance: none;
+
+    transition:
+        background 0.3s ease,
+        transform 0.3s ease,
+        opacity 0.5s ease;
+
+    opacity: 0;
+}
+
+.audio-toggle.visible {
+    opacity: 1;
+}
+
+.audio-toggle:hover {
+    background: rgba(255, 255, 255, 0.32);
+    transform: scale(1.08);
+}
+
+.audio-toggle:active {
+    transform: scale(0.94);
+}
+
+.audio-toggle.muted {
+    opacity: 0.6;
+}
+
+
+/* =========================
+   آیکون‌ها
+   ========================= */
+
+.audio-toggle .icon-on,
+.audio-toggle .icon-off {
+    display: block;
+    width: 20px;
+    height: 20px;
+    transition: opacity 0.3s ease;
+}
+
+.audio-toggle svg {
+    display: block;
+}
+
+.audio-toggle .icon-off {
+    display: none;
+}
+
+.audio-toggle.muted .icon-on {
+    display: none;
+}
+
+.audio-toggle.muted .icon-off {
+    display: block;
+}
+
+
+/* =========================
+   موبایل
+   ========================= */
+
+@media (max-width: 600px) {
+
+    .audio-toggle {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+        top: calc(12px + env(safe-area-inset-top));
+        right: calc(12px + env(safe-area-inset-right));
+    }
+
+}
+
+
+/* =========================
+   کاهش حرکت
+   ========================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .audio-toggle {
+        transition: opacity 0.5s ease;
+    }
+
+    .audio-toggle:hover {
+        transform: none;
+    }
+
+}

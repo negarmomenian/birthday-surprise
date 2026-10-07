@@ -1,0 +1,71 @@
+/* =========================
+   HINT PULSE ON FLOWER
+   حلقه‌ی نبض روی گل
+   ========================= */
+
+.flower.hint::after {
+  content: "";
+
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 90px;
+  height: 90px;
+
+  border-radius: 50%;
+
+  transform: translate(-50%, -50%);
+
+  border: 2px solid rgba(255, 235, 170, 0.9);
+
+  box-shadow:
+    0 0 25px rgba(255, 220, 130, 0.7),
+    0 0 50px rgba(255, 200, 90, 0.35);
+
+  animation: hint-pulse 1.8s ease-in-out infinite;
+
+  pointer-events: none;
+}
+
+@keyframes hint-pulse {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(0.85);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.15);
+    opacity: 1;
+  }
+}
+
+/* ✅ وقتی گل باز شد، نبض محو شه */
+
+.flower.opened.hint::after {
+  display: none !important;
+  animation: none !important;
+}
+
+/* =========================
+   موبایل
+   ========================= */
+
+@media (max-width: 600px) {
+  .flower.hint::after {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+/* =========================
+   کاهش حرکت
+   ========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .flower.hint::after {
+    animation: none;
+    opacity: 0.7;
+  }
+}

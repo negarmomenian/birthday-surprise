@@ -1,0 +1,94 @@
+/* =========================
+   PARALLAX
+   پارالاکس با ژیروسکوپ
+   ========================= */
+
+/* ✅ همه‌ی لایه‌ها، متغیرهای پارالاکس رو می‌گیرن */
+
+.meadow,
+.stars,
+.moon,
+.clouds,
+.clouds-over,
+.atmosphere-layer,
+.light-layer,
+.particles,
+.leaves,
+.bloom-flower {
+  /* متغیرهای پیش‌فرض (صفر) */
+  --parallax-x: 0px;
+  --parallax-y: 0px;
+
+  /* ✅ استفاده از transform جدید که پارالاکس رو هم شامل می‌شه */
+  will-change: transform;
+}
+
+/* =========================
+   لایه‌های جداگانه — transform جدید
+   ========================= */
+
+/* عکس دشت */
+.meadow {
+  transform: translate(var(--parallax-x), var(--parallax-y)) scale(1.05);
+  transform-origin: center center;
+}
+
+/* ستاره‌ها */
+.stars {
+  transform: translate(var(--parallax-x), var(--parallax-y));
+}
+
+/* ماه */
+.moon {
+  /* ماه خودش transform داره (translate + scale)
+       پس پارالاکس رو با margin اعمال می‌کنیم */
+  margin-left: var(--parallax-x);
+  margin-top: var(--parallax-y);
+}
+
+/* ابرها */
+.clouds,
+.clouds-over {
+  transform: translate(var(--parallax-x), var(--parallax-y));
+}
+
+/* گل‌ها */
+#flowers {
+  transform: translate(var(--parallax-x), var(--parallax-y));
+}
+
+/* برگ‌ها */
+.leaves {
+  transform: translate(var(--parallax-x), var(--parallax-y));
+}
+
+/* ذرات */
+.particles {
+  transform: translate(var(--parallax-x), var(--parallax-y));
+}
+
+/* گل پایانی (غنچه) */
+.bloom-flower {
+  margin-left: var(--parallax-x);
+  margin-top: var(--parallax-y);
+}
+
+/* =========================
+   اگه ژیروسکوپ کار نکرد، بدون پارالاکس کار کنه
+   ========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .meadow,
+  .stars,
+  .moon,
+  .clouds,
+  .clouds-over,
+  .atmosphere-layer,
+  .light-layer,
+  .particles,
+  .leaves,
+  .bloom-flower {
+    --parallax-x: 0px;
+    --parallax-y: 0px;
+  }
+}

@@ -1,0 +1,769 @@
+.meadow {
+  position: absolute;
+  inset: 0;
+
+  background-image: url("../assets/images/meadow/meadow-mahdieh.png");
+  background-size: cover;
+  background-position: center 25%;
+  background-repeat: no-repeat;
+
+  z-index: 1;
+}
+.sky-layer {
+  position: absolute;
+  inset: 0;
+
+  z-index: 2;
+
+  pointer-events: none;
+}
+
+.light-layer {
+  position: absolute;
+  inset: 0;
+
+  z-index: 3;
+
+  pointer-events: none;
+
+  transition:
+    background 4s ease,
+    opacity 4s ease;
+
+  opacity: 1;
+}
+/* =========================
+   DAY
+   ========================= */
+
+/* =========================
+   DAY
+   ========================= */
+
+#world[data-time="day"] .light-layer {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0)
+  );
+
+  opacity: 1;
+}
+/* =========================
+   DAWN LIGHT
+   ========================= */
+
+#world[data-time="dawn"] .light-layer {
+  background: linear-gradient(
+    to bottom,
+    rgba(80, 90, 145, 0.04),
+    rgba(255, 190, 135, 0.07)
+  );
+
+  opacity: 1;
+}
+
+/* =========================
+   GOLDEN HOUR
+   ========================= */
+
+#world[data-time="golden"] .light-layer {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 220, 160, 0.015),
+    rgba(255, 195, 125, 0.055)
+  );
+
+  opacity: 1;
+}
+
+/* =========================
+   TWILIGHT
+   ========================= */
+
+#world[data-time="twilight"] .light-layer {
+  background: linear-gradient(
+    to bottom,
+    rgba(80, 95, 155, 0.045),
+    rgba(55, 60, 115, 0.095)
+  );
+
+  opacity: 1;
+}
+
+/* =========================
+   NIGHT
+   ========================= */
+
+#world[data-time="night"] .light-layer {
+  background: linear-gradient(
+    to bottom,
+    rgba(15, 24, 55, 0.075),
+    rgba(18, 23, 52, 0.16)
+  );
+
+  opacity: 1;
+}
+
+#flowers {
+  position: absolute;
+  inset: 0;
+
+  z-index: 10;
+
+  pointer-events: none;
+}
+
+#memory-panel {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 20;
+
+  pointer-events: none;
+}
+.atmosphere-layer {
+  position: absolute;
+  inset: 0;
+
+  z-index: 2;
+
+  pointer-events: none;
+
+  opacity: 1;
+
+  transition:
+    background 4s ease,
+    opacity 4s ease;
+}
+
+/* =========================
+   DAY
+   ========================= */
+
+#world[data-time="day"] .atmosphere-layer {
+  background: linear-gradient(
+    to bottom,
+    rgba(125, 165, 210, 0.06),
+    rgba(255, 220, 175, 0.02) 60%,
+    rgba(255, 190, 130, 0.03)
+  );
+}
+/* =========================
+   DAWN
+   ========================= */
+
+#world[data-time="dawn"] .atmosphere-layer {
+  background: linear-gradient(
+    to bottom,
+    rgba(55, 65, 110, 0.1),
+    rgba(115, 100, 145, 0.08) 45%,
+    rgba(245, 175, 125, 0.1)
+  );
+}
+
+/* =========================
+   GOLDEN HOUR
+   ========================= */
+
+#world[data-time="golden"] .atmosphere-layer {
+  background: linear-gradient(
+    to bottom,
+    rgba(120, 155, 205, 0.05),
+    rgba(255, 205, 140, 0.07) 50%,
+    rgba(255, 155, 85, 0.11)
+  );
+}
+
+/* =========================
+   TWILIGHT
+   ========================= */
+
+#world[data-time="twilight"] .atmosphere-layer {
+  background: linear-gradient(
+    to bottom,
+    rgba(40, 60, 115, 0.12),
+    rgba(75, 70, 125, 0.13) 50%,
+    rgba(35, 38, 78, 0.2)
+  );
+}
+
+/*
+   NIGHT
+   */
+
+#world[data-time="night"] .atmosphere-layer {
+  background: linear-gradient(
+    to bottom,
+    rgba(3, 7, 20, 0.3),
+    rgba(6, 11, 30, 0.36) 55%,
+    rgba(12, 13, 30, 0.42)
+  );
+}
+/* =========================
+   SUNLIGHT
+   ========================= */
+
+#world::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 2;
+
+  pointer-events: none;
+
+  background: radial-gradient(
+    circle at 68% 30%,
+    rgba(255, 215, 145, 0.12),
+    rgba(255, 215, 145, 0.045) 22%,
+    rgba(255, 215, 145, 0) 52%
+  );
+
+  opacity: 0;
+
+  transition: opacity 4s ease;
+}
+#world[data-time="dawn"]::before {
+  opacity: 0.35;
+}
+#world[data-time="day"]::before {
+  opacity: 0.55;
+}
+
+#world[data-time="golden"]::before {
+  opacity: 0.9;
+}
+
+#world[data-time="twilight"]::before {
+  opacity: 0.18;
+}
+
+#world[data-time="night"]::before {
+  opacity: 0;
+}
+
+.clouds {
+  position: absolute;
+  inset: 0;
+
+  z-index: 6;
+
+  pointer-events: none;
+
+  overflow: hidden;
+
+  opacity: 1;
+
+  transition: opacity 3s ease;
+}
+
+.cloud {
+  position: absolute;
+
+  height: 65px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      ellipse at 20% 60%,
+      rgba(255, 255, 255, 0.45) 0%,
+      rgba(255, 255, 255, 0) 55%
+    ),
+    radial-gradient(
+      ellipse at 45% 40%,
+      rgba(255, 255, 255, 0.5) 0%,
+      rgba(255, 255, 255, 0) 60%
+    ),
+    radial-gradient(
+      ellipse at 70% 55%,
+      rgba(255, 255, 255, 0.38) 0%,
+      rgba(255, 255, 255, 0) 58%
+    );
+
+  filter: blur(7px);
+
+  opacity: 0.7;
+
+  will-change: transform;
+
+  animation: cloud-drift 45s linear infinite;
+}
+.cloud-1 {
+  width: 300px;
+  top: 12%;
+  left: -100px;
+
+  opacity: 0.42;
+
+  animation-duration: 55s;
+}
+
+.cloud-2 {
+  width: 420px;
+  top: 25%;
+  left: 30%;
+
+  height: 75px;
+
+  opacity: 0.3;
+
+  animation-duration: 70s;
+  animation-delay: -20s;
+}
+
+.cloud-3 {
+  width: 280px;
+  top: 17%;
+  left: 75%;
+
+  height: 55px;
+
+  opacity: 0.34;
+
+  animation-duration: 60s;
+  animation-delay: -35s;
+}
+.cloud-1 {
+  animation-duration: 75s;
+}
+
+.cloud-2 {
+  animation-duration: 90s;
+}
+
+.cloud-3 {
+  animation-duration: 80s;
+}
+@keyframes cloud-drift {
+  from {
+    transform: translateX(-80px);
+  }
+
+  to {
+    transform: translateX(calc(100vw + 500px));
+  }
+}
+#world[data-time="day"] .clouds {
+  opacity: 1;
+}
+
+#world[data-time="sunset"] .clouds {
+  opacity: 0.75;
+}
+#world[data-time="twilight"] .clouds {
+  opacity: 0.35;
+}
+
+#world[data-time="night"] .clouds {
+  opacity: 0.12;
+}
+#world[data-time="dawn"] .clouds {
+  opacity: 0.55;
+}
+
+#world[data-time="golden"] .clouds {
+  opacity: 0.75;
+}
+.stars {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 55%;
+
+  z-index: 4;
+
+  pointer-events: none;
+
+  opacity: 0;
+
+  background-image:
+    radial-gradient(
+      circle at 8% 18%,
+      rgba(255, 255, 255, 0.9) 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 17% 31%,
+      rgba(255, 255, 255, 0.75) 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 27% 12%,
+      rgba(255, 255, 255, 0.85) 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 36% 24%,
+      rgba(255, 255, 255, 0.8) 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 46% 10%,
+      rgba(255, 255, 255, 0.9) 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 55% 20%,
+      rgba(255, 255, 255, 0.7) 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 64% 13%,
+      rgba(255, 255, 255, 0.85) 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 73% 27%,
+      rgba(255, 255, 255, 0.8) 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 82% 15%,
+      rgba(255, 255, 255, 0.9) 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 91% 25%,
+      rgba(255, 255, 255, 0.7) 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 12% 43%,
+      rgba(255, 255, 255, 0.7) 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 23% 35%,
+      rgba(255, 255, 255, 0.9) 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 42% 46%,
+      rgba(255, 255, 255, 0.75) 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 58% 39%,
+      rgba(255, 255, 255, 0.8) 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 69% 35%,
+      rgba(255, 255, 255, 0.7) 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 87% 30%,
+      rgba(255, 255, 255, 0.85) 0 1px,
+      transparent 2px
+    );
+
+  transition: opacity 5s ease;
+}
+
+#world[data-time="twilight"] .stars {
+  opacity: 0.35;
+}
+
+#world[data-time="night"] .stars {
+  opacity: 1;
+  filter: brightness(1.2);
+}
+
+.moon {
+  position: absolute;
+
+  width: 65px;
+  height: 65px;
+
+  border-radius: 50%;
+
+  /* هسته‌ی ماه — روشن‌تر */
+  background: radial-gradient(
+    circle at 38% 35%,
+    rgba(255, 255, 250, 1) 0%,
+    rgba(252, 250, 235, 1) 40%,
+    rgba(245, 242, 222, 1) 75%,
+    rgba(235, 232, 212, 1) 100%
+  );
+
+  /* هاله‌ی چندلایه — قوی‌تر */
+  box-shadow:
+    inset -3px -3px 8px rgba(150, 150, 160, 0.3),
+    inset 2px 2px 6px rgba(255, 255, 255, 0.75),
+    /* هاله‌ی نزدیک */ 0 0 25px rgba(255, 250, 220, 0.85),
+    0 0 50px rgba(245, 245, 230, 0.55),
+    0 0 95px rgba(230, 235, 250, 0.35),
+    0 0 150px rgba(215, 225, 255, 0.2);
+
+  top: 18%;
+  left: 75%;
+
+  transform: translate(-50%, -50%) scale(0.7);
+
+  opacity: 0;
+
+  z-index: 5;
+
+  pointer-events: none;
+
+  transition:
+    opacity 5s ease,
+    transform 5s ease,
+    top 5s ease,
+    left 5s ease;
+}
+
+#world[data-time="day"] .moon {
+  opacity: 0;
+}
+
+#world[data-time="golden"] .moon {
+  opacity: 0;
+}
+
+#world[data-time="sunset"] .moon {
+  opacity: 0.08;
+
+  transform: translate(-50%, -50%) scale(0.75);
+}
+
+#world[data-time="twilight"] .moon {
+  opacity: 0.55;
+
+  transform: translate(-50%, -50%) scale(0.9);
+}
+
+#world[data-time="night"] .moon {
+  opacity: 1;
+
+  transform: translate(-50%, -50%) scale(1);
+}
+/* =========================
+   CLOUDS OVER LAYER
+   ابرهای نیمه‌شفاف روی ماه و ستاره‌ها
+   ========================= */
+
+/* =========================
+   CLOUDS OVER LAYER
+   ابرهای نیمه‌شفاف روی ماه
+   ========================= */
+/* =========================
+   CLOUDS OVER LAYER
+   ابرهای نیمه‌شفاف روی ماه
+   ========================= */
+
+.clouds-over {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 65%;
+
+  z-index: 7;
+
+  pointer-events: none;
+
+  overflow: hidden;
+
+  opacity: 0;
+
+  transition: opacity 4s ease;
+}
+
+#world[data-time="twilight"] .clouds-over {
+  opacity: 0.5;
+}
+
+#world[data-time="night"] .clouds-over {
+  opacity: 0.75;
+}
+
+/* =========================
+   ابر نرم و کم‌رنگ
+   ========================= */
+
+/* =========================
+   ابر نرم و کم‌رنگ
+   ========================= */
+
+.cloud-over {
+  position: absolute;
+
+  height: 65px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      ellipse at 25% 55%,
+      rgba(220, 220, 235, 0.5) 0%,
+      rgba(180, 185, 210, 0.35) 30%,
+      rgba(140, 145, 175, 0) 65%
+    ),
+    radial-gradient(
+      ellipse at 50% 40%,
+      rgba(230, 230, 240, 0.48) 0%,
+      rgba(185, 190, 215, 0.33) 35%,
+      rgba(145, 150, 180, 0) 70%
+    ),
+    radial-gradient(
+      ellipse at 75% 60%,
+      rgba(215, 220, 235, 0.45) 0%,
+      rgba(175, 180, 205, 0.3) 30%,
+      rgba(135, 140, 170, 0) 65%
+    );
+
+  filter: blur(11px);
+
+  will-change: transform;
+
+  animation: cloud-over-drift-right 100s linear infinite;
+}
+
+/* ابرهایی که چپ به راست حرکت می‌کنن */
+.cloud-over.reverse {
+  animation: cloud-over-drift-left 120s linear infinite;
+}
+
+/* =========================
+   موقعیت ابرها
+   ========================= */
+
+.cloud-over-1 {
+  width: 380px;
+  top: 6%;
+  left: -200px;
+
+  animation-duration: 125s;
+}
+
+.cloud-over-2 {
+  width: 480px;
+  top: 16%;
+  left: 20%;
+
+  height: 85px;
+
+  animation-duration: 155s;
+  animation-delay: -55s;
+
+  opacity: 0.85;
+}
+
+.cloud-over-3 {
+  width: 340px;
+  top: 30%;
+  left: 60%;
+
+  animation-duration: 140s;
+  animation-delay: -95s;
+
+  opacity: 0.75;
+}
+
+.cloud-over-4 {
+  width: 300px;
+  top: 10%;
+  left: 40%;
+
+  animation-duration: 165s;
+  animation-delay: -30s;
+
+  opacity: 0.7;
+}
+
+.cloud-over-5 {
+  width: 420px;
+  top: 26%;
+  left: -250px;
+
+  height: 75px;
+
+  animation-duration: 180s;
+  animation-delay: -120s;
+
+  opacity: 0.65;
+}
+
+/* =========================
+   انیمیشن راست به چپ
+   ========================= */
+
+@keyframes cloud-over-drift-right {
+  from {
+    transform: translateX(100vw);
+  }
+  to {
+    transform: translateX(-350px);
+  }
+}
+
+/* =========================
+   انیمیشن چپ به راست
+   ========================= */
+
+@keyframes cloud-over-drift-left {
+  from {
+    transform: translateX(-350px);
+  }
+  to {
+    transform: translateX(100vw);
+  }
+}
+/* =========================
+   STAR DIM LAYER
+   لایه‌ی تیره‌کننده ستاره‌ها
+   ========================= */
+
+.star-dim {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 45%;
+
+  z-index: 6; /* بالای ستاره‌ها (z=4)، پایین ابرها (z=7) */
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at 30% 20%,
+      rgba(10, 15, 35, 0.35) 0%,
+      rgba(10, 15, 35, 0) 55%
+    ),
+    radial-gradient(
+      ellipse at 70% 40%,
+      rgba(10, 15, 35, 0.3) 0%,
+      rgba(10, 15, 35, 0) 60%
+    ),
+    radial-gradient(
+      ellipse at 50% 10%,
+      rgba(10, 15, 35, 0.25) 0%,
+      rgba(10, 15, 35, 0) 50%
+    );
+
+  opacity: 0;
+
+  transition: opacity 4s ease;
+}
+
+#world[data-time="twilight"] .star-dim {
+  opacity: 0.5;
+}
+
+#world[data-time="night"] .star-dim {
+  opacity: 0.85;
+}

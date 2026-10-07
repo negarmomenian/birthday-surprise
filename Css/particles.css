@@ -1,0 +1,167 @@
+/* =========================
+   FLOATING PARTICLES
+   (گرده / غبار رویایی)
+   ========================= */
+
+.particles {
+    position: absolute;
+    inset: 0;
+
+    z-index: 4;   /* بین meadow (z=1) و atmosphere (z=2)... ولی چون meadow.css z-index 2 و 3 داره، این رو 4 می‌ذاریم که بالای meadow و پایین flowers (z=10) باشه */
+
+    pointer-events: none;
+
+    overflow: hidden;
+
+    /* خیلی ملایم، طوری که فقط حس رویا بده */
+    mix-blend-mode: screen;
+
+    opacity: 0;
+    transition:
+        opacity 3s ease,
+        -webkit-mask-image 3s ease,
+        mask-image 3s ease;
+}
+
+/* بعد از لود صفحه آروم ظاهر می‌شه */
+.particles.ready {
+    opacity: 1;
+}
+
+
+/* =========================
+   هر ذره
+   ========================= */
+
+.particle {
+    position: absolute;
+
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 248, 210, 0.95) 0%,
+            rgba(255, 235, 170, 0.55) 40%,
+            rgba(255, 235, 170, 0) 75%
+        );
+
+    filter: blur(0.5px);
+
+    will-change: transform, opacity;
+
+    animation:
+        particle-float
+        var(--duration)
+        ease-in-out
+        var(--delay)
+        infinite;
+
+    /* شروع نامرئی */
+    opacity: 0;
+}
+
+
+/* =========================
+   حرکت شناور
+   ========================= */
+
+@keyframes particle-float {
+
+    0% {
+        transform:
+            translate(0, 0)
+            scale(0.6);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: var(--peak-opacity, 0.7);
+    }
+
+    50% {
+        transform:
+            translate(
+                var(--drift-x, 30px),
+                calc(var(--drift-y, -60px) * 0.5)
+            )
+            scale(1);
+        opacity: var(--peak-opacity, 0.7);
+    }
+
+    85% {
+        opacity: var(--peak-opacity, 0.7);
+    }
+
+    100% {
+        transform:
+            translate(
+                calc(var(--drift-x, 30px) * 1.6),
+                var(--drift-y, -60px)
+            )
+            scale(0.6);
+        opacity: 0;
+    }
+}
+
+
+/* =========================
+   کاهش حرکت
+   ========================= */
+
+@media (prefers-reduced-motion: reduce) {
+    .particles {
+        display: none;
+    }
+}
+
+
+/* =========================
+   موبایل: سبک‌تر و کم‌تعدادتر
+   ========================= */
+
+@media (max-width: 600px) {
+
+    .particles {
+        mix-blend-mode: normal;  /* بعضی موبایل‌ها screen رو سنگین رندر می‌کنن */
+    }
+
+    .particle {
+        width: 5px;
+        height: 5px;
+        filter: blur(0.4px);
+    }
+}
+/* =========================
+   NIGHT / TWILIGHT
+   گرده‌ها فقط پایین صفحه
+   ========================= */
+
+#world[data-time="twilight"] .particles {
+    opacity: 0.75;
+}
+
+#world[data-time="night"] .particles {
+    opacity: 0.5;
+
+    -webkit-mask-image:
+        linear-gradient(
+            to bottom,
+            transparent 0%,
+            transparent 40%,
+            rgba(0, 0, 0, 0.4) 55%,
+            rgba(0, 0, 0, 1) 75%
+        );
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            transparent 0%,
+            transparent 40%,
+            rgba(0, 0, 0, 0.4) 55%,
+            rgba(0, 0, 0, 1) 75%
+        );
+}

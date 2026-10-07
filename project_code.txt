@@ -1,0 +1,5781 @@
+﻿========== Css\audio.css ==========
+/* =========================
+   AUDIO CONTROLS
+   Ø¯Ú©Ù…Ù‡â€ŒÛŒ Ú©Ù†ØªØ±Ù„ ØµØ¯Ø§
+   ========================= */
+
+.audio-toggle {
+    position: absolute;
+
+    top: calc(16px + env(safe-area-inset-top));
+    right: calc(16px + env(safe-area-inset-right));
+
+    z-index: 30;
+
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border: 1px solid rgba(255, 255, 255, 0.34);
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.18);
+
+    backdrop-filter: blur(14px) saturate(120%);
+    -webkit-backdrop-filter: blur(14px) saturate(120%);
+
+    box-shadow:
+        0 8px 22px rgba(0, 0, 0, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.42);
+
+    color: rgba(60, 50, 40, 0.9);
+
+    font-size: 20px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    pointer-events: auto;
+
+    appearance: none;
+
+    transition:
+        background 0.3s ease,
+        transform 0.3s ease,
+        opacity 0.5s ease;
+
+    opacity: 0;
+}
+
+.audio-toggle.visible {
+    opacity: 1;
+}
+
+.audio-toggle:hover {
+    background: rgba(255, 255, 255, 0.32);
+    transform: scale(1.08);
+}
+
+.audio-toggle:active {
+    transform: scale(0.94);
+}
+
+.audio-toggle.muted {
+    opacity: 0.6;
+}
+
+
+/* =========================
+   Ø¢ÛŒÚ©ÙˆÙ†â€ŒÙ‡Ø§
+   ========================= */
+
+.audio-toggle .icon-on,
+.audio-toggle .icon-off {
+    display: block;
+    width: 20px;
+    height: 20px;
+    transition: opacity 0.3s ease;
+}
+
+.audio-toggle svg {
+    display: block;
+}
+
+.audio-toggle .icon-off {
+    display: none;
+}
+
+.audio-toggle.muted .icon-on {
+    display: none;
+}
+
+.audio-toggle.muted .icon-off {
+    display: block;
+}
+
+
+/* =========================
+   Ù…ÙˆØ¨Ø§ÛŒÙ„
+   ========================= */
+
+@media (max-width: 600px) {
+
+    .audio-toggle {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+        top: calc(12px + env(safe-area-inset-top));
+        right: calc(12px + env(safe-area-inset-right));
+    }
+
+}
+
+
+/* =========================
+   Ú©Ø§Ù‡Ø´ Ø­Ø±Ú©Øª
+   ========================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .audio-toggle {
+        transition: opacity 0.5s ease;
+    }
+
+    .audio-toggle:hover {
+        transform: none;
+    }
+
+}
+
+========== Css\flowers.css ==========
+#flowers {
+  position: fixed;
+
+  inset: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  z-index: 10;
+
+  pointer-events: none;
+}
+
+.flower {
+  position: absolute;
+
+  width: 48px;
+  height: 64px;
+
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  pointer-events: auto;
+
+  appearance: none;
+
+  opacity: var(--opacity);
+
+  filter: blur(var(--blur)) brightness(var(--brightness));
+
+  transform: translate(-50%, -50%) rotate(var(--rotation)) scale(var(--scale));
+
+  transition:
+    transform 0.8s ease,
+    opacity 0.8s ease,
+    filter 0.8s ease;
+
+  z-index: 10;
+  filter: blur(var(--blur)) brightness(var(--brightness))
+    drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15)); /* â† Ø§ÛŒÙ† */
+  animation: flower-breathe 4s ease-in-out infinite;
+}
+
+@keyframes flower-breathe {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) rotate(var(--rotation)) scale(var(--scale));
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(var(--rotation))
+      scale(calc(var(--scale) * 1.03));
+  }
+}
+
+.flower img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  pointer-events: none;
+
+  user-select: none;
+}
+
+.flower.opened {
+  transform: translate(-50%, -50%) rotate(var(--rotation))
+    scale(calc(var(--scale) * 1.08));
+}
+
+========== Css\guide.css ==========
+/* =========================
+   HINT PULSE ON FLOWER
+   Ø­Ù„Ù‚Ù‡â€ŒÛŒ Ù†Ø¨Ø¶ Ø±ÙˆÛŒ Ú¯Ù„
+   ========================= */
+
+.flower.hint::after {
+  content: "";
+
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 90px;
+  height: 90px;
+
+  border-radius: 50%;
+
+  transform: translate(-50%, -50%);
+
+  border: 2px solid rgba(255, 235, 170, 0.9);
+
+  box-shadow:
+    0 0 25px rgba(255, 220, 130, 0.7),
+    0 0 50px rgba(255, 200, 90, 0.35);
+
+  animation: hint-pulse 1.8s ease-in-out infinite;
+
+  pointer-events: none;
+}
+
+@keyframes hint-pulse {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(0.85);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.15);
+    opacity: 1;
+  }
+}
+
+/* âœ… ÙˆÙ‚ØªÛŒ Ú¯Ù„ Ø¨Ø§Ø² Ø´Ø¯ØŒ Ù†Ø¨Ø¶ Ù…Ø­Ùˆ Ø´Ù‡ */
+
+.flower.opened.hint::after {
+  display: none !important;
+  animation: none !important;
+}
+
+/* =========================
+   Ù…ÙˆØ¨Ø§ÛŒÙ„
+   ========================= */
+
+@media (max-width: 600px) {
+  .flower.hint::after {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+/* =========================
+   Ú©Ø§Ù‡Ø´ Ø­Ø±Ú©Øª
+   ========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .flower.hint::after {
+    animation: none;
+    opacity: 0.7;
+  }
+}
+
+========== Css\leaves.css ==========
+/* =========================
+   FALLING AUTUMN LEAVES
+   Ø¨Ø±Ú¯â€ŒÙ‡Ø§ÛŒ Ù¾Ø§ÛŒÛŒØ²ÛŒ â€” Ø¨Ø§ Ø¹Ú©Ø³ ÙˆØ§Ù‚Ø¹ÛŒ
+   ========================= */
+
+.leaves {
+  position: absolute;
+  inset: 0;
+
+  z-index: 8; /* âœ… Ø¨Ø§Ù„Ø§ØªØ± Ø§Ø² meadow (z:1)ØŒ Ø¨Ø§Ù„Ø§ÛŒ atmosphere (z:2)ØŒ Ù¾Ø§ÛŒÛŒÙ† flowers (z:10) */
+
+  pointer-events: none;
+
+  overflow: hidden;
+
+  opacity: 0;
+
+  transition:
+    opacity 4s ease,
+    filter 4s ease;
+}
+
+.leaves.ready {
+  opacity: 1;
+}
+
+/* =========================
+   Ø¨Ø±Ú¯
+   ========================= */
+
+.leaf {
+  position: absolute;
+
+  width: 30px;
+  height: 30px;
+
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  /* âœ… Ø¨Ù„ÙˆØ± Ø¨ÛŒØ´ØªØ± */
+  filter: blur(1.5px);
+
+  will-change: transform, opacity, filter;
+
+  opacity: 0;
+}
+
+/* =========================
+   Ø­Ø±Ú©Øª Ø±Ø§Ø³Øª Ø¨Ù‡ Ú†Ù¾
+   ========================= */
+
+.leaf.right-to-left {
+  animation: leaf-r-to-l var(--drift-duration, 25s) linear
+    var(--drift-delay, 0s) infinite;
+}
+
+/* =========================
+   Ø­Ø±Ú©Øª Ú†Ù¾ Ø¨Ù‡ Ø±Ø§Ø³Øª
+   ========================= */
+
+.leaf.left-to-right {
+  animation: leaf-l-to-r var(--drift-duration, 25s) linear
+    var(--drift-delay, 0s) infinite;
+}
+
+/* =========================
+   Ø§Ù†ÛŒÙ…ÛŒØ´Ù† Ø±Ø§Ø³Øª Ø¨Ù‡ Ú†Ù¾
+   ========================= */
+
+@keyframes leaf-r-to-l {
+  0% {
+    transform: translate(105vw, var(--start-y, 50vh))
+      rotate(var(--start-rotation, 0deg)) scale(var(--leaf-scale, 1));
+    opacity: 0;
+  }
+
+  5% {
+    opacity: var(--leaf-opacity, 0.7);
+  }
+
+  25% {
+    transform: translate(
+        calc(105vw - var(--path-1, 30vw)),
+        calc(var(--start-y, 50vh) + var(--wave-1, 30px))
+      )
+      rotate(calc(var(--start-rotation, 0deg) + 80deg))
+      scale(var(--leaf-scale, 1));
+    opacity: var(--leaf-opacity, 0.7);
+  }
+
+  50% {
+    transform: translate(
+        calc(105vw - var(--path-2, 55vw)),
+        calc(var(--start-y, 50vh) + var(--wave-2, -30px))
+      )
+      rotate(calc(var(--start-rotation, 0deg) + 190deg))
+      scale(var(--leaf-scale, 1));
+    opacity: var(--leaf-opacity, 0.7);
+  }
+
+  75% {
+    transform: translate(
+        calc(105vw - var(--path-3, 80vw)),
+        calc(var(--start-y, 50vh) + var(--wave-3, 40px))
+      )
+      rotate(calc(var(--start-rotation, 0deg) + 310deg))
+      scale(var(--leaf-scale, 1));
+    opacity: var(--leaf-opacity, 0.7);
+  }
+
+  95% {
+    opacity: var(--leaf-opacity, 0.7);
+  }
+
+  100% {
+    transform: translate(
+        calc(105vw - var(--path-4, 120vw)),
+        calc(var(--start-y, 50vh) + var(--wave-4, -20px))
+      )
+      rotate(calc(var(--start-rotation, 0deg) + 420deg))
+      scale(var(--leaf-scale, 1));
+    opacity: 0;
+  }
+}
+
+/* =========================
+   Ø§Ù†ÛŒÙ…ÛŒØ´Ù† Ú†Ù¾ Ø¨Ù‡ Ø±Ø§Ø³Øª
+   ========================= */
+
+@keyframes leaf-l-to-r {
+  0% {
+    transform: translate(-15vw, var(--start-y, 50vh))
+      rotate(var(--start-rotation, 0deg)) scale(var(--leaf-scale, 1));
+    opacity: 0;
+  }
+
+  5% {
+    opacity: var(--leaf-opacity, 0.7);
+  }
+
+  25% {
+    transform: translate(
+        calc(-15vw + var(--path-1, 30vw)),
+        calc(var(--start-y, 50vh) + var(--wave-1, 30px))
+      )
+      rotate(calc(var(--start-rotation, 0deg) - 80deg))
+      scale(var(--leaf-scale, 1));
+    opacity: var(--leaf-opacity, 0.7);
+  }
+
+  50% {
+    transform: translate(
+        calc(-15vw + var(--path-2, 55vw)),
+        calc(var(--start-y, 50vh) + var(--wave-2, -30px))
+      )
+      rotate(calc(var(--start-rotation, 0deg) - 190deg))
+      scale(var(--leaf-scale, 1));
+    opacity: var(--leaf-opacity, 0.7);
+  }
+
+  75% {
+    transform: translate(
+        calc(-15vw + var(--path-3, 80vw)),
+        calc(var(--start-y, 50vh) + var(--wave-3, 40px))
+      )
+      rotate(calc(var(--start-rotation, 0deg) - 310deg))
+      scale(var(--leaf-scale, 1));
+    opacity: var(--leaf-opacity, 0.7);
+  }
+
+  95% {
+    opacity: var(--leaf-opacity, 0.7);
+  }
+
+  100% {
+    transform: translate(
+        calc(-15vw + var(--path-4, 120vw)),
+        calc(var(--start-y, 50vh) + var(--wave-4, -20px))
+      )
+      rotate(calc(var(--start-rotation, 0deg) - 420deg))
+      scale(var(--leaf-scale, 1));
+    opacity: 0;
+  }
+}
+
+/* =========================
+   Ø´Ø¨ / Ø´ÙÙ‚
+   ========================= */
+
+#world[data-time="twilight"] .leaves {
+  opacity: 0.85;
+  filter: brightness(0.95) saturate(0.95);
+}
+
+#world[data-time="night"] .leaves {
+  opacity: 0.7;
+  filter: brightness(0.8) saturate(0.85);
+}
+/* =========================
+   Ú©Ø§Ù‡Ø´ Ø­Ø±Ú©Øª
+   ========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .leaves {
+    display: none;
+  }
+}
+
+/* =========================
+   Ù…ÙˆØ¨Ø§ÛŒÙ„
+   ========================= */
+
+@media (max-width: 600px) {
+  .leaf {
+    width: 24px;
+    height: 24px;
+  }
+}
+.leaf.far {
+  filter: blur(3px) brightness(0.85) saturate(0.9);
+  opacity: 0.4;
+}
+
+.leaf.mid {
+  filter: blur(2px) brightness(0.92) saturate(0.95);
+  opacity: 0.65;
+}
+
+.leaf.near {
+  filter: blur(0.8px);
+  opacity: 0.85;
+}
+
+========== Css\magic.css ==========
+/* =========================
+   MAGIC PARTICLES
+   Ø°Ø±Ø§Øª Ø·Ù„Ø§ÛŒÛŒ â€” Ù…Ù„Ø§ÛŒÙ… Ø¨Ø±Ø§ÛŒ Ø´Ø¨
+   ========================= */
+
+.magic-particle {
+  position: fixed;
+
+  z-index: 45;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  /* âœ… Ø´Ø±ÙˆØ¹ Ø¨Ø§ Ø´ÙØ§ÙÛŒØª */
+  opacity: 0.95;
+
+  /* âœ… Ø¯Ø±Ø®Ø´Ø´ Ù…Ù„Ø§ÛŒÙ… */
+  box-shadow:
+    0 0 6px rgba(255, 230, 170, 0.7),
+    0 0 12px rgba(255, 210, 140, 0.4);
+
+  will-change: transform, opacity;
+
+  transition:
+    transform 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 1.4s ease;
+}
+/* =========================
+   FINAL FLASH
+   ÙÙ„Ø§Ø´ Ù…Ù„Ø§ÛŒÙ… Ø·Ù„Ø§ÛŒÛŒ Ø¨Ø±Ø§ÛŒ Ø¢Ø®Ø±ÛŒÙ† Ú¯Ù„
+   ========================= */
+
+.final-flash {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 42;
+
+  pointer-events: none;
+
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 235, 180, 0.4) 0%,
+    rgba(255, 220, 150, 0.2) 30%,
+    rgba(255, 200, 120, 0.05) 60%,
+    rgba(255, 200, 120, 0) 100%
+  );
+
+  opacity: 0;
+
+  animation: final-flash-pulse 2.5s ease-out forwards;
+}
+
+@keyframes final-flash-pulse {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  25% {
+    opacity: 0.7;
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+}
+
+========== Css\meadow.css ==========
+.meadow {
+  position: absolute;
+  inset: 0;
+
+  background-image: url("../assets/images/meadow/meadow-mahdieh.png");
+  background-size: cover;
+  background-position: center 25%;
+  background-repeat: no-repeat;
+
+  z-index: 1;
+}
+.sky-layer {
+  position: absolute;
+  inset: 0;
+
+  z-index: 2;
+
+  pointer-events: none;
+}
+
+.light-layer {
+  position: absolute;
+  inset: 0;
+
+  z-index: 3;
+
+  pointer-events: none;
+
+  transition:
+    background 4s ease,
+    opacity 4s ease;
+
+  opacity: 1;
+}
+/* =========================
+   DAY
+   ========================= */
+
+/* =========================
+   DAY
+   ========================= */
+
+#world[data-time="day"] .light-layer {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0)
+  );
+
+  opacity: 1;
+}
+/* =========================
+   DAWN LIGHT
+   ========================= */
+
+#world[data-time="dawn"] .light-layer {
+  background: linear-gradient(
+    to bottom,
+    rgba(80, 90, 145, 0.04),
+    rgba(255, 190, 135, 0.07)
+  );
+
+  opacity: 1;
+}
+
+/* =========================
+   GOLDEN HOUR
+   ========================= */
+
+#world[data-time="golden"] .light-layer {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 220, 160, 0.015),
+    rgba(255, 195, 125, 0.055)
+  );
+
+  opacity: 1;
+}
+
+/* =========================
+   TWILIGHT
+   ========================= */
+
+#world[data-time="twilight"] .light-layer {
+  background: linear-gradient(
+    to bottom,
+    rgba(80, 95, 155, 0.045),
+    rgba(55, 60, 115, 0.095)
+  );
+
+  opacity: 1;
+}
+
+/* =========================
+   NIGHT
+   ========================= */
+
+#world[data-time="night"] .light-layer {
+  background: linear-gradient(
+    to bottom,
+    rgba(15, 24, 55, 0.075),
+    rgba(18, 23, 52, 0.16)
+  );
+
+  opacity: 1;
+}
+
+#flowers {
+  position: absolute;
+  inset: 0;
+
+  z-index: 10;
+
+  pointer-events: none;
+}
+
+#memory-panel {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 20;
+
+  pointer-events: none;
+}
+.atmosphere-layer {
+  position: absolute;
+  inset: 0;
+
+  z-index: 2;
+
+  pointer-events: none;
+
+  opacity: 1;
+
+  transition:
+    background 4s ease,
+    opacity 4s ease;
+}
+
+/* =========================
+   DAY
+   ========================= */
+
+#world[data-time="day"] .atmosphere-layer {
+  background: linear-gradient(
+    to bottom,
+    rgba(125, 165, 210, 0.06),
+    rgba(255, 220, 175, 0.02) 60%,
+    rgba(255, 190, 130, 0.03)
+  );
+}
+/* =========================
+   DAWN
+   ========================= */
+
+#world[data-time="dawn"] .atmosphere-layer {
+  background: linear-gradient(
+    to bottom,
+    rgba(55, 65, 110, 0.1),
+    rgba(115, 100, 145, 0.08) 45%,
+    rgba(245, 175, 125, 0.1)
+  );
+}
+
+/* =========================
+   GOLDEN HOUR
+   ========================= */
+
+#world[data-time="golden"] .atmosphere-layer {
+  background: linear-gradient(
+    to bottom,
+    rgba(120, 155, 205, 0.05),
+    rgba(255, 205, 140, 0.07) 50%,
+    rgba(255, 155, 85, 0.11)
+  );
+}
+
+/* =========================
+   TWILIGHT
+   ========================= */
+
+#world[data-time="twilight"] .atmosphere-layer {
+  background: linear-gradient(
+    to bottom,
+    rgba(40, 60, 115, 0.12),
+    rgba(75, 70, 125, 0.13) 50%,
+    rgba(35, 38, 78, 0.2)
+  );
+}
+
+/*
+   NIGHT
+   */
+
+#world[data-time="night"] .atmosphere-layer {
+  background: linear-gradient(
+    to bottom,
+    rgba(3, 7, 20, 0.3),
+    rgba(6, 11, 30, 0.36) 55%,
+    rgba(12, 13, 30, 0.42)
+  );
+}
+/* =========================
+   SUNLIGHT
+   ========================= */
+
+#world::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 2;
+
+  pointer-events: none;
+
+  background: radial-gradient(
+    circle at 68% 30%,
+    rgba(255, 215, 145, 0.12),
+    rgba(255, 215, 145, 0.045) 22%,
+    rgba(255, 215, 145, 0) 52%
+  );
+
+  opacity: 0;
+
+  transition: opacity 4s ease;
+}
+#world[data-time="dawn"]::before {
+  opacity: 0.35;
+}
+#world[data-time="day"]::before {
+  opacity: 0.55;
+}
+
+#world[data-time="golden"]::before {
+  opacity: 0.9;
+}
+
+#world[data-time="twilight"]::before {
+  opacity: 0.18;
+}
+
+#world[data-time="night"]::before {
+  opacity: 0;
+}
+
+.clouds {
+  position: absolute;
+  inset: 0;
+
+  z-index: 6;
+
+  pointer-events: none;
+
+  overflow: hidden;
+
+  opacity: 1;
+
+  transition: opacity 3s ease;
+}
+
+.cloud {
+  position: absolute;
+
+  height: 65px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      ellipse at 20% 60%,
+      rgba(255, 255, 255, 0.45) 0%,
+      rgba(255, 255, 255, 0) 55%
+    ),
+    radial-gradient(
+      ellipse at 45% 40%,
+      rgba(255, 255, 255, 0.5) 0%,
+      rgba(255, 255, 255, 0) 60%
+    ),
+    radial-gradient(
+      ellipse at 70% 55%,
+      rgba(255, 255, 255, 0.38) 0%,
+      rgba(255, 255, 255, 0) 58%
+    );
+
+  filter: blur(7px);
+
+  opacity: 0.7;
+
+  will-change: transform;
+
+  animation: cloud-drift 45s linear infinite;
+}
+.cloud-1 {
+  width: 300px;
+  top: 12%;
+  left: -100px;
+
+  opacity: 0.42;
+
+  animation-duration: 55s;
+}
+
+.cloud-2 {
+  width: 420px;
+  top: 25%;
+  left: 30%;
+
+  height: 75px;
+
+  opacity: 0.3;
+
+  animation-duration: 70s;
+  animation-delay: -20s;
+}
+
+.cloud-3 {
+  width: 280px;
+  top: 17%;
+  left: 75%;
+
+  height: 55px;
+
+  opacity: 0.34;
+
+  animation-duration: 60s;
+  animation-delay: -35s;
+}
+.cloud-1 {
+  animation-duration: 75s;
+}
+
+.cloud-2 {
+  animation-duration: 90s;
+}
+
+.cloud-3 {
+  animation-duration: 80s;
+}
+@keyframes cloud-drift {
+  from {
+    transform: translateX(-80px);
+  }
+
+  to {
+    transform: translateX(calc(100vw + 500px));
+  }
+}
+#world[data-time="day"] .clouds {
+  opacity: 1;
+}
+
+#world[data-time="sunset"] .clouds {
+  opacity: 0.75;
+}
+#world[data-time="twilight"] .clouds {
+  opacity: 0.35;
+}
+
+#world[data-time="night"] .clouds {
+  opacity: 0.12;
+}
+#world[data-time="dawn"] .clouds {
+  opacity: 0.55;
+}
+
+#world[data-time="golden"] .clouds {
+  opacity: 0.75;
+}
+.stars {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 55%;
+
+  z-index: 4;
+
+  pointer-events: none;
+
+  opacity: 0;
+
+  background-image:
+    radial-gradient(
+      circle at 8% 18%,
+      rgba(255, 255, 255, 0.9) 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 17% 31%,
+      rgba(255, 255, 255, 0.75) 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 27% 12%,
+      rgba(255, 255, 255, 0.85) 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 36% 24%,
+      rgba(255, 255, 255, 0.8) 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 46% 10%,
+      rgba(255, 255, 255, 0.9) 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 55% 20%,
+      rgba(255, 255, 255, 0.7) 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 64% 13%,
+      rgba(255, 255, 255, 0.85) 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 73% 27%,
+      rgba(255, 255, 255, 0.8) 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 82% 15%,
+      rgba(255, 255, 255, 0.9) 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 91% 25%,
+      rgba(255, 255, 255, 0.7) 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 12% 43%,
+      rgba(255, 255, 255, 0.7) 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 23% 35%,
+      rgba(255, 255, 255, 0.9) 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 42% 46%,
+      rgba(255, 255, 255, 0.75) 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 58% 39%,
+      rgba(255, 255, 255, 0.8) 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 69% 35%,
+      rgba(255, 255, 255, 0.7) 0 1px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 87% 30%,
+      rgba(255, 255, 255, 0.85) 0 1px,
+      transparent 2px
+    );
+
+  transition: opacity 5s ease;
+}
+
+#world[data-time="twilight"] .stars {
+  opacity: 0.35;
+}
+
+#world[data-time="night"] .stars {
+  opacity: 1;
+  filter: brightness(1.2);
+}
+
+.moon {
+  position: absolute;
+
+  width: 65px;
+  height: 65px;
+
+  border-radius: 50%;
+
+  /* Ù‡Ø³ØªÙ‡â€ŒÛŒ Ù…Ø§Ù‡ â€” Ø±ÙˆØ´Ù†â€ŒØªØ± */
+  background: radial-gradient(
+    circle at 38% 35%,
+    rgba(255, 255, 250, 1) 0%,
+    rgba(252, 250, 235, 1) 40%,
+    rgba(245, 242, 222, 1) 75%,
+    rgba(235, 232, 212, 1) 100%
+  );
+
+  /* Ù‡Ø§Ù„Ù‡â€ŒÛŒ Ú†Ù†Ø¯Ù„Ø§ÛŒÙ‡ â€” Ù‚ÙˆÛŒâ€ŒØªØ± */
+  box-shadow:
+    inset -3px -3px 8px rgba(150, 150, 160, 0.3),
+    inset 2px 2px 6px rgba(255, 255, 255, 0.75),
+    /* Ù‡Ø§Ù„Ù‡â€ŒÛŒ Ù†Ø²Ø¯ÛŒÚ© */ 0 0 25px rgba(255, 250, 220, 0.85),
+    0 0 50px rgba(245, 245, 230, 0.55),
+    0 0 95px rgba(230, 235, 250, 0.35),
+    0 0 150px rgba(215, 225, 255, 0.2);
+
+  top: 18%;
+  left: 75%;
+
+  transform: translate(-50%, -50%) scale(0.7);
+
+  opacity: 0;
+
+  z-index: 5;
+
+  pointer-events: none;
+
+  transition:
+    opacity 5s ease,
+    transform 5s ease,
+    top 5s ease,
+    left 5s ease;
+}
+
+#world[data-time="day"] .moon {
+  opacity: 0;
+}
+
+#world[data-time="golden"] .moon {
+  opacity: 0;
+}
+
+#world[data-time="sunset"] .moon {
+  opacity: 0.08;
+
+  transform: translate(-50%, -50%) scale(0.75);
+}
+
+#world[data-time="twilight"] .moon {
+  opacity: 0.55;
+
+  transform: translate(-50%, -50%) scale(0.9);
+}
+
+#world[data-time="night"] .moon {
+  opacity: 1;
+
+  transform: translate(-50%, -50%) scale(1);
+}
+/* =========================
+   CLOUDS OVER LAYER
+   Ø§Ø¨Ø±Ù‡Ø§ÛŒ Ù†ÛŒÙ…Ù‡â€ŒØ´ÙØ§Ù Ø±ÙˆÛŒ Ù…Ø§Ù‡ Ùˆ Ø³ØªØ§Ø±Ù‡â€ŒÙ‡Ø§
+   ========================= */
+
+/* =========================
+   CLOUDS OVER LAYER
+   Ø§Ø¨Ø±Ù‡Ø§ÛŒ Ù†ÛŒÙ…Ù‡â€ŒØ´ÙØ§Ù Ø±ÙˆÛŒ Ù…Ø§Ù‡
+   ========================= */
+/* =========================
+   CLOUDS OVER LAYER
+   Ø§Ø¨Ø±Ù‡Ø§ÛŒ Ù†ÛŒÙ…Ù‡â€ŒØ´ÙØ§Ù Ø±ÙˆÛŒ Ù…Ø§Ù‡
+   ========================= */
+
+.clouds-over {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 65%;
+
+  z-index: 7;
+
+  pointer-events: none;
+
+  overflow: hidden;
+
+  opacity: 0;
+
+  transition: opacity 4s ease;
+}
+
+#world[data-time="twilight"] .clouds-over {
+  opacity: 0.5;
+}
+
+#world[data-time="night"] .clouds-over {
+  opacity: 0.75;
+}
+
+/* =========================
+   Ø§Ø¨Ø± Ù†Ø±Ù… Ùˆ Ú©Ù…â€ŒØ±Ù†Ú¯
+   ========================= */
+
+/* =========================
+   Ø§Ø¨Ø± Ù†Ø±Ù… Ùˆ Ú©Ù…â€ŒØ±Ù†Ú¯
+   ========================= */
+
+.cloud-over {
+  position: absolute;
+
+  height: 65px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      ellipse at 25% 55%,
+      rgba(220, 220, 235, 0.5) 0%,
+      rgba(180, 185, 210, 0.35) 30%,
+      rgba(140, 145, 175, 0) 65%
+    ),
+    radial-gradient(
+      ellipse at 50% 40%,
+      rgba(230, 230, 240, 0.48) 0%,
+      rgba(185, 190, 215, 0.33) 35%,
+      rgba(145, 150, 180, 0) 70%
+    ),
+    radial-gradient(
+      ellipse at 75% 60%,
+      rgba(215, 220, 235, 0.45) 0%,
+      rgba(175, 180, 205, 0.3) 30%,
+      rgba(135, 140, 170, 0) 65%
+    );
+
+  filter: blur(11px);
+
+  will-change: transform;
+
+  animation: cloud-over-drift-right 100s linear infinite;
+}
+
+/* Ø§Ø¨Ø±Ù‡Ø§ÛŒÛŒ Ú©Ù‡ Ú†Ù¾ Ø¨Ù‡ Ø±Ø§Ø³Øª Ø­Ø±Ú©Øª Ù…ÛŒâ€ŒÚ©Ù†Ù† */
+.cloud-over.reverse {
+  animation: cloud-over-drift-left 120s linear infinite;
+}
+
+/* =========================
+   Ù…ÙˆÙ‚Ø¹ÛŒØª Ø§Ø¨Ø±Ù‡Ø§
+   ========================= */
+
+.cloud-over-1 {
+  width: 380px;
+  top: 6%;
+  left: -200px;
+
+  animation-duration: 125s;
+}
+
+.cloud-over-2 {
+  width: 480px;
+  top: 16%;
+  left: 20%;
+
+  height: 85px;
+
+  animation-duration: 155s;
+  animation-delay: -55s;
+
+  opacity: 0.85;
+}
+
+.cloud-over-3 {
+  width: 340px;
+  top: 30%;
+  left: 60%;
+
+  animation-duration: 140s;
+  animation-delay: -95s;
+
+  opacity: 0.75;
+}
+
+.cloud-over-4 {
+  width: 300px;
+  top: 10%;
+  left: 40%;
+
+  animation-duration: 165s;
+  animation-delay: -30s;
+
+  opacity: 0.7;
+}
+
+.cloud-over-5 {
+  width: 420px;
+  top: 26%;
+  left: -250px;
+
+  height: 75px;
+
+  animation-duration: 180s;
+  animation-delay: -120s;
+
+  opacity: 0.65;
+}
+
+/* =========================
+   Ø§Ù†ÛŒÙ…ÛŒØ´Ù† Ø±Ø§Ø³Øª Ø¨Ù‡ Ú†Ù¾
+   ========================= */
+
+@keyframes cloud-over-drift-right {
+  from {
+    transform: translateX(100vw);
+  }
+  to {
+    transform: translateX(-350px);
+  }
+}
+
+/* =========================
+   Ø§Ù†ÛŒÙ…ÛŒØ´Ù† Ú†Ù¾ Ø¨Ù‡ Ø±Ø§Ø³Øª
+   ========================= */
+
+@keyframes cloud-over-drift-left {
+  from {
+    transform: translateX(-350px);
+  }
+  to {
+    transform: translateX(100vw);
+  }
+}
+/* =========================
+   STAR DIM LAYER
+   Ù„Ø§ÛŒÙ‡â€ŒÛŒ ØªÛŒØ±Ù‡â€ŒÚ©Ù†Ù†Ø¯Ù‡ Ø³ØªØ§Ø±Ù‡â€ŒÙ‡Ø§
+   ========================= */
+
+.star-dim {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 45%;
+
+  z-index: 6; /* Ø¨Ø§Ù„Ø§ÛŒ Ø³ØªØ§Ø±Ù‡â€ŒÙ‡Ø§ (z=4)ØŒ Ù¾Ø§ÛŒÛŒÙ† Ø§Ø¨Ø±Ù‡Ø§ (z=7) */
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at 30% 20%,
+      rgba(10, 15, 35, 0.35) 0%,
+      rgba(10, 15, 35, 0) 55%
+    ),
+    radial-gradient(
+      ellipse at 70% 40%,
+      rgba(10, 15, 35, 0.3) 0%,
+      rgba(10, 15, 35, 0) 60%
+    ),
+    radial-gradient(
+      ellipse at 50% 10%,
+      rgba(10, 15, 35, 0.25) 0%,
+      rgba(10, 15, 35, 0) 50%
+    );
+
+  opacity: 0;
+
+  transition: opacity 4s ease;
+}
+
+#world[data-time="twilight"] .star-dim {
+  opacity: 0.5;
+}
+
+#world[data-time="night"] .star-dim {
+  opacity: 0.85;
+}
+
+========== Css\panel.css ==========
+/* =========================
+   MEMORY OVERLAY
+   ========================= */
+
+.memory-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 18px calc(24px + env(safe-area-inset-bottom));
+
+  /* âœ… Ù¾Ø³â€ŒØ²Ù…ÛŒÙ†Ù‡â€ŒÛŒ ØªÛŒØ±Ù‡â€ŒØªØ± Ø¨Ø±Ø§ÛŒ Ú©Ù†ØªØ±Ø§Ø³Øª Ø¨Ù„ÙˆØ± */
+  background: rgba(20, 15, 10, 0.25);
+
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+
+/* =========================
+   VISIBLE
+   ========================= */
+
+.memory-overlay.visible {
+  opacity: 1;
+
+  pointer-events: auto;
+}
+
+/* =========================
+   GLASS CONTAINER
+   ========================= */
+
+.memory-card {
+  position: relative;
+
+  width: min(100%, 470px);
+
+  max-height: 90vh;
+
+  overflow-y: auto;
+
+  padding: 22px 20px 24px;
+
+  border: 1px solid rgba(255, 255, 255, 0.34);
+
+  border-radius: 28px;
+
+  background: rgba(255, 255, 255, 0.16);
+
+  /* âœ… Ø¨Ù„ÙˆØ± Ø§Ø² Ø§ÙˆÙ„ Ø§Ø¹Ù…Ø§Ù„ Ø´Ù‡ */
+  backdrop-filter: blur(20px) saturate(130%);
+  -webkit-backdrop-filter: blur(20px) saturate(130%);
+
+  /* âœ… Ø¨Ø±Ø§ÛŒ Ø§ÛŒÙ†Ú©Ù‡ GPU Ø§Ø² Ø§ÙˆÙ„ Ø±Ù†Ø¯Ø± Ú©Ù†Ù‡ */
+  will-change: transform, opacity;
+
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.42);
+
+  transform: translateY(28px) scale(0.97);
+
+  opacity: 0;
+
+  /* âœ… ÙÙ‚Ø· opacity Ùˆ transform Ø§Ù†ÛŒÙ…ÛŒØª Ø´Ù†ØŒ Ù†Ù‡ backdrop */
+  transition:
+    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.75s ease;
+}
+
+/* =========================
+   CARD OPEN
+   ========================= */
+
+.memory-overlay.visible .memory-card {
+  transform: translateY(0) scale(1);
+
+  opacity: 1;
+}
+
+/* =========================
+   CLOSE BUTTON
+   ========================= */
+
+.memory-close {
+  position: absolute;
+
+  top: 12px;
+  right: 12px;
+
+  z-index: 5;
+
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.28);
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.18);
+
+  color: rgba(40, 45, 50, 0.72);
+
+  font-size: 20px;
+
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    transform 0.3s ease;
+}
+
+.memory-close:hover {
+  background: rgba(255, 255, 255, 0.38);
+
+  transform: rotate(90deg);
+}
+
+/* =========================
+   POLAROID
+   ========================= */
+
+.polaroid {
+  width: min(100%, 360px);
+
+  margin: 4px auto 24px;
+
+  padding: 12px 12px 18px;
+
+  background: #f7f5ee;
+
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.18);
+
+  transform: none;
+}
+
+/* =========================
+   PHOTO
+   ========================= */
+
+.polaroid-photo {
+  width: 100%;
+
+  /* âœ… Ù†Ø³Ø¨Øª Ø«Ø§Ø¨Øª Ø­Ø°Ù Ø´Ø¯ â€” Ø¹Ú©Ø³ Ø¨Ø§ Ù†Ø³Ø¨Øª Ø®ÙˆØ¯Ø´ Ù†Ø´ÙˆÙ† Ø¯Ø§Ø¯Ù‡ Ù…ÛŒâ€ŒØ´Ù‡ */
+
+  overflow: hidden;
+
+  background: #e9e7df;
+
+  /* Ø§Ø±ØªÙØ§Ø¹ Ø®ÙˆØ¯Ú©Ø§Ø± Ø¨Ø± Ø§Ø³Ø§Ø³ Ø¹Ú©Ø³ */
+  height: auto;
+}
+
+.polaroid-photo img {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  object-fit: contain;
+  /* âœ… Ø§ÙÚ©Øª Ù‚Ø¯ÛŒÙ…ÛŒ */
+  filter: sepia(0.15) saturate(1.1) contrast(1.05) brightness(1.02);
+}
+/* =========================
+   POLAROID CAPTION
+   ========================= */
+
+.polaroid-caption {
+  padding: 13px 5px 0;
+
+  text-align: center;
+}
+
+.polaroid-title {
+  font-size: 18px;
+
+  line-height: 1.4;
+
+  color: #34352f;
+
+  letter-spacing: 0.01em;
+}
+
+.polaroid-date {
+  margin-top: 5px;
+
+  font-size: 11px;
+
+  letter-spacing: 0.14em;
+
+  color: #77786f;
+
+  text-transform: uppercase;
+}
+
+/* =========================
+   MEMORY STORY
+   ========================= */
+
+.memory-story {
+  width: min(100%, 390px);
+
+  margin: 0 auto;
+
+  padding: 2px 8px 4px;
+
+  color: rgba(255, 255, 255, 0.94);
+
+  text-align: center;
+
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+}
+
+.memory-story p {
+  margin: 0;
+
+  font-size: 16px;
+
+  line-height: 1.9;
+
+  font-weight: 400;
+}
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 480px) {
+  .memory-overlay {
+    padding: 16px 12px calc(16px + env(safe-area-inset-bottom));
+  }
+
+  .memory-card {
+    width: 100%;
+
+    max-height: 92vh;
+
+    padding: 18px 14px 20px;
+
+    border-radius: 25px;
+  }
+
+  .polaroid {
+    width: min(100%, 330px);
+
+    padding: 10px 10px 16px;
+
+    margin-bottom: 20px;
+  }
+
+  .polaroid-title {
+    font-size: 17px;
+  }
+
+  .polaroid-date {
+    font-size: 10px;
+  }
+
+  .memory-story p {
+    font-size: 15px;
+
+    line-height: 1.85;
+  }
+}
+/* =========================
+   MEMORY WITHOUT PHOTO
+   Ø®Ø§Ø·Ø±Ù‡â€ŒÛŒ Ø¨Ø¯ÙˆÙ† Ø¹Ú©Ø³
+   ========================= */
+
+.memory-no-photo {
+  width: min(100%, 360px);
+
+  margin: 4px auto 24px;
+
+  padding: 20px 12px;
+
+  text-align: center;
+}
+
+.memory-no-photo .polaroid-title {
+  font-size: 22px;
+  color: rgba(255, 255, 255, 0.96);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+}
+
+.memory-no-photo .polaroid-date {
+  margin-top: 8px;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+}
+.birthday-overlay {
+  position: absolute;
+  inset: 0;
+
+  z-index: 100; /* â† Ø¨Ø§Ù„Ø§ØªØ±ÛŒÙ† Ù„Ø§ÛŒÙ‡ */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  background: rgba(15, 10, 5, 0.45);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: opacity 1s ease;
+}
+
+.birthday-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.birthday-close {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  /* ÙØ§ØµÙ„Ù‡ Ø§Ø² Ù…ØªÙ† Ø¨Ø§Ù„Ø§ÛŒ Ø®ÙˆØ¯Ø´ */
+  margin-top: 28px;
+
+  padding: 8px 22px;
+
+  border: 1px solid rgba(255, 240, 190, 0.55);
+  border-radius: 30px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 235, 170, 0.32) 0%,
+    rgba(255, 215, 130, 0.22) 100%
+  );
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  color: rgba(60, 45, 20, 0.95);
+
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 500;
+
+  letter-spacing: 0.05em;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 6px 16px rgba(180, 130, 40, 0.18),
+    inset 0 1px 0 rgba(255, 255, 240, 0.6);
+
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s ease,
+    background 0.35s ease;
+}
+
+.birthday-close:hover {
+  transform: translateY(-2px) scale(1.04);
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 240, 180, 0.45) 0%,
+    rgba(255, 220, 140, 0.32) 100%
+  );
+
+  box-shadow:
+    0 10px 22px rgba(180, 130, 40, 0.26),
+    inset 0 1px 0 rgba(255, 255, 240, 0.7);
+}
+
+.birthday-close:active {
+  transform: translateY(0) scale(0.98);
+}
+/* =========================
+   RTL TEXT
+   Ø±Ø§Ø³Øªâ€ŒØ¨Ù‡â€ŒÚ†Ù¾
+   ========================= */
+
+.birthday-title,
+.birthday-message,
+.memory-story,
+.memory-story p,
+.polaroid-caption,
+.polaroid-title,
+.polaroid-date {
+  direction: rtl;
+  unicode-bidi: embed;
+}
+/* =========================
+   AFTER MESSAGE
+   Ù¾ÛŒØ§Ù… Ø¨Ø¹Ø¯ Ø§Ø² ØªØ¨Ø±ÛŒÚ©
+   ========================= */
+
+.after-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 90;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  background: rgba(15, 10, 5, 0.25);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition: opacity 1.2s ease;
+}
+
+.after-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.after-card {
+  width: min(100%, 380px);
+
+  padding: 36px 28px 30px;
+
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  border-radius: 28px;
+
+  background: rgba(255, 255, 255, 0.14);
+
+  backdrop-filter: blur(20px) saturate(130%);
+  -webkit-backdrop-filter: blur(20px) saturate(130%);
+
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+
+  text-align: center;
+
+  transform: translateY(20px) scale(0.96);
+  opacity: 0;
+
+  transition:
+    transform 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 1s ease;
+}
+
+.after-overlay.visible .after-card {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.after-text {
+  font-size: 17px;
+  line-height: 2;
+
+  color: rgba(255, 255, 255, 0.96);
+
+  margin-bottom: 26px;
+
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.15);
+}
+
+.after-replay {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 11px 32px;
+
+  border: 1px solid rgba(255, 240, 190, 0.5);
+  border-radius: 30px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 235, 170, 0.3) 0%,
+    rgba(255, 215, 130, 0.2) 100%
+  );
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  color: rgba(60, 45, 20, 0.95);
+
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 500;
+
+  letter-spacing: 0.05em;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 22px rgba(180, 130, 40, 0.18),
+    inset 0 1px 0 rgba(255, 255, 240, 0.6);
+
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s ease,
+    background 0.35s ease;
+}
+
+.after-replay:hover {
+  transform: translateY(-2px) scale(1.04);
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 240, 180, 0.45) 0%,
+    rgba(255, 220, 140, 0.3) 100%
+  );
+
+  box-shadow:
+    0 12px 30px rgba(180, 130, 40, 0.28),
+    inset 0 1px 0 rgba(255, 255, 240, 0.7);
+}
+
+.after-replay:active {
+  transform: translateY(0) scale(0.98);
+}
+
+@media (max-width: 600px) {
+  .after-card {
+    padding: 30px 22px 26px;
+    border-radius: 24px;
+  }
+
+  .after-text {
+    font-size: 16px;
+    margin-bottom: 22px;
+  }
+
+  .after-replay {
+    padding: 10px 26px;
+    font-size: 13px;
+  }
+}
+
+========== Css\parallax.css ==========
+/* =========================
+   PARALLAX
+   Ù¾Ø§Ø±Ø§Ù„Ø§Ú©Ø³ Ø¨Ø§ Ú˜ÛŒØ±ÙˆØ³Ú©ÙˆÙ¾
+   ========================= */
+
+/* âœ… Ù‡Ù…Ù‡â€ŒÛŒ Ù„Ø§ÛŒÙ‡â€ŒÙ‡Ø§ØŒ Ù…ØªØºÛŒØ±Ù‡Ø§ÛŒ Ù¾Ø§Ø±Ø§Ù„Ø§Ú©Ø³ Ø±Ùˆ Ù…ÛŒâ€ŒÚ¯ÛŒØ±Ù† */
+
+.meadow,
+.stars,
+.moon,
+.clouds,
+.clouds-over,
+.atmosphere-layer,
+.light-layer,
+.particles,
+.leaves,
+.bloom-flower {
+  /* Ù…ØªØºÛŒØ±Ù‡Ø§ÛŒ Ù¾ÛŒØ´â€ŒÙØ±Ø¶ (ØµÙØ±) */
+  --parallax-x: 0px;
+  --parallax-y: 0px;
+
+  /* âœ… Ø§Ø³ØªÙØ§Ø¯Ù‡ Ø§Ø² transform Ø¬Ø¯ÛŒØ¯ Ú©Ù‡ Ù¾Ø§Ø±Ø§Ù„Ø§Ú©Ø³ Ø±Ùˆ Ù‡Ù… Ø´Ø§Ù…Ù„ Ù…ÛŒâ€ŒØ´Ù‡ */
+  will-change: transform;
+}
+
+/* =========================
+   Ù„Ø§ÛŒÙ‡â€ŒÙ‡Ø§ÛŒ Ø¬Ø¯Ø§Ú¯Ø§Ù†Ù‡ â€” transform Ø¬Ø¯ÛŒØ¯
+   ========================= */
+
+/* Ø¹Ú©Ø³ Ø¯Ø´Øª */
+.meadow {
+  transform: translate(var(--parallax-x), var(--parallax-y)) scale(1.05);
+  transform-origin: center center;
+}
+
+/* Ø³ØªØ§Ø±Ù‡â€ŒÙ‡Ø§ */
+.stars {
+  transform: translate(var(--parallax-x), var(--parallax-y));
+}
+
+/* Ù…Ø§Ù‡ */
+.moon {
+  /* Ù…Ø§Ù‡ Ø®ÙˆØ¯Ø´ transform Ø¯Ø§Ø±Ù‡ (translate + scale)
+       Ù¾Ø³ Ù¾Ø§Ø±Ø§Ù„Ø§Ú©Ø³ Ø±Ùˆ Ø¨Ø§ margin Ø§Ø¹Ù…Ø§Ù„ Ù…ÛŒâ€ŒÚ©Ù†ÛŒÙ… */
+  margin-left: var(--parallax-x);
+  margin-top: var(--parallax-y);
+}
+
+/* Ø§Ø¨Ø±Ù‡Ø§ */
+.clouds,
+.clouds-over {
+  transform: translate(var(--parallax-x), var(--parallax-y));
+}
+
+/* Ú¯Ù„â€ŒÙ‡Ø§ */
+#flowers {
+  transform: translate(var(--parallax-x), var(--parallax-y));
+}
+
+/* Ø¨Ø±Ú¯â€ŒÙ‡Ø§ */
+.leaves {
+  transform: translate(var(--parallax-x), var(--parallax-y));
+}
+
+/* Ø°Ø±Ø§Øª */
+.particles {
+  transform: translate(var(--parallax-x), var(--parallax-y));
+}
+
+/* Ú¯Ù„ Ù¾Ø§ÛŒØ§Ù†ÛŒ (ØºÙ†Ú†Ù‡) */
+.bloom-flower {
+  margin-left: var(--parallax-x);
+  margin-top: var(--parallax-y);
+}
+
+/* =========================
+   Ø§Ú¯Ù‡ Ú˜ÛŒØ±ÙˆØ³Ú©ÙˆÙ¾ Ú©Ø§Ø± Ù†Ú©Ø±Ø¯ØŒ Ø¨Ø¯ÙˆÙ† Ù¾Ø§Ø±Ø§Ù„Ø§Ú©Ø³ Ú©Ø§Ø± Ú©Ù†Ù‡
+   ========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .meadow,
+  .stars,
+  .moon,
+  .clouds,
+  .clouds-over,
+  .atmosphere-layer,
+  .light-layer,
+  .particles,
+  .leaves,
+  .bloom-flower {
+    --parallax-x: 0px;
+    --parallax-y: 0px;
+  }
+}
+
+========== Css\particles.css ==========
+/* =========================
+   FLOATING PARTICLES
+   (Ú¯Ø±Ø¯Ù‡ / ØºØ¨Ø§Ø± Ø±ÙˆÛŒØ§ÛŒÛŒ)
+   ========================= */
+
+.particles {
+    position: absolute;
+    inset: 0;
+
+    z-index: 4;   /* Ø¨ÛŒÙ† meadow (z=1) Ùˆ atmosphere (z=2)... ÙˆÙ„ÛŒ Ú†ÙˆÙ† meadow.css z-index 2 Ùˆ 3 Ø¯Ø§Ø±Ù‡ØŒ Ø§ÛŒÙ† Ø±Ùˆ 4 Ù…ÛŒâ€ŒØ°Ø§Ø±ÛŒÙ… Ú©Ù‡ Ø¨Ø§Ù„Ø§ÛŒ meadow Ùˆ Ù¾Ø§ÛŒÛŒÙ† flowers (z=10) Ø¨Ø§Ø´Ù‡ */
+
+    pointer-events: none;
+
+    overflow: hidden;
+
+    /* Ø®ÛŒÙ„ÛŒ Ù…Ù„Ø§ÛŒÙ…ØŒ Ø·ÙˆØ±ÛŒ Ú©Ù‡ ÙÙ‚Ø· Ø­Ø³ Ø±ÙˆÛŒØ§ Ø¨Ø¯Ù‡ */
+    mix-blend-mode: screen;
+
+    opacity: 0;
+    transition:
+        opacity 3s ease,
+        -webkit-mask-image 3s ease,
+        mask-image 3s ease;
+}
+
+/* Ø¨Ø¹Ø¯ Ø§Ø² Ù„ÙˆØ¯ ØµÙØ­Ù‡ Ø¢Ø±ÙˆÙ… Ø¸Ø§Ù‡Ø± Ù…ÛŒâ€ŒØ´Ù‡ */
+.particles.ready {
+    opacity: 1;
+}
+
+
+/* =========================
+   Ù‡Ø± Ø°Ø±Ù‡
+   ========================= */
+
+.particle {
+    position: absolute;
+
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 248, 210, 0.95) 0%,
+            rgba(255, 235, 170, 0.55) 40%,
+            rgba(255, 235, 170, 0) 75%
+        );
+
+    filter: blur(0.5px);
+
+    will-change: transform, opacity;
+
+    animation:
+        particle-float
+        var(--duration)
+        ease-in-out
+        var(--delay)
+        infinite;
+
+    /* Ø´Ø±ÙˆØ¹ Ù†Ø§Ù…Ø±Ø¦ÛŒ */
+    opacity: 0;
+}
+
+
+/* =========================
+   Ø­Ø±Ú©Øª Ø´Ù†Ø§ÙˆØ±
+   ========================= */
+
+@keyframes particle-float {
+
+    0% {
+        transform:
+            translate(0, 0)
+            scale(0.6);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: var(--peak-opacity, 0.7);
+    }
+
+    50% {
+        transform:
+            translate(
+                var(--drift-x, 30px),
+                calc(var(--drift-y, -60px) * 0.5)
+            )
+            scale(1);
+        opacity: var(--peak-opacity, 0.7);
+    }
+
+    85% {
+        opacity: var(--peak-opacity, 0.7);
+    }
+
+    100% {
+        transform:
+            translate(
+                calc(var(--drift-x, 30px) * 1.6),
+                var(--drift-y, -60px)
+            )
+            scale(0.6);
+        opacity: 0;
+    }
+}
+
+
+/* =========================
+   Ú©Ø§Ù‡Ø´ Ø­Ø±Ú©Øª
+   ========================= */
+
+@media (prefers-reduced-motion: reduce) {
+    .particles {
+        display: none;
+    }
+}
+
+
+/* =========================
+   Ù…ÙˆØ¨Ø§ÛŒÙ„: Ø³Ø¨Ú©â€ŒØªØ± Ùˆ Ú©Ù…â€ŒØªØ¹Ø¯Ø§Ø¯ØªØ±
+   ========================= */
+
+@media (max-width: 600px) {
+
+    .particles {
+        mix-blend-mode: normal;  /* Ø¨Ø¹Ø¶ÛŒ Ù…ÙˆØ¨Ø§ÛŒÙ„â€ŒÙ‡Ø§ screen Ø±Ùˆ Ø³Ù†Ú¯ÛŒÙ† Ø±Ù†Ø¯Ø± Ù…ÛŒâ€ŒÚ©Ù†Ù† */
+    }
+
+    .particle {
+        width: 5px;
+        height: 5px;
+        filter: blur(0.4px);
+    }
+}
+/* =========================
+   NIGHT / TWILIGHT
+   Ú¯Ø±Ø¯Ù‡â€ŒÙ‡Ø§ ÙÙ‚Ø· Ù¾Ø§ÛŒÛŒÙ† ØµÙØ­Ù‡
+   ========================= */
+
+#world[data-time="twilight"] .particles {
+    opacity: 0.75;
+}
+
+#world[data-time="night"] .particles {
+    opacity: 0.5;
+
+    -webkit-mask-image:
+        linear-gradient(
+            to bottom,
+            transparent 0%,
+            transparent 40%,
+            rgba(0, 0, 0, 0.4) 55%,
+            rgba(0, 0, 0, 1) 75%
+        );
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            transparent 0%,
+            transparent 40%,
+            rgba(0, 0, 0, 0.4) 55%,
+            rgba(0, 0, 0, 1) 75%
+        );
+}
+
+========== Css\petals.css ==========
+/* =========================
+   BLOOM FLOWER
+   Ú¯Ù„ Ø¨Ø§Ø¨ÙˆÙ†Ù‡â€ŒÛŒ Ø¯Ø± Ø­Ø§Ù„ Ø´Ú©ÙØªÙ†
+   ========================= */
+
+.bloom-flower {
+  position: absolute;
+
+  bottom: calc(28px + env(safe-area-inset-bottom));
+  left: calc(12px + env(safe-area-inset-left));
+
+  width: 70px;
+  height: 70px;
+
+  opacity: 0;
+  transition: opacity 1.8s ease;
+  z-index: 100; /* Ø§Ø² 25 Ø¨Ù‡ 100 */
+  pointer-events: none; /* Ù¾ÛŒØ´â€ŒÙØ±Ø¶ */
+}
+
+.bloom-flower.visible {
+  opacity: 1;
+}
+
+/* =========================
+   Ø³Ø§Ù‚Ù‡
+   ========================= */
+
+.bloom-flower .stem {
+  position: absolute;
+
+  bottom: 0;
+  left: 50%;
+
+  width: 2px;
+  height: 18px;
+
+  background: linear-gradient(
+    to top,
+    rgba(90, 120, 60, 0.9),
+    rgba(120, 150, 80, 0.7)
+  );
+
+  border-radius: 2px;
+
+  transform: translateX(-50%);
+
+  opacity: 0.85;
+}
+
+/* =========================
+   ØºÙ†Ú†Ù‡
+   ========================= */
+
+.bloom-flower .bud {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 18px;
+  height: 22px;
+
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(200, 215, 140, 0.9) 0%,
+    rgba(150, 180, 90, 0.95) 50%,
+    rgba(110, 140, 60, 1) 100%
+  );
+
+  box-shadow:
+    inset 0 -3px 6px rgba(80, 100, 40, 0.35),
+    inset 0 2px 4px rgba(255, 255, 220, 0.5),
+    0 2px 6px rgba(0, 0, 0, 0.15);
+
+  transform: translate(-50%, -50%);
+
+  transition:
+    opacity 1s ease,
+    transform 1.2s ease;
+
+  z-index: 2;
+}
+
+.bloom-flower.blooming .bud {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.5);
+}
+
+/* =========================
+   Ù„Ø§ÛŒÙ‡â€ŒÛŒ Ú¯Ù„Ø¨Ø±Ú¯â€ŒÙ‡Ø§
+   ========================= */
+
+.bloom-flower .petals-layer {
+  position: absolute;
+  inset: 0;
+}
+
+/* =========================
+   Ú¯Ù„Ø¨Ø±Ú¯
+   ========================= */
+
+.bloom-flower .petal {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  /* âœ… Ú¯Ù„Ø¨Ø±Ú¯ Ù¾Ù‡Ù†â€ŒØªØ± */
+  width: 9px;
+  height: 22px;
+
+  border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 250, 225, 1) 0%,
+    rgba(255, 245, 200, 1) 60%,
+    rgba(250, 230, 160, 1) 100%
+  );
+
+  box-shadow:
+    inset 0 -2px 3px rgba(200, 170, 90, 0.3),
+    0 0 4px rgba(255, 235, 170, 0.6);
+
+  transform: translate(-50%, -50%) rotate(var(--petal-angle)) translateY(-12px)
+    scale(0.4);
+
+  opacity: 0;
+
+  transition:
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.7s ease;
+
+  z-index: 1;
+}
+
+.bloom-flower .petal.placed {
+  opacity: 1;
+  transform: translate(-50%, -50%) rotate(var(--petal-angle)) translateY(-12px)
+    scale(1);
+}
+
+/* =========================
+   Ù‡Ø³ØªÙ‡
+   ========================= */
+
+.bloom-flower .core {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 14px;
+  height: 14px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(255, 235, 140, 1) 0%,
+    rgba(240, 190, 70, 1) 60%,
+    rgba(210, 150, 40, 1) 100%
+  );
+
+  box-shadow:
+    0 0 12px rgba(255, 220, 130, 0.85),
+    0 0 24px rgba(255, 190, 90, 0.5),
+    inset 0 -2px 4px rgba(160, 100, 30, 0.4);
+
+  transform: translate(-50%, -50%) scale(0);
+
+  opacity: 0;
+
+  transition:
+    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 1s ease;
+
+  z-index: 3;
+}
+
+.bloom-flower.blooming .core {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+/* =========================
+   Ú¯Ù„ Ú©Ø§Ù…Ù„ â€” Ù…Ø§Ù†Ø¯Ú¯Ø§Ø± + ØªÚ©ÙˆÙ† + Ù†ÙˆØ±
+   ========================= */
+
+.bloom-flower.blooming {
+  animation: bloom-sway 5s ease-in-out infinite;
+  pointer-events: auto; /* ÙÙ‚Ø· ÙˆÙ‚ØªÛŒ Ú©Ø§Ù…Ù„ Ø´Ø¯ØŒ Ú©Ù„ÛŒÚ©â€ŒÙ¾Ø°ÛŒØ± */
+}
+
+@keyframes bloom-sway {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+}
+
+.bloom-flower.blooming .core {
+  animation: core-glow 3.5s ease-in-out infinite;
+}
+
+@keyframes core-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 12px rgba(255, 220, 130, 0.85),
+      0 0 24px rgba(255, 190, 90, 0.5),
+      inset 0 -2px 4px rgba(160, 100, 30, 0.4);
+  }
+  50% {
+    box-shadow:
+      0 0 20px rgba(255, 230, 150, 1),
+      0 0 40px rgba(255, 200, 110, 0.7),
+      0 0 70px rgba(255, 180, 80, 0.35),
+      inset 0 -2px 4px rgba(160, 100, 30, 0.4);
+  }
+}
+
+/* =========================
+   Ú©Ù„ÛŒÚ©â€ŒÙ¾Ø°ÛŒØ±ÛŒ ÙÙ‚Ø· ÙˆÙ‚ØªÛŒ Ø´Ú©ÙØªÙ‡ Ø´Ø¯Ù‡
+   ========================= */
+
+.bloom-flower.blooming {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* =========================
+   Ø´Ù…Ø§Ø±Ù†Ø¯Ù‡
+   ========================= */
+
+.bloom-count {
+  position: absolute;
+
+  bottom: -18px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  padding: 3px 10px;
+
+  border-radius: 20px;
+
+  background: rgba(20, 15, 10, 0.32);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  font-size: 11px;
+  font-weight: 500;
+
+  color: rgba(255, 245, 220, 0.95);
+
+  letter-spacing: 0.04em;
+
+  white-space: nowrap;
+
+  /* âœ… Ú†Ù¾â€ŒØ¨Ù‡â€ŒØ±Ø§Ø³Øª (Ú©Ù‡ 0/23 Ø¯Ø±Ø³Øª Ù†Ø´ÙˆÙ† Ø¯Ø§Ø¯Ù‡ Ø´Ù‡) */
+  direction: ltr;
+  unicode-bidi: embed;
+}
+
+.bloom-current {
+  font-size: 13px;
+  font-weight: 600;
+  transition: transform 0.35s ease;
+}
+
+.bloom-current.pulse {
+  transform: scale(1.4);
+  color: rgba(255, 240, 170, 1);
+}
+
+.bloom-separator {
+  opacity: 0.5;
+  margin: 0 1px;
+}
+
+.bloom-total {
+  opacity: 0.75;
+}
+
+/* =========================
+   Ù¾Ø±ÙˆØ§Ø² Ú¯Ù„Ø¨Ø±Ú¯
+   ========================= */
+
+.flying-petal {
+  position: fixed;
+
+  z-index: 50;
+
+  width: 8px;
+  height: 16px;
+
+  border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 250, 225, 1) 0%,
+    rgba(255, 245, 200, 1) 60%,
+    rgba(250, 230, 160, 1) 100%
+  );
+
+  box-shadow: 0 0 8px rgba(255, 235, 170, 0.8);
+
+  pointer-events: none;
+
+  will-change: transform, opacity;
+
+  transition:
+    transform 1.3s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 1.3s ease;
+}
+
+/* =========================
+   Ù¾Ø®Ø´ Ú¯Ù„Ø¨Ø±Ú¯ (Ú©Ù„ÛŒÚ© Ø±ÙˆÛŒ Ú¯Ù„ Ù†Ù‡Ø§ÛŒÛŒ)
+   ========================= */
+
+.burst-petal {
+  position: fixed;
+
+  z-index: 45;
+
+  width: 7px;
+  height: 14px;
+
+  border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 250, 225, 1) 0%,
+    rgba(255, 245, 200, 1) 60%,
+    rgba(250, 230, 160, 1) 100%
+  );
+
+  box-shadow: 0 0 6px rgba(255, 235, 170, 0.7);
+
+  pointer-events: none;
+
+  will-change: transform, opacity;
+
+  transition:
+    transform 1.3s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 1.3s ease;
+}
+
+/* =========================
+   Ù…ÙˆØ¨Ø§ÛŒÙ„
+   ========================= */
+
+@media (max-width: 600px) {
+  .bloom-flower {
+    width: 60px;
+    height: 60px;
+
+    bottom: calc(20px + env(safe-area-inset-bottom));
+    left: calc(8px + env(safe-area-inset-left));
+  }
+
+  .bloom-flower .stem {
+    height: 14px;
+  }
+
+  .bloom-flower .bud {
+    width: 15px;
+    height: 19px;
+  }
+
+  .bloom-flower .petal {
+    width: 6px;
+    height: 17px;
+    transform: translate(-50%, -50%) rotate(var(--petal-angle))
+      translateY(-12px) scale(0.4);
+  }
+
+  .bloom-flower .petal.placed {
+    transform: translate(-50%, -50%) rotate(var(--petal-angle))
+      translateY(-12px) scale(1);
+  }
+
+  .bloom-flower .core {
+    width: 12px;
+    height: 12px;
+  }
+
+  .bloom-count {
+    font-size: 10px;
+    padding: 2px 8px;
+    bottom: -16px;
+  }
+
+  .bloom-current {
+    font-size: 12px;
+  }
+
+  .flying-petal,
+  .burst-petal {
+    width: 7px;
+    height: 14px;
+  }
+}
+
+/* =========================
+   Ú©Ø§Ù‡Ø´ Ø­Ø±Ú©Øª
+   ========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .bloom-flower .petal,
+  .bloom-flower .core,
+  .flying-petal,
+  .burst-petal {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+/* âœ… ÙˆÙ‚ØªÛŒ Ú¯Ù„ Ø±ÛŒØ³Øª Ù…ÛŒâ€ŒØ´Ù‡ØŒ ØºÙ†Ú†Ù‡ Ø¨Ø±Ú¯Ø±Ø¯Ù‡ */
+
+.bloom-flower:not(.blooming) .bud {
+  opacity: 1 !important;
+  transform: translate(-50%, -50%) scale(1) !important;
+}
+
+.bloom-flower:not(.blooming) .core {
+  opacity: 0 !important;
+  transform: translate(-50%, -50%) scale(0) !important;
+}
+
+========== Css\style.css ==========
+@import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Vazirmatn", Tahoma, sans-serif;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: #111;
+}
+
+#world {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+========== Css\welcome.css ==========
+/* =========================
+   WELCOME OVERLAY
+   Ù¾ÛŒØ§Ù… ÙˆØ±ÙˆØ¯ÛŒ
+   ========================= */
+
+.welcome-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 200; /* Ø¨Ø§Ù„Ø§ØªØ±ÛŒÙ† Ù„Ø§ÛŒÙ‡ */
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  /* âœ… Ù¾Ø³â€ŒØ²Ù…ÛŒÙ†Ù‡â€ŒÛŒ Ø®ÛŒÙ„ÛŒ Ù…Ù„Ø§ÛŒÙ… */
+  background: rgba(15, 10, 5, 0.35);
+
+  backdrop-filter: blur(12px) saturate(120%);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+
+  opacity: 0;
+
+  transition: opacity 1.2s ease;
+}
+
+.welcome-overlay.visible {
+  opacity: 1;
+}
+
+.welcome-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* =========================
+   Ú©Ø§Ø±Øª Ù¾ÛŒØ§Ù…
+   ========================= */
+
+.welcome-card {
+  position: relative;
+
+  width: min(100%, 420px);
+
+  padding: 38px 30px 32px;
+
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  border-radius: 30px;
+
+  background: rgba(255, 255, 255, 0.16);
+
+  backdrop-filter: blur(20px) saturate(130%);
+  -webkit-backdrop-filter: blur(20px) saturate(130%);
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+
+  text-align: center;
+
+  color: rgba(255, 255, 255, 0.96);
+
+  transform: translateY(20px) scale(0.96);
+  opacity: 0;
+
+  transition:
+    transform 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 1s ease;
+}
+
+.welcome-overlay.visible .welcome-card {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+/* =========================
+   Ø¢ÛŒÚ©ÙˆÙ†
+   ========================= */
+
+.welcome-icon {
+  font-size: 48px;
+  line-height: 1;
+  margin-bottom: 20px;
+
+  animation: welcome-float 4s ease-in-out infinite;
+}
+
+@keyframes welcome-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(3deg);
+  }
+}
+
+/* =========================
+   Ø¹Ù†ÙˆØ§Ù†
+   ========================= */
+
+.welcome-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 18px;
+
+  color: rgba(255, 255, 255, 1);
+
+  text-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+
+  letter-spacing: 0.01em;
+}
+
+/* =========================
+   Ù…ØªÙ†
+   ========================= */
+
+.welcome-message {
+  font-size: 15px;
+  line-height: 2;
+
+  color: rgba(255, 255, 255, 0.92);
+
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.15);
+
+  margin-bottom: 28px;
+}
+
+/* =========================
+   Ø¯Ú©Ù…Ù‡
+   ========================= */
+
+.welcome-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px 38px;
+
+  border: 1px solid rgba(255, 240, 190, 0.55);
+  border-radius: 30px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 235, 170, 0.35) 0%,
+    rgba(255, 215, 130, 0.25) 100%
+  );
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  color: rgba(60, 45, 20, 0.98);
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+
+  letter-spacing: 0.05em;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 22px rgba(180, 130, 40, 0.2),
+    inset 0 1px 0 rgba(255, 255, 240, 0.65);
+
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s ease,
+    background 0.35s ease;
+}
+
+.welcome-button:hover {
+  transform: translateY(-2px) scale(1.04);
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 240, 180, 0.5) 0%,
+    rgba(255, 220, 140, 0.35) 100%
+  );
+
+  box-shadow:
+    0 12px 30px rgba(180, 130, 40, 0.3),
+    inset 0 1px 0 rgba(255, 255, 240, 0.75);
+}
+
+.welcome-button:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* =========================
+   Ù…ÙˆØ¨Ø§ÛŒÙ„
+   ========================= */
+
+@media (max-width: 600px) {
+  .welcome-card {
+    padding: 32px 24px 26px;
+    border-radius: 26px;
+  }
+
+  .welcome-icon {
+    font-size: 42px;
+    margin-bottom: 16px;
+  }
+
+  .welcome-title {
+    font-size: 20px;
+    margin-bottom: 14px;
+  }
+
+  .welcome-message {
+    font-size: 14px;
+    line-height: 1.9;
+    margin-bottom: 24px;
+  }
+
+  .welcome-button {
+    padding: 11px 32px;
+    font-size: 13px;
+  }
+}
+
+/* =========================
+   Ú©Ø§Ù‡Ø´ Ø­Ø±Ú©Øª
+   ========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .welcome-icon {
+    animation: none;
+  }
+
+  .welcome-card {
+    transition: opacity 0.5s ease;
+    transform: none;
+  }
+}
+
+========== Js\audio.js ==========
+/* =========================
+   AUDIO SYSTEM
+   Ø³ÛŒØ³ØªÙ… ØµØ¯Ø§
+   ========================= */
+
+const AudioSystem = (() => {
+  /* =========================
+       Ø§Ù„Ù…Ø§Ù†â€ŒÙ‡Ø§ÛŒ ØµÙˆØªÛŒ
+       ========================= */
+
+  const ambient = new Audio("assets/audio/Chand-Mera-Dil.m4a");
+
+  /* =========================
+       ØªÙ†Ø¸ÛŒÙ…Ø§Øª
+       ========================= */
+
+  ambient.loop = false;
+
+  ambient.addEventListener("ended", () => {
+    /* Ø§Ú¯Ù‡ Ú©Ø§Ø±Ø¨Ø± ØµØ¯Ø§ Ø±Ùˆ Ù‚Ø·Ø¹ Ú©Ø±Ø¯Ù‡ØŒ Ø¯ÙˆØ¨Ø§Ø±Ù‡ Ù¾Ø®Ø´ Ù†Ú©Ù† */
+
+    if (isMuted) {
+      return;
+    }
+
+    setTimeout(() => {
+      if (isMuted) return;
+
+      ambient.currentTime = 0;
+      ambient.play().catch(() => {});
+    }, 3000);
+  });
+
+  ambient.volume = 0.15; /* ØµØ¯Ø§ÛŒ Ù¾Ø³â€ŒØ²Ù…ÛŒÙ†Ù‡ Ù…Ù„Ø§ÛŒÙ… */
+
+  /* =========================
+       ÙˆØ¶Ø¹ÛŒØª
+       ========================= */
+
+  let isMuted = false;
+
+  let isStarted = false;
+
+  let fadeInterval = null;
+  let activeVoices = [];
+
+  /* =========================
+       Ø´Ø±ÙˆØ¹ Ø¢Ø±ÙˆÙ… Ù…ÙˆØ³ÛŒÙ‚ÛŒ (fade in)
+       ========================= */
+
+  function fadeIn(audio, targetVolume, duration = 3000) {
+    clearInterval(fadeInterval);
+
+    audio.volume = 0;
+
+    audio.play().catch(() => {});
+
+    const stepTime = 50;
+
+    const steps = duration / stepTime;
+
+    const volumeStep = targetVolume / steps;
+
+    fadeInterval = setInterval(() => {
+      if (audio.volume + volumeStep >= targetVolume) {
+        audio.volume = targetVolume;
+
+        clearInterval(fadeInterval);
+      } else {
+        audio.volume += volumeStep;
+      }
+    }, stepTime);
+  }
+
+  /* =========================
+       Ø´Ø±ÙˆØ¹ Ù…ÙˆØ³ÛŒÙ‚ÛŒ Ù¾Ø³â€ŒØ²Ù…ÛŒÙ†Ù‡
+       (ÙÙ‚Ø· Ø¨Ø§ Ø§ÙˆÙ„ÛŒÙ† ØªØ¹Ø§Ù…Ù„ Ú©Ø§Ø±Ø¨Ø±)
+       ========================= */
+
+  function startAmbient() {
+    if (isStarted || isMuted) {
+      return;
+    }
+
+    isStarted = true;
+
+    /* âœ… fade in Ø³Ø±ÛŒØ¹â€ŒØªØ± â€” Û±.Ûµ Ø«Ø§Ù†ÛŒÙ‡ Ø¨Ù‡ Ø¬Ø§ÛŒ Û³ Ø«Ø§Ù†ÛŒÙ‡ */
+
+    fadeIn(ambient, 0.15, 1500);
+  }
+
+  /* =========================
+       Ù„Ø±Ø²Ø´ Ø®ÙÛŒÙ Ù…ÙˆØ¨Ø§ÛŒÙ„
+       ========================= */
+
+  function vibrateLight() {
+    if (typeof navigator !== "undefined" && "vibrate" in navigator) {
+      /* Û±Ûµ Ù…ÛŒÙ„ÛŒâ€ŒØ«Ø§Ù†ÛŒÙ‡ â€” Ø®ÛŒÙ„ÛŒ Ù…Ù„Ø§ÛŒÙ… */
+      navigator.vibrate(15);
+    }
+  }
+
+  /* =========================
+       Ù‚Ø·Ø¹ / ÙˆØµÙ„ Ú©Ø±Ø¯Ù† ØµØ¯Ø§
+       ========================= */
+
+  function toggleMute() {
+    isMuted = !isMuted;
+
+    if (isMuted) {
+      ambient.pause();
+    } else {
+      if (!isStarted) {
+        startAmbient();
+      } else {
+        ambient.play().catch(() => {});
+      }
+    }
+
+    return isMuted;
+  }
+
+  /* =========================
+       API Ø¹Ù…ÙˆÙ…ÛŒ
+       ========================= */
+
+  /* =========================
+   DUCK AND PLAY
+   Ú©Ù… Ú©Ø±Ø¯Ù† Ø¢Ù‡Ù†Ú¯ + Ù¾Ù„ÛŒ ØµØ¯Ø§ÛŒ Ù…Ù‡Ø¯ÛŒÙ‡
+   ========================= */
+
+  let duckedVolume = null;
+
+  function duckAndPlay(audioSrc) {
+    if (!audioSrc || isMuted) return;
+
+    /* âœ… Û±. ØªÙˆÙ‚Ù ØµØ¯Ø§Ù‡Ø§ÛŒ Ù‚Ø¨Ù„ÛŒ */
+
+    stopAllVoices();
+
+    /* âœ… Û². Ø¢Ù‡Ù†Ú¯ Ø±Ùˆ Ú©Ù… Ú©Ù† */
+
+    if (!duckedVolume) {
+      duckedVolume = ambient.volume;
+    }
+
+    const targetVolume = duckedVolume * 0.2;
+
+    const duckInterval = setInterval(() => {
+      if (ambient.volume <= targetVolume) {
+        clearInterval(duckInterval);
+        return;
+      }
+      ambient.volume -= 0.01;
+    }, 30);
+
+    /* âœ… Û³. ØµØ¯Ø§ÛŒ Ù…Ù‡Ø¯ÛŒÙ‡ Ø±Ùˆ Ù¾Ù„ÛŒ Ú©Ù† */
+
+    const voice = new Audio(audioSrc);
+    voice.volume = 0.9;
+
+    /* Ø°Ø®ÛŒØ±Ù‡ Ú©Ù† */
+
+    activeVoices.push(voice);
+
+    voice.play().catch(() => {});
+
+    /* âœ… Û´. Ø¨Ø¹Ø¯ Ø§Ø² ØªÙ…ÙˆÙ… Ø´Ø¯Ù†ØŒ Ø¢Ù‡Ù†Ú¯ Ø¨Ø±Ú¯Ø±Ø¯Ù‡ */
+
+    voice.addEventListener("ended", () => {
+      /* Ø­Ø°Ù Ø§Ø² Ù„ÛŒØ³Øª */
+
+      const idx = activeVoices.indexOf(voice);
+      if (idx > -1) {
+        activeVoices.splice(idx, 1);
+      }
+
+      /* Ø¨Ø±Ú¯Ø±Ø¯ÙˆÙ†Ø¯Ù† Ø¢Ù‡Ù†Ú¯ */
+
+      if (activeVoices.length === 0) {
+        const restoreInterval = setInterval(() => {
+          if (ambient.volume >= duckedVolume) {
+            ambient.volume = duckedVolume;
+            clearInterval(restoreInterval);
+            return;
+          }
+          ambient.volume += 0.01;
+        }, 30);
+      }
+    });
+
+    return voice;
+  }
+
+  /* âœ… ØªÙˆÙ‚Ù Ù‡Ù…Ù‡â€ŒÛŒ ØµØ¯Ø§Ù‡Ø§ */
+
+  function stopAllVoices() {
+    activeVoices.forEach((voice) => {
+      voice.pause();
+      voice.currentTime = 0;
+    });
+
+    activeVoices = [];
+
+    /* Ø¨Ø±Ú¯Ø±Ø¯ÙˆÙ†Ø¯Ù† Ø¢Ù‡Ù†Ú¯ */
+
+    if (duckedVolume) {
+      const restoreInterval = setInterval(() => {
+        if (ambient.volume >= duckedVolume) {
+          ambient.volume = duckedVolume;
+          clearInterval(restoreInterval);
+          return;
+        }
+        ambient.volume += 0.01;
+      }, 30);
+    }
+  }
+
+  return {
+    startAmbient,
+    vibrateLight,
+    toggleMute,
+    duckAndPlay,
+    stopAllVoices,
+
+    get muted() {
+      return isMuted;
+    },
+  };
+})();
+
+/* =========================
+   Ø³Ø§Ø®Øª Ø¯Ú©Ù…Ù‡â€ŒÛŒ ØµØ¯Ø§
+   ========================= */
+
+function createAudioToggle() {
+  const world = document.getElementById("world");
+
+  if (!world) {
+    return;
+  }
+
+  const button = document.createElement("button");
+
+  button.className = "audio-toggle";
+
+  button.setAttribute("aria-label", "Toggle sound");
+
+  button.innerHTML = `
+        <svg class="icon-on" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11 5L6 9H2V15H6L11 19V5Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M15.54 8.46C16.4774 9.39764 17.004 10.6692 17.004 12C17.004 13.3308 16.4774 14.6024 15.54 15.54" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M19.07 4.93C20.9447 6.80528 21.9979 9.34836 21.9979 12C21.9979 14.6516 20.9447 17.1947 19.07 19.07" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+
+        <svg class="icon-off" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11 5L6 9H2V15H6L11 19V5Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M22 9L16 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16 9L22 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+     `;
+
+  world.appendChild(button);
+
+  /* Ù†Ù…Ø§ÛŒØ´ Ø¢Ø±ÙˆÙ… */
+
+  setTimeout(() => {
+    button.classList.add("visible");
+  }, 1200);
+
+  /* Ú©Ù„ÛŒÚ© Ø±ÙˆÛŒ Ø¯Ú©Ù…Ù‡ */
+
+  button.addEventListener("click", (event) => {
+    event.stopPropagation();
+
+    const muted = AudioSystem.toggleMute();
+
+    button.classList.toggle("muted", muted);
+  });
+}
+
+/* =========================
+   Ø§ØªØµØ§Ù„ Ø§ÙÚ©Øªâ€ŒÙ‡Ø§ Ø¨Ù‡ Ø±ÙˆÛŒØ¯Ø§Ø¯Ù‡Ø§
+   ========================= */
+
+function connectAudioEvents() {
+  /* =========================
+       Ú©Ù„ÛŒÚ© Ø±ÙˆÛŒ Ú¯Ù„:
+       Ù„Ø±Ø²Ø´ Ø®ÙÛŒÙ â€” Ø¨Ø¯ÙˆÙ† ØµØ¯Ø§
+       ========================= */
+
+  document.addEventListener("click", (event) => {
+    if (event.target.closest(".flower")) {
+      AudioSystem.vibrateLight();
+    }
+  });
+}
+
+/* =========================
+   Ø§Ø¬Ø±Ø§ Ø¯Ø± Ù„ÙˆØ¯ ØµÙØ­Ù‡
+   ========================= */
+
+function initAudio() {
+  createAudioToggle();
+
+  connectAudioEvents();
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initAudio);
+} else {
+  initAudio();
+}
+
+========== Js\flowers.js ==========
+/* =========================
+   FLOWER POSITIONS
+   Ú†ÛŒØ¯Ù…Ø§Ù† Ø±Ù†Ø¯ÙˆÙ… Û²Û³ Ú¯Ù„
+   ========================= */
+
+function generateFlowerPositions() {
+  const positions = [];
+
+  /* =========================
+       Û² Ú¯Ù„ Ù¾ÛŒØ´â€ŒØ²Ù…ÛŒÙ†Ù‡ (Ú©Ù†Ø§Ø±Ù‡Ø§)
+       ========================= */
+
+  positions.push({
+    x: 6,
+    y: 97,
+    rotation: -12,
+    scale: 1.0,
+    opacity: 0.98,
+    blur: 0,
+    brightness: 1,
+    state: "closed",
+  });
+
+  positions.push({
+    x: 94,
+    y: 97,
+    rotation: 9,
+    scale: 0.98,
+    opacity: 0.98,
+    blur: 0,
+    brightness: 1,
+    state: "closed",
+  });
+
+  /* =========================
+       ØªÙˆÙ„ÛŒØ¯ Ø¨Ù‚ÛŒÙ‡ Ø¨Ù‡ ØµÙˆØ±Øª Ø±Ù†Ø¯ÙˆÙ…
+       ========================= */
+
+  const totalFlowers = 23;
+  let attempts = 0;
+  const MAX_ATTEMPTS = 50000;
+
+  while (positions.length < totalFlowers && attempts < MAX_ATTEMPTS) {
+    attempts++;
+
+    const x = 3 + Math.random() * 94;
+    const y = 55 + Math.random() * 43; /* y: 55 ØªØ§ 98 */
+
+    /* ÙÛŒÙ„ØªØ± Û±: Ù†Ø§Ø­ÛŒÙ‡â€ŒÛŒ ØºÙ†Ú†Ù‡ (Ù¾Ø§ÛŒÛŒÙ†-Ú†Ù¾) */
+    if (x < 28 && y > 82) continue;
+
+    /* ÙÛŒÙ„ØªØ± Û²: ØµÙˆØ±Øª Ùˆ Ù…ÙˆÙ‡Ø§ÛŒ Ù…Ù‡Ø¯ÛŒÙ‡ (Ø¨Ø§Ù„Ø§-ÙˆØ³Ø·) */
+    if (x > 28 && x < 75 && y > 25 && y < 60) continue;
+
+    /* ÙÛŒÙ„ØªØ± Û³: Ø¨Ø¯Ù† Ùˆ Ù„Ø¨Ø§Ø³ Ù…Ù‡Ø¯ÛŒÙ‡ (ÙˆØ³Ø·ØŒ Ø¨Ø§Ø±ÛŒÚ©â€ŒØªØ±) */
+    if (x > 33 && x < 72 && y > 58 && y < 95) continue;
+
+    /* ÙÛŒÙ„ØªØ± Û´: ÙØ§ØµÙ„Ù‡ Ø§Ø² Ú¯Ù„â€ŒÙ‡Ø§ÛŒ Ù‚Ø¨Ù„ÛŒ */
+    let tooClose = false;
+
+    for (let i = 0; i < positions.length; i++) {
+      const p = positions[i];
+
+      if (Math.abs(p.x - x) < 6 && Math.abs(p.y - y) < 4) {
+        tooClose = true;
+        break;
+      }
+    }
+
+    if (tooClose) continue;
+
+    /* Ù…Ù‚Ø§Ø¯ÛŒØ± Ù†Ù‡Ø§ÛŒÛŒ */
+
+    const depthFactor = (y - 55) / 43;
+
+    const scale = 0.5 + depthFactor * 0.4 + Math.random() * 0.2;
+
+    const opacity = 0.68 + depthFactor * 0.3;
+    const blur = (1 - depthFactor) * 0.85;
+    const brightness = 0.88 + depthFactor * 0.12;
+    const rotation = -18 + Math.random() * 36;
+
+    positions.push({
+      x: Math.round(x * 10) / 10,
+      y: Math.round(y * 10) / 10,
+      rotation: Math.round(rotation),
+      scale: Math.round(scale * 100) / 100,
+      opacity: Math.round(opacity * 100) / 100,
+      blur: Math.round(blur * 100) / 100,
+      brightness: Math.round(brightness * 100) / 100,
+      state: "closed",
+    });
+  }
+
+  console.log("ðŸŒ¸ ØªØ¹Ø¯Ø§Ø¯ Ú¯Ù„â€ŒÙ‡Ø§:", positions.length);
+
+  positions.sort((a, b) => a.y - b.y);
+
+  return positions;
+}
+
+/* =========================
+   Ù…ØªØºÛŒØ±Ù‡Ø§ÛŒ Ø³Ø±Ø§Ø³Ø±ÛŒ
+   ========================= */
+
+const flowerPositions = generateFlowerPositions();
+const totalFlowers = flowerPositions.length;
+
+/* =========================
+   CREATE FLOWERS
+   Ø³Ø§Ø®Øª Ú¯Ù„â€ŒÙ‡Ø§ Ø±ÙˆÛŒ ØµÙØ­Ù‡
+   ========================= */
+
+function createFlowers() {
+  const container = document.getElementById("flowers");
+
+  if (!container) {
+    console.warn("âš ï¸ #flowers Ù¾ÛŒØ¯Ø§ Ù†Ø´Ø¯");
+    return;
+  }
+
+  container.innerHTML = "";
+
+  /* =========================
+       Ø³Ø§Ø®Øª Ú¯Ù„ Ù¾Ø§ÛŒØ§Ù†ÛŒ (ØºÙ†Ú†Ù‡)
+       ========================= */
+
+  if (!window.__bloomFlowerCreated) {
+    window.__bloomFlowerCreated = true;
+
+    if (typeof BloomFlower !== "undefined") {
+      setTimeout(() => {
+        BloomFlower.create(totalFlowers);
+      }, 2000);
+    } else {
+      console.warn("âš ï¸ BloomFlower ØªØ¹Ø±ÛŒÙ Ù†Ø´Ø¯Ù‡ â€” petals.js Ù„ÙˆØ¯ Ù†Ø´Ø¯Ù‡ØŸ");
+    }
+  }
+
+  /* =========================
+       Ø³Ø§Ø®Øª Ú¯Ù„â€ŒÙ‡Ø§ÛŒ Ø¯Ø´Øª
+       ========================= */
+
+  flowerPositions.forEach((position, index) => {
+    const flower = document.createElement("button");
+
+    flower.className = "flower";
+
+    flower.style.left = `${position.x}%`;
+    flower.style.top = `${position.y}%`;
+
+    flower.style.setProperty("--rotation", `${position.rotation}deg`);
+    flower.style.setProperty("--scale", position.scale);
+    flower.style.setProperty("--opacity", position.opacity);
+    flower.style.setProperty("--blur", `${position.blur}px`);
+    flower.style.setProperty("--brightness", position.brightness);
+
+    flower.setAttribute("aria-label", `Chamomile flower ${index + 1}`);
+
+    const image = document.createElement("img");
+    image.src = "assets/images/flowers/chamomile-closed.png";
+    image.alt = "";
+
+    flower.appendChild(image);
+
+    /* =========================
+           Ú©Ù„ÛŒÚ© Ø±ÙˆÛŒ Ú¯Ù„
+           ========================= */
+
+    flower.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      /* Ø§Ú¯Ù‡ Ù‚Ø¨Ù„Ø§Ù‹ Ø¨Ø§Ø² Ø´Ø¯Ù‡ Ø¨ÙˆØ¯ØŒ ÙÙ‚Ø· Ù¾Ù†Ù„ Ø±Ùˆ Ø¨Ø§Ø² Ú©Ù† */
+
+      if (flower.classList.contains("opened")) {
+        openMemory(index % memories.length);
+        return;
+      }
+
+      /* Ø§ÙˆÙ„ÛŒÙ† Ú©Ù„ÛŒÚ©: Ú¯Ù„ Ø±Ùˆ Ø¨Ø§Ø² Ú©Ù† */
+
+      flower.classList.add("opened");
+
+      image.src = "assets/images/flowers/chamomile-open.png";
+
+      const rect = flower.getBoundingClientRect();
+
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+
+      if (typeof BloomFlower !== "undefined") {
+        BloomFlower.addPetal(centerX, centerY);
+      }
+
+      /* âœ… Ú†Ú© Ú©Ù† Ø§ÛŒÙ† Ú¯Ù„ Ú†Ù†Ø¯Ù…ÛŒÙ† Ú¯Ù„ Ø¨Ø§Ø² Ø´Ø¯Ù‡â€ŒØ³Øª */
+
+      const openedCount = document.querySelectorAll(".flower.opened").length;
+
+      const isFinalFlower = openedCount === totalFlowers;
+
+      /* âœ… Ø°Ø±Ø§Øª Ø·Ù„Ø§ÛŒÛŒ â€” Ø¨ÛŒØ´ØªØ± Ø¨Ø±Ø§ÛŒ Ø¢Ø®Ø±ÛŒÙ† Ú¯Ù„ */
+
+      if (typeof MagicParticles !== "undefined") {
+        if (isFinalFlower) {
+          /* âœ… Ø¢Ø®Ø±ÛŒÙ† Ú¯Ù„: Ø§ÙÚ©Øª Ø®Ø§Øµ */
+
+          MagicParticles.finalBurst(centerX, centerY);
+
+          /* ÙÙ„Ø§Ø´ Ù…Ù„Ø§ÛŒÙ… Ø±ÙˆÛŒ Ú©Ù„ ØµÙØ­Ù‡ */
+
+          setTimeout(() => {
+            MagicParticles.finalFlash();
+          }, 300);
+        } else {
+          /* Ú¯Ù„â€ŒÙ‡Ø§ÛŒ Ù…Ø¹Ù…ÙˆÙ„ÛŒ */
+
+          MagicParticles.burst(centerX, centerY);
+        }
+      }
+
+      /* âœ… Ù¾Ù†Ù„ Ø±Ùˆ Ú©Ù…ÛŒ ØªØ£Ø®ÛŒØ± Ø¨Ù†Ø¯Ø§Ø² â€” ÙØ±ØµØª Ø¨Ø±Ø§ÛŒ Ø°Ø±Ø§Øª */
+
+      const delay = isFinalFlower ? 1400 : 600;
+
+      setTimeout(() => {
+        openMemory(index % memories.length);
+      }, delay);
+    });
+
+    /* âœ… Ø¨Ø±Ø§ÛŒ Ù…ÙˆØ¨Ø§ÛŒÙ„ â€” Ú©Ù„ÛŒÚ© Ø¨Ø¯ÙˆÙ† ØªØ£Ø®ÛŒØ± */
+
+    flower.addEventListener(
+      "touchstart",
+      () => {
+        flower.dataset.touched = "1";
+
+        setTimeout(() => {
+          flower.dataset.touched = "0";
+        }, 500);
+      },
+      { passive: true },
+    );
+
+    container.appendChild(flower);
+  });
+}
+
+/* =========================
+   BIRTHDAY MESSAGE
+   Ù¾ÛŒØ§Ù… ØªØ¨Ø±ÛŒÚ© ØªÙˆÙ„Ø¯
+   ========================= */
+
+/* =========================
+   BIRTHDAY MESSAGE
+   Ù¾ÛŒØ§Ù… ØªØ¨Ø±ÛŒÚ© ØªÙˆÙ„Ø¯
+   ========================= */
+
+function showBirthdayMessage() {
+  if (document.querySelector(".birthday-overlay")) {
+    return;
+  }
+
+  const world = document.getElementById("world");
+  if (!world) return;
+
+  const overlay = document.createElement("div");
+  overlay.className = "birthday-overlay";
+
+  overlay.innerHTML = `
+        <div class="birthday-card">
+
+            <div class="birthday-icon">ðŸŒ¼</div>
+
+            <h1 class="birthday-title" dir="rtl">
+              Û²Û³ ØªØ§ Ú†ÛŒØ²ÛŒ Ú©Ù‡ Ø¬ÙˆØ¬Ù‡ Ù…Ù†Ùˆ ØªØ§ Ø§Ù„Ø§Ù† Ø³Ø§Ø®ØªÙ†!
+            </h1>
+
+            <p class="birthday-message" dir="rtl">
+                Ù‡Ø± Ú¯Ù„Ø¨Ø±Ú¯ØŒ ÛŒÙ‡ Ú†ÛŒØ² Ø®Ø§Øµ Ø§Ø² ØªÙˆ Ø¨ÙˆØ¯.<br>
+                Ø­Ø§Ù„Ø§ ÛŒÙ‡ Ú¯Ù„ Ú©Ø§Ù…Ù„ Ø´Ø¯...<br>
+                ÙˆÙ„ÛŒ ØªÙˆ Ø§Ø² Ù‡Ø± Ú¯Ù„ÛŒ Ù‚Ø´Ù†Ú¯â€ŒØªØ±ÛŒ.<br>
+                ØªÙˆÙ„Ø¯Øª Ù…Ø¨Ø§Ø±Ú©ØŒ Ø¨Ø§Ø¨ÙˆÙ†Ù‡ Ù…Ù†.ðŸ’›
+            </p>
+
+            <button class="birthday-close" aria-label="Close">
+               Ø¨Ø²Ù† Ù…Ù†ÙˆØŒ Ø¹Ø§Ø­
+            </button>
+
+        </div>
+    `;
+
+  world.appendChild(overlay);
+
+  requestAnimationFrame(() => {
+    overlay.classList.add("visible");
+  });
+  if (typeof BloomFlower !== "undefined" && BloomFlower.startAutoBurst) {
+    setTimeout(() => {
+      BloomFlower.startAutoBurst();
+    }, 800);
+  }
+
+  const closeBtn = overlay.querySelector(".birthday-close");
+
+  closeBtn.addEventListener("click", () => {
+    overlay.classList.remove("visible");
+
+    setTimeout(() => {
+      overlay.remove();
+
+      /* âœ… Ø¨Ø¹Ø¯ Ø§Ø² Ø¨Ø³ØªÙ† Ù¾ÛŒØ§Ù…ØŒ Ù¾ÛŒØ§Ù… Ø¨Ø¹Ø¯ÛŒ Ùˆ Ø¯Ú©Ù…Ù‡â€ŒÛŒ Ø¯ÙˆØ¨Ø§Ø±Ù‡ */
+
+      showAfterMessage();
+    }, 700);
+  });
+}
+
+/* =========================
+   AFTER MESSAGE
+   Ù¾ÛŒØ§Ù… Ø¨Ø¹Ø¯ Ø§Ø² ØªØ¨Ø±ÛŒÚ© + Ø¯Ú©Ù…Ù‡â€ŒÛŒ Ø¯ÙˆØ¨Ø§Ø±Ù‡
+   ========================= */
+
+function showAfterMessage() {
+  if (document.querySelector(".after-overlay")) {
+    return;
+  }
+
+  const world = document.getElementById("world");
+  if (!world) return;
+
+  const overlay = document.createElement("div");
+  overlay.className = "after-overlay";
+
+  overlay.innerHTML = `
+        <div class="after-card">
+
+            <p class="after-text" dir="rtl">
+                Ø¨Ø²Ø±Ú¯ Ø´Ø¯ÛŒ Ø¬ÙˆØ¬Ù‡ Ù…Ù† <br>
+                Ù‡Ø±Ø³Ø§Ù„ Ú©Ù‡ Ù…ÛŒÚ¯Ø°Ø±Ù‡ Ù…ÛŒØ±ÛŒ ØªÙˆ Ù¾ÙˆØ³Øª Ùˆ Ø§Ø³ØªØ®ÙˆÙ† Ø§ÛŒÙ† Ø¢Ø¯Ù… <br>
+                Ø¯ÙˆØ³ØªØª Ø¯Ø§Ø±Ù… Ø¯Ø®ØªØ± Ù‚Ø´Ù†Ú¯ Ù…Ù† <br>
+                Ø§Ù…Ø¨Ø¯ÙˆØ§Ø±Ù… Ø§Ù…Ø³Ø§Ù„ Ú†Ø´Ø§Øª Ø§Ø² ØªÙ‡ Ø¯Ù„ Ø¨Ø®Ù†Ø¯Ù† <br>
+                Ø¨Ù‡ØªØ±ÛŒÙ† Ø§ØªÙØ§Ù‚ Ù‡Ø§ Ø¨Ø±Ø§Øª Ø±Ù‚Ù… Ø¨Ø®ÙˆØ±Ù‡ Ùˆ <br>
+                ØªÚ© ØªÚ© Ø¢Ø±Ø²ÙˆÙ‡Ø§Øª Ø®Ø§Ø·Ø±Ù‡ Ø´Ù† <br>
+                ÛŒØ§Ø¯Øª Ù†Ø±Ù‡ Ú†Ù‚Ø¯ Ø¯ÙˆØ³ØªØª Ø¯Ø§Ø±Ù…ØŒ ØªÙˆÙ„Ø¯Øª Ù…Ø¨Ø§Ø±Ú© Ù‚Ù„Ø¨ Ù…Ù†ðŸ’› 
+            </p>
+
+            <button class="after-replay" dir="rtl">
+                Ø¨Ø±Ú¯Ø±Ø¯ÛŒÙ… Ø§Ø² Ø§ÙˆÙ„
+            </button>
+
+        </div>
+    `;
+
+  world.appendChild(overlay);
+
+  requestAnimationFrame(() => {
+    overlay.classList.add("visible");
+  });
+
+  /* =========================
+       Ø¯Ú©Ù…Ù‡â€ŒÛŒ Ø¯ÙˆØ¨Ø§Ø±Ù‡
+       ========================= */
+
+  const replayBtn = overlay.querySelector(".after-replay");
+  function resetFlowers() {
+    console.log("ðŸ”„ resetFlowers Ø§Ø¬Ø±Ø§ Ø´Ø¯");
+
+    /* Û°. ØªÙˆÙ‚Ù Ù¾Ø®Ø´ Ø®ÙˆØ¯Ú©Ø§Ø± */
+
+    if (typeof BloomFlower !== "undefined" && BloomFlower.stopAutoBurst) {
+      BloomFlower.stopAutoBurst();
+    }
+
+    /* Û±. Ø¨Ø³ØªÙ† Ú¯Ù„â€ŒÙ‡Ø§ÛŒ Ø¯Ø´Øª */
+
+    document.querySelectorAll(".flower").forEach((f) => {
+      f.classList.remove("opened");
+      f.classList.remove("hint");
+
+      const img = f.querySelector("img");
+      if (img) {
+        img.src = "assets/images/flowers/chamomile-closed.png";
+      }
+    });
+
+    /* Û². Ø­Ø°Ù Ú©Ø§Ù…Ù„ Ú¯Ù„ Ù¾Ø§ÛŒØ§Ù†ÛŒ Ù‚Ø¯ÛŒÙ…ÛŒ */
+
+    const oldBloom = document.querySelector(".bloom-flower");
+
+    if (oldBloom) {
+      /* Ù¾Ø§Ú© Ú©Ø±Ø¯Ù† Ú¯Ù„Ø¨Ø±Ú¯â€ŒÙ‡Ø§ */
+
+      const petalsLayer = oldBloom.querySelector(".petals-layer");
+      if (petalsLayer) {
+        petalsLayer.innerHTML = "";
+      }
+
+      /* Ø­Ø°Ù Ú©Ù„ Ø§Ù„Ù…Ø§Ù† */
+
+      oldBloom.remove();
+
+      console.log("ðŸ—‘ï¸ Ú¯Ù„ Ù¾Ø§ÛŒØ§Ù†ÛŒ Ù‚Ø¯ÛŒÙ…ÛŒ Ø­Ø°Ù Ø´Ø¯");
+    }
+
+    /* Û³. Ø±ÛŒØ³Øª state Ø¯Ø§Ø®Ù„ÛŒ BloomFlower */
+
+    if (typeof BloomFlower !== "undefined" && BloomFlower.reset) {
+      BloomFlower.reset();
+    }
+
+    /* Û´. Ø³Ø§Ø®Øª Ú¯Ù„ Ù¾Ø§ÛŒØ§Ù†ÛŒ Ø¬Ø¯ÛŒØ¯ */
+
+    if (typeof BloomFlower !== "undefined") {
+      setTimeout(() => {
+        BloomFlower.create(totalFlowers);
+
+        console.log("ðŸŒ¸ Ú¯Ù„ Ù¾Ø§ÛŒØ§Ù†ÛŒ Ø¬Ø¯ÛŒØ¯ Ø³Ø§Ø®ØªÙ‡ Ø´Ø¯");
+      }, 500);
+    }
+  }
+}
+function resetFlowers() {
+  console.log("ðŸ”„ resetFlowers Ø´Ø±ÙˆØ¹ Ø´Ø¯");
+
+  /* Û±. ØªÙˆÙ‚Ù Ù¾Ø®Ø´ Ø®ÙˆØ¯Ú©Ø§Ø± */
+
+  try {
+    if (typeof BloomFlower !== "undefined" && BloomFlower.stopAutoBurst) {
+      BloomFlower.stopAutoBurst();
+      console.log("âœ‹ AutoBurst Ù…ØªÙˆÙ‚Ù Ø´Ø¯");
+    }
+  } catch (err) {
+    console.error("Ø®Ø·Ø§ Ø¯Ø± stopAutoBurst:", err);
+  }
+
+  /* Û². Ø¨Ø³ØªÙ† Ú¯Ù„â€ŒÙ‡Ø§ÛŒ Ø¯Ø´Øª */
+
+  try {
+    document.querySelectorAll(".flower").forEach((f) => {
+      f.classList.remove("opened");
+      f.classList.remove("hint");
+
+      const img = f.querySelector("img");
+      if (img) {
+        img.src = "assets/images/flowers/chamomile-closed.png";
+      }
+    });
+
+    console.log("ðŸŒ¼ Ú¯Ù„â€ŒÙ‡Ø§ÛŒ Ø¯Ø´Øª Ø¨Ø³ØªÙ‡ Ø´Ø¯Ù†");
+  } catch (err) {
+    console.error("Ø®Ø·Ø§ Ø¯Ø± Ø¨Ø³ØªÙ† Ú¯Ù„â€ŒÙ‡Ø§:", err);
+  }
+
+  /* Û³. Ø­Ø°Ù Ú¯Ù„ Ù¾Ø§ÛŒØ§Ù†ÛŒ Ù‚Ø¯ÛŒÙ…ÛŒ */
+
+  try {
+    const oldBloom = document.querySelector(".bloom-flower");
+
+    if (oldBloom) {
+      oldBloom.remove();
+      console.log("ðŸ—‘ï¸ Ú¯Ù„ Ù¾Ø§ÛŒØ§Ù†ÛŒ Ù‚Ø¯ÛŒÙ…ÛŒ Ø­Ø°Ù Ø´Ø¯");
+    }
+  } catch (err) {
+    console.error("Ø®Ø·Ø§ Ø¯Ø± Ø­Ø°Ù Ú¯Ù„ Ù¾Ø§ÛŒØ§Ù†ÛŒ:", err);
+  }
+
+  /* Û´. Ø±ÛŒØ³Øª state Ø¯Ø§Ø®Ù„ÛŒ */
+
+  try {
+    if (typeof BloomFlower !== "undefined" && BloomFlower.reset) {
+      BloomFlower.reset();
+      console.log("ðŸ”„ BloomFlower.reset Ø´Ø¯");
+    }
+  } catch (err) {
+    console.error("Ø®Ø·Ø§ Ø¯Ø± BloomFlower.reset:", err);
+  }
+
+  /* Ûµ. Ø³Ø§Ø®Øª Ú¯Ù„ Ù¾Ø§ÛŒØ§Ù†ÛŒ Ø¬Ø¯ÛŒØ¯ */
+
+  try {
+    if (typeof BloomFlower !== "undefined") {
+      window.__bloomFlowerCreated = false;
+
+      setTimeout(() => {
+        try {
+          BloomFlower.create(totalFlowers);
+          window.__bloomFlowerCreated = true;
+          console.log("ðŸŒ¸ Ú¯Ù„ Ù¾Ø§ÛŒØ§Ù†ÛŒ Ø¬Ø¯ÛŒØ¯ Ø³Ø§Ø®ØªÙ‡ Ø´Ø¯");
+        } catch (err) {
+          console.error("Ø®Ø·Ø§ Ø¯Ø± Ø³Ø§Ø®Øª Ú¯Ù„ Ø¬Ø¯ÛŒØ¯:", err);
+        }
+      }, 500);
+    }
+  } catch (err) {
+    console.error("Ø®Ø·Ø§ Ø¯Ø± Ø³Ø§Ø®Øª Ú¯Ù„ Ø¬Ø¯ÛŒØ¯:", err);
+  }
+
+  console.log("âœ… resetFlowers ØªÙ…ÙˆÙ… Ø´Ø¯");
+}
+
+========== Js\hint.js ==========
+/* =========================
+   HINT SYSTEM
+   Ø­Ù„Ù‚Ù‡â€ŒÛŒ Ù†Ø¨Ø¶ Ø±ÙˆÛŒ Ú¯Ù„â€ŒÙ‡Ø§
+   ========================= */
+
+(function () {
+  let hintFlower = null;
+  let firstHintTimer = null;
+  let rehintTimer = null;
+  let userClicked = false;
+
+  /* =========================
+       Ø§Ù†ØªØ®Ø§Ø¨ Ú¯Ù„ Ø±Ù†Ø¯ÙˆÙ…
+       ========================= */
+
+  function pickRandomFlower() {
+    const flowers = document.querySelectorAll(".flower");
+    if (!flowers.length) return null;
+
+    const unopened = Array.from(flowers).filter(
+      (f) => !f.classList.contains("opened"),
+    );
+
+    if (!unopened.length) return null;
+
+    const candidates = unopened.filter((f) => {
+      const top = parseFloat(f.style.top);
+      return top > 65;
+    });
+
+    const pool = candidates.length ? candidates : unopened;
+
+    return pool[Math.floor(Math.random() * pool.length)];
+  }
+
+  /* =========================
+       Ù¾Ø§Ú© Ú©Ø±Ø¯Ù† Ù†Ø¨Ø¶
+       ========================= */
+
+  function clearHint() {
+    document.querySelectorAll(".flower.hint").forEach((f) => {
+      f.classList.remove("hint");
+    });
+
+    hintFlower = null;
+  }
+
+  /* =========================
+       Ù†Ù…Ø§ÛŒØ´ Ù†Ø¨Ø¶
+       ========================= */
+
+  function showHint() {
+    if (userClicked) return;
+
+    clearHint();
+
+    hintFlower = pickRandomFlower();
+
+    if (hintFlower) {
+      hintFlower.classList.add("hint");
+    }
+  }
+
+  /* =========================
+       Ø²Ù…Ø§Ù†â€ŒØ¨Ù†Ø¯ÛŒ Ù†Ø¨Ø¶ Ù…Ø¬Ø¯Ø¯
+       ========================= */
+
+  function scheduleRehint() {
+    if (userClicked) return;
+
+    clearTimeout(rehintTimer);
+
+    rehintTimer = setTimeout(() => {
+      if (userClicked) return;
+
+      showHint();
+      scheduleRehint();
+    }, 10000);
+  }
+
+  /* =========================
+       Ø´Ø±ÙˆØ¹
+       ========================= */
+
+  function start() {
+    firstHintTimer = setTimeout(() => {
+      if (userClicked) return;
+
+      showHint();
+      scheduleRehint();
+    }, 5000);
+  }
+
+  /* =========================
+       Ø¨Ø§ Ú©Ù„ÛŒÚ© Ø±ÙˆÛŒ Ú¯Ù„ØŒ Ù†Ø¨Ø¶ Ø¨Ø±Ù‡
+       ========================= */
+
+  function handleClick(event) {
+    const clickedFlower = event.target.closest(".flower");
+
+    if (!clickedFlower) return;
+
+    userClicked = true;
+
+    clearTimeout(firstHintTimer);
+    clearTimeout(rehintTimer);
+
+    clearHint();
+
+    setTimeout(clearHint, 50);
+    setTimeout(clearHint, 150);
+    setTimeout(clearHint, 300);
+    setTimeout(clearHint, 600);
+  }
+
+  /* =========================
+       Ø§Ø¬Ø±Ø§
+       ========================= */
+
+  function init() {
+    document.addEventListener("click", handleClick, true);
+    document.addEventListener("touchstart", handleClick, {
+      passive: true,
+      capture: true,
+    });
+
+    start();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
+
+========== Js\interaction.js ==========
+
+========== Js\leaves.js ==========
+/* =========================
+   FALLING AUTUMN LEAVES
+   Ø¨Ø±Ú¯â€ŒÙ‡Ø§ÛŒ Ù¾Ø§ÛŒÛŒØ²ÛŒ â€” Ø¨Ø§ Ø¹Ú©Ø³ ÙˆØ§Ù‚Ø¹ÛŒ
+   ========================= */
+
+function createLeaves() {
+  const container = document.getElementById("leaves");
+
+  if (!container) {
+    console.warn("âš ï¸ #leaves Ù¾ÛŒØ¯Ø§ Ù†Ø´Ø¯");
+    return;
+  }
+
+  /* =========================
+       Ù…Ø³ÛŒØ±Ù‡Ø§ÛŒ Ø¨Ø±Ú¯â€ŒÙ‡Ø§
+       ========================= */
+
+  const leafImages = [
+    "assets/images/leaves/leaf-1.png",
+    "assets/images/leaves/leaf-2.png",
+    "assets/images/leaves/leaf-3.png",
+    "assets/images/leaves/leaf-4.png",
+  ];
+
+  /* =========================
+       ØªØ¹Ø¯Ø§Ø¯
+       ========================= */
+
+  const isMobile = window.matchMedia("(max-width: 600px)").matches;
+
+  const count = isMobile ? 14 : 18;
+
+  container.innerHTML = "";
+
+  /* =========================
+       Ø³Ø§Ø®Øª Ø¨Ø±Ú¯â€ŒÙ‡Ø§
+       ========================= */
+
+  for (let i = 0; i < count; i++) {
+    const leaf = document.createElement("span");
+    leaf.className = "leaf";
+
+    /* =========================
+           Ø¹Ú©Ø³ Ø±Ù†Ø¯ÙˆÙ…
+           ========================= */
+
+    const randomImage =
+      leafImages[Math.floor(Math.random() * leafImages.length)];
+
+    leaf.style.backgroundImage = `url(${randomImage})`;
+
+    /* =========================
+           Ø¬Ù‡Øª Ø­Ø±Ú©Øª â€” Ø¯Ù‚ÛŒÙ‚Ø§Ù‹ Ù…ØªØ¹Ø§Ø¯Ù„
+           ========================= */
+
+    const direction = i % 2 === 0 ? "right-to-left" : "left-to-right";
+
+    leaf.classList.add(direction);
+
+    /* =========================
+           Ø¹Ù…Ù‚
+           ========================= */
+
+    const depthIndex = i % 3;
+
+    let depthClass;
+    let opacity;
+
+    if (depthIndex === 0) {
+      depthClass = "far";
+      opacity = 0.25 + Math.random() * 0.15; /* 0.25-0.40 */
+    } else if (depthIndex === 1) {
+      depthClass = "mid";
+      opacity = 0.45 + Math.random() * 0.15; /* 0.45-0.60 */
+    } else {
+      depthClass = "near";
+      opacity = 0.65 + Math.random() * 0.15; /* 0.65-0.80 */
+    }
+
+    leaf.classList.add(depthClass);
+
+    /* =========================
+           Ø§Ø±ØªÙØ§Ø¹ Ø´Ø±ÙˆØ¹ â€” ÛŒÚ©Ù†ÙˆØ§Ø®Øª
+           ========================= */
+
+    const startY = 3 + Math.random() * 70;
+
+    leaf.style.setProperty("--start-y", `${startY}vh`);
+
+    /* =========================
+           Ù…Ø¯Øª Ø²Ù…Ø§Ù†
+           ========================= */
+
+    leaf.style.setProperty("--drift-duration", `${25 + Math.random() * 30}s`);
+
+    /* =========================
+           ØªØ£Ø®ÛŒØ±
+           ========================= */
+
+    leaf.style.setProperty("--drift-delay", `${i * 1.2 + Math.random() * 4}s`);
+
+    /* =========================
+           Ø§Ù†Ø¯Ø§Ø²Ù‡
+           ========================= */
+
+    let scale;
+
+    if (depthClass === "far") {
+      scale = 0.5 + Math.random() * 0.3;
+    } else if (depthClass === "mid") {
+      scale = 0.7 + Math.random() * 0.3;
+    } else {
+      scale = 0.9 + Math.random() * 0.4;
+    }
+
+    leaf.style.setProperty("--leaf-scale", scale.toFixed(2));
+
+    /* =========================
+           Ø´ÙØ§ÙÛŒØª
+           ========================= */
+
+    leaf.style.setProperty("--leaf-opacity", opacity.toFixed(2));
+
+    /* =========================
+           Ú†Ø±Ø®Ø´
+           ========================= */
+
+    leaf.style.setProperty(
+      "--start-rotation",
+      `${Math.floor(Math.random() * 360)}deg`,
+    );
+
+    /* =========================
+           Ù…ÙˆØ¬ Ø¹Ù…ÙˆØ¯ÛŒ
+           ========================= */
+
+    leaf.style.setProperty("--wave-1", `${-40 + Math.random() * 80}px`);
+    leaf.style.setProperty("--wave-2", `${-50 + Math.random() * 100}px`);
+    leaf.style.setProperty("--wave-3", `${-45 + Math.random() * 90}px`);
+    leaf.style.setProperty("--wave-4", `${-35 + Math.random() * 70}px`);
+
+    /* =========================
+           âœ… Ù…Ø³ÛŒØ± Ø§ÙÙ‚ÛŒ Ø«Ø§Ø¨Øª
+           ========================= */
+
+    leaf.style.setProperty("--path-1", "30vw");
+    leaf.style.setProperty("--path-2", "60vw");
+    leaf.style.setProperty("--path-3", "85vw");
+    leaf.style.setProperty("--path-4", "125vw");
+
+    container.appendChild(leaf);
+  }
+
+  console.log("ðŸ‚ ØªØ¹Ø¯Ø§Ø¯ Ø¨Ø±Ú¯â€ŒÙ‡Ø§:", container.children.length);
+
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      container.classList.add("ready");
+    }, 600);
+  });
+}
+
+/* =========================
+   Ø§Ø¬Ø±Ø§
+   ========================= */
+
+window.addEventListener("load", createLeaves);
+
+let leavesResizeTimer;
+
+window.addEventListener("resize", () => {
+  clearTimeout(leavesResizeTimer);
+
+  leavesResizeTimer = setTimeout(() => {
+    const container = document.getElementById("leaves");
+
+    if (container) {
+      container.classList.remove("ready");
+    }
+
+    createLeaves();
+  }, 500);
+});
+
+========== Js\magic.js ==========
+/* =========================
+   MAGIC PARTICLES
+   Ø°Ø±Ø§Øª Ø·Ù„Ø§ÛŒÛŒ Ù‡Ù†Ú¯Ø§Ù… Ø¨Ø§Ø² Ø´Ø¯Ù† Ú¯Ù„
+   ========================= */
+
+const MagicParticles = (() => {
+  /* =========================
+       Ù¾Ø®Ø´ Ø°Ø±Ø§Øª Ø§Ø² ÛŒÙ‡ Ù†Ù‚Ø·Ù‡
+       ========================= */
+
+  function burst(x, y) {
+    /* =========================
+           ØªÙ†Ø¸ÛŒÙ…Ø§Øª â€” Ù…Ù„Ø§ÛŒÙ… Ø¨Ø±Ø§ÛŒ Ø´Ø¨
+           ========================= */
+
+    const count = 12;
+
+    const colors = [
+      "rgba(255, 235, 180, 0.9)" /* Ú©Ø±Ù… Ø±ÙˆØ´Ù† */,
+      "rgba(255, 220, 150, 0.85)" /* Ø·Ù„Ø§ÛŒÛŒ Ù…Ù„Ø§ÛŒÙ… */,
+      "rgba(255, 245, 200, 0.9)" /* Ú©Ø±Ù… Ø®ÛŒÙ„ÛŒ Ø±ÙˆØ´Ù† */,
+      "rgba(255, 210, 140, 0.8)" /* Ø·Ù„Ø§ÛŒÛŒ Ú¯Ø±Ù… */,
+    ];
+
+    for (let i = 0; i < count; i++) {
+      const particle = document.createElement("div");
+      particle.className = "magic-particle";
+
+      /* =========================
+               Ù…ÙˆÙ‚Ø¹ÛŒØª Ø§ÙˆÙ„ÛŒÙ‡
+               ========================= */
+
+      particle.style.left = `${x}px`;
+      particle.style.top = `${y}px`;
+
+      /* =========================
+               Ø§Ù†Ø¯Ø§Ø²Ù‡ (Ø±Ù†Ø¯ÙˆÙ…)
+               ========================= */
+
+      const size = 3 + Math.random() * 4; /* Û³ ØªØ§ Û· Ù¾ÛŒÚ©Ø³Ù„ */
+
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+
+      /* =========================
+               Ø±Ù†Ú¯ (Ø±Ù†Ø¯ÙˆÙ… Ø§Ø² Ù¾Ø§Ù„Øª)
+               ========================= */
+
+      const color = colors[Math.floor(Math.random() * colors.length)];
+
+      particle.style.background = `radial-gradient(circle, ${color} 0%, ${color.replace(/[\d.]+\)$/, "0)")} 70%)`;
+
+      /* =========================
+               Ù…Ù‚ØµØ¯ Ù¾Ø±ÙˆØ§Ø² (Ø±Ù†Ø¯ÙˆÙ…)
+               ========================= */
+
+      /* Ø°Ø±Ø§Øª Ø¨Ù‡ Ø³Ù…Øª Ø¨Ø§Ù„Ø§ Ù¾Ø±ÙˆØ§Ø² Ù…ÛŒâ€ŒÚ©Ù†Ù†ØŒ Ø¨Ø§ Ù¾Ø®Ø´ Ø§ÙÙ‚ÛŒ Ú©Ù… */
+
+      const dx = (Math.random() - 0.5) * 60; /* Ø§ÙÙ‚ÛŒ: -Û³Û° ØªØ§ +Û³Û° */
+      const dy = -80 - Math.random() * 60; /* Ø¹Ù…ÙˆØ¯ÛŒ: Ø¨Ø§Ù„Ø§ (Ù…Ù†ÙÛŒ) */
+
+      /* =========================
+               Ù…Ø¯Øª Ø²Ù…Ø§Ù†
+               ========================= */
+
+      const duration = 1200 + Math.random() * 600; /* Û±.Û² ØªØ§ Û±.Û¸ Ø«Ø§Ù†ÛŒÙ‡ */
+
+      /* =========================
+               ØªØ£Ø®ÛŒØ± Ø´Ø±ÙˆØ¹ (Ø¨Ø±Ø§ÛŒ Ù¾Ø®Ø´â€ŒØ´Ø¯Ú¯ÛŒ)
+               ========================= */
+
+      const delay = Math.random() * 200; /* Û° ØªØ§ Û²Û°Û°ms */
+
+      /* =========================
+               Ø§Ù†ÛŒÙ…ÛŒØ´Ù†
+               ========================= */
+
+      particle.style.transition = `transform ${duration}ms cubic-bezier(0.16, 1, 0.3, 1), opacity ${duration}ms ease`;
+
+      document.body.appendChild(particle);
+
+      /* =========================
+               Ø´Ø±ÙˆØ¹ Ù¾Ø±ÙˆØ§Ø² (Ø¨Ø¹Ø¯ Ø§Ø² delay)
+               ========================= */
+
+      setTimeout(() => {
+        particle.style.transform = `translate(${dx}px, ${dy}px) scale(0.4)`;
+
+        particle.style.opacity = "0";
+      }, delay);
+
+      /* =========================
+               Ø­Ø°Ù Ø¨Ø¹Ø¯ Ø§Ø² Ù¾Ø§ÛŒØ§Ù†
+               ========================= */
+
+      setTimeout(
+        () => {
+          if (particle.parentNode) {
+            particle.remove();
+          }
+        },
+        duration + delay + 100,
+      );
+    }
+  }
+
+  /* =========================
+       API Ø¹Ù…ÙˆÙ…ÛŒ
+       ========================= */
+
+  /* =========================
+   FINAL BURST
+   Ø°Ø±Ø§Øª Ø¨ÛŒØ´ØªØ± Ø¨Ø±Ø§ÛŒ Ø¢Ø®Ø±ÛŒÙ† Ú¯Ù„
+   ========================= */
+
+  function finalBurst(x, y) {
+    /* âœ… Û³Û° ØªØ§ Ø°Ø±Ø§Øª (Ø¨Ù‡ Ø¬Ø§ÛŒ Û±Û²) */
+
+    const count = 30;
+
+    const colors = [
+      "rgba(255, 235, 180, 0.95)",
+      "rgba(255, 220, 150, 0.9)",
+      "rgba(255, 245, 200, 0.95)",
+      "rgba(255, 210, 140, 0.85)",
+      "rgba(255, 255, 220, 0.95)",
+    ];
+
+    for (let i = 0; i < count; i++) {
+      const particle = document.createElement("div");
+      particle.className = "magic-particle";
+
+      particle.style.left = `${x}px`;
+      particle.style.top = `${y}px`;
+
+      /* Ø§Ù†Ø¯Ø§Ø²Ù‡ Ø¨Ø²Ø±Ú¯â€ŒØªØ± Ø¨Ø±Ø§ÛŒ Ø¢Ø®Ø±ÛŒÙ† Ú¯Ù„ */
+
+      const size = 4 + Math.random() * 6;
+
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+
+      const color = colors[Math.floor(Math.random() * colors.length)];
+
+      particle.style.background = `radial-gradient(circle, ${color} 0%, ${color.replace(/[\d.]+\)$/, "0)")} 70%)`;
+
+      /* Ù¾Ø±ÙˆØ§Ø² Ø¨Ø²Ø±Ú¯â€ŒØªØ± */
+
+      const dx = (Math.random() - 0.5) * 120; /* Ø§ÙÙ‚ÛŒ Ø¨ÛŒØ´ØªØ± */
+      const dy = -120 - Math.random() * 100; /* Ø¹Ù…ÙˆØ¯ÛŒ Ø¨ÛŒØ´ØªØ± */
+
+      const duration = 1600 + Math.random() * 800;
+      const delay = Math.random() * 300;
+
+      particle.style.transition = `transform ${duration}ms cubic-bezier(0.16, 1, 0.3, 1), opacity ${duration}ms ease`;
+
+      document.body.appendChild(particle);
+
+      setTimeout(() => {
+        particle.style.transform = `translate(${dx}px, ${dy}px) scale(0.3)`;
+        particle.style.opacity = "0";
+      }, delay);
+
+      setTimeout(
+        () => {
+          if (particle.parentNode) {
+            particle.remove();
+          }
+        },
+        duration + delay + 100,
+      );
+    }
+  }
+
+  /* =========================
+   FINAL FLASH
+   ÙÙ„Ø§Ø´ Ù…Ù„Ø§ÛŒÙ… Ø±ÙˆÛŒ Ú©Ù„ ØµÙØ­Ù‡
+   ========================= */
+
+  function finalFlash() {
+    /* Ø¬Ù„ÙˆÚ¯ÛŒØ±ÛŒ Ø§Ø² ÙÙ„Ø§Ø´ ØªÚ©Ø±Ø§Ø±ÛŒ */
+
+    if (document.querySelector(".final-flash")) {
+      return;
+    }
+
+    const flash = document.createElement("div");
+    flash.className = "final-flash";
+
+    document.body.appendChild(flash);
+
+    /* Ø­Ø°Ù Ø¨Ø¹Ø¯ Ø§Ø² Ù¾Ø§ÛŒØ§Ù† Ø§Ù†ÛŒÙ…ÛŒØ´Ù† */
+
+    setTimeout(() => {
+      if (flash.parentNode) {
+        flash.remove();
+      }
+    }, 2600);
+  }
+
+  return {
+    burst,
+    finalBurst,
+    finalFlash,
+  };
+})();
+
+========== Js\main.js ==========
+/* =========================
+   REAL WORLD TIME
+   ========================= */
+
+function updateWorldTime() {
+  const timeData = getTimeProgress();
+
+  setSkyState(timeData.state, timeData.progress);
+}
+
+/* =========================
+   TEST STATES
+   ========================= */
+
+const testStates = ["dawn", "day", "golden", "twilight", "night", "night"];
+
+let testIndex = 0;
+
+let manualTestMode = false;
+
+/* =========================
+   MANUAL TIME TEST
+   ========================= */
+
+function testTimeState(state) {
+  manualTestMode = true;
+
+  setSkyState(state, 0);
+}
+
+/* =========================
+   KEYBOARD TEST
+   ========================= */
+
+document.addEventListener("keydown", (event) => {
+  const key = event.key;
+
+  if (key >= "1" && key <= "6") {
+    const index = Number(key) - 1;
+
+    testIndex = index;
+
+    testTimeState(testStates[index]);
+  }
+
+  if (key.toLowerCase() === "r") {
+    manualTestMode = false;
+
+    updateWorldTime();
+  }
+});
+
+/* =========================
+   REAL TIME CLOCK
+   ========================= */
+
+function startWorldClock() {
+  updateWorldTime();
+
+  setInterval(() => {
+    if (manualTestMode) return;
+
+    updateWorldTime();
+  }, 1000);
+}
+
+/* =========================
+   START
+   ========================= */
+
+startWorldClock();
+
+createFlowers();
+/* =========================
+   HIDDEN CONSOLE MESSAGE
+   Ù¾ÛŒØ§Ù… Ù…Ø®ÙÛŒ Ø¨Ø±Ø§ÛŒ Ù…Ù‡Ø¯ÛŒÙ‡
+   ========================= */
+
+console.log(
+  "%c Ø¨Ø±Ø§ÛŒ Ù…Ø§Ù‡ Ø¢Ø³Ù…ÙˆÙ†Ù… ðŸŒ™",
+  "font-size: 28px; color: #d9a441; font-weight: bold; text-shadow: 0 0 10px rgba(217,164,65,0.5); padding: 10px 0;",
+);
+
+console.log(
+  "%cØ§Ú¯Ù‡ Ø§ÛŒÙ†Ùˆ Ù…ÛŒâ€ŒØ¨ÛŒÙ†ÛŒØŒ ÛŒØ¹Ù†ÛŒ  .\nØªÙˆÙ„Ø¯Øª Ù…Ø¨Ø§Ø±Ú©. ðŸŒ™",
+  "font-size: 14px; color: #8a5a22; padding: 10px 0; line-height: 1.8;",
+);
+
+========== Js\memories.js ==========
+// Memory Data :
+const memories = [
+  {
+    title: "Ú†Ø´Ù… Ø¢Ù‡ÙˆÛŒÛŒ",
+    date: "2026/10/08",
+    image: "./assets/images/memories/trait-01.png",
+    text: "Ø§ÙˆÙ† Ú†Ø´Ù…Ø§ÛŒ Ø¢Ù‡ÙˆÛŒÛŒ Ø¨ÛŒ Ù†Ø¸ÛŒØ±ØªØŒ <br> Ø§Ù…Ø§Ù† Ø§Ù…Ø§Ù†! <br>  Ú†Ø´Ù… Ù‡Ø§ÛŒ Ù‚Ù‡ÙˆÙ‡ Ø§ÛŒ Ø®ÙˆØ´Ú¯Ù„Øª <br> Ø¬ÙˆØ±ÛŒ Ø®Ø§Øµ Ùˆ Ù‚Ø´Ù†Ú¯Ù† Ú©Ù‡ Ø¢Ø¯Ù… Ø¯ÙˆØ³ Ø¯Ø§Ø±Ù‡ Ø³Ø§Ø¹ØªÙ‡Ø§ Ø¨Ù‡Ø´ÙˆÙ† Ø®ÛŒØ±Ù‡ Ø¨Ø´Ù‡ Ùˆ Ø¨Ú¯Ù‡: <br> ÙØªØ¨Ø§Ø±Ú© Ø§Ù„Ù„Ù‡ Ø§Ø­Ø³Ù† Ø§Ù„Ø®Ø§Ù„Ù‚ÛŒÙ†.ðŸ¤ŒðŸ¼ ",
+  },
+  {
+    //ÙˆÛŒØ¯ÛŒÙˆ!
+    title: " ÙØ±ÙØ±ÛŒ Ù‡Ø§ÛŒ Ø¯ÙˆØ³Øª Ø¯Ø§Ø´ØªÙ†ÛŒ",
+    date: "2026/10/08",
+    image: "./assets/images/memories/trait-012.jpg",
+    text: " Ù…ÙˆÙ‡Ø§Øª Ú†Ù‡ Ø®ÙˆØ´Ú¯Ù‡ Ú†Ù‡ ÙØ±ÙØ±ÛŒ Ú†Ù‡ Ù„Ø®ØªØ´! <br> Ø®Ø¯Ø§ Ø¯ÛŒØ¯ Ù†Ù…ÛŒØ´Ù‡ Ø¨Ù‡ Ø§ÛŒÙ† Ø±Ø§Ø­ØªÛŒ Ú†Ø´Ù… Ø§Ø² ØªÙˆ Ø¨Ø±Ø¯Ø§Ø´ØªØŒ Ú¯ÙØª Ù…ÙˆÙ‡Ø§Ø´Ùˆ Ù‡Ù… ÙØ± Ú©Ù†ÛŒÙ… <br> Ú©Ù‡ Ø¯Ù„Ù…ÙˆÙ† ØªÙˆÛŒ Ù…ÙˆÙ‡Ø§ÛŒ ÙØ±Øª Ú¯Ø±Ù‡ Ø¨Ø®ÙˆØ±Ù‡ Ùˆ Ú¯ÛŒØ± Ú©Ù†Ù‡.ðŸ‘©ðŸ»â€ðŸ¦±",
+  },
+  {
+    title: "Ù…Ø§Ù‡ Ø®Ø§Ù†ÙˆÙ…ÛŒ!",
+    date: "2026/10/08",
+    image: "./assets/images/memories/trait-02.png",
+    text: "   Ú†Ø´Ù… Ø¨Ù‡Ù… Ø²Ø¯ÛŒÙ… Ø´Ø¯ÛŒ Ù…Ø§Ù‡ Ù…Ù†ØŒ Ù…Ø§Ù‡ Ø´Ø¨ Ú†Ù‡Ø§Ø±Ø¯Ù‡ <br> Ù…Ø§Ù‡ Ø§Ø³Ù…ÙˆÙ†Ù… Ú©Ù‡ Ø´Ø¨Ø§ÛŒ ØªÛŒØ±Ù‡ Ùˆ ØªØ§Ø±Ù…Ùˆ Ø±ÙˆØ´Ù† Ù…ÛŒÚ©Ù†ÛŒ <br> Ù‡Ù…Ù‡ Ø¢Ø¯Ù…Ø§ Ø³ØªØ§Ø±Ù‡ Ø¨Ø§Ø´Ù†ØŒ ØªÙˆ Ø¯Ø± Ú©Ù†Ø§Ø±Ø´ÙˆÙ† Ù…Ø§Ù‡ÛŒ!ðŸŒ™ ",
+  },
+  {
+    title: "Ø®Ù†Ø¯Ù‡ Ø´ÛŒØ±ÛŒÙ†Øª",
+    date: "2026/10/08",
+    image: "./assets/images/memories/trait-03.jpg",
+    text: " ÛŒÚ©ÛŒ Ø§Ø² ØµØ¯Ø§Ù‡Ø§ Ùˆ ØµØ­Ù†Ù‡ Ù‡Ø§ÛŒÛŒ Ú©Ù‡ Ù‡ÛŒÚ†ÙˆÙ‚Øª Ø§Ø² Ø´Ù†ÛŒØ¯Ù† Ùˆ Ø¯ÛŒØ¯Ù†Ø´ Ø®Ø³ØªÙ‡ Ù†Ù…ÛŒØ´Ù…ØŒ <br> Ø®Ù†Ø¯Ù‡ Ø®ÙˆØ´Ú¯Ù„ Ùˆ Ø´ÛŒØ±ÛŒÙ†ØªÙ‡ <br> Ø§ÙˆÙ† Ù„Ø¨Ø®ØªØ¯ Ù…Ø­ÙˆÛŒ Ú©Ù‡ Ù…ÛŒØ²Ù†ÛŒ ÛŒÙ‡ Ù‡Ù„Ø§Ù„ Ù…Ø§Ù‡ Ø±Ùˆ Ø¨Ù‡ Ø¨Ø§Ù„Ø§ Ù…ÛŒØ´ÛŒÙ†Ù‡ Ø±Ùˆ ØµÙˆØ±Øª Ù†Ø§Ø²Øª.ðŸ¤ŒðŸ¼",
+  },
+  {
+    title: "Ø¯Ù„ Ù†Ø§Ø²Ú© Ù…Ù†",
+    date: "2026/10/08",
+    image: "./assets/images/memories/trait-04.jpg",
+    text: " Ù¾Ø´Øª Ù‡Ù…Ù‡ Ø´ÛŒØ·Ù†Øª Ù‡Ø§ Ùˆ Ø´ÙˆØ®ÛŒ Ù‡Ø§ØªØŒ ÛŒÙ‡ Ø¯Ù„ Ù†Ø§Ø²Ú© Ø¯Ø§Ø±ÛŒ <br> Ø´Ø§ÛŒØ¯ Ù†Ø´ÙˆÙ†Ø´ Ù†Ø¯ÛŒØŒ ÙˆÙ„ÛŒ Ù…Ù† Ø®ÙˆØ¨ Ù…ÛŒØ¯ÙˆÙ†Ù…Ø´ <br> Ø¨Ø§ÛŒØ¯ Ø¨ÛŒØ´ØªØ± Ù…Ø±Ø§Ù‚Ø¨Ø´ Ø¨Ø§Ø´Ù…âœ¨",
+  },
+  {
+    title: "Ø­ÙˆØ§Ø³ Ø¬Ù…Ø¹! ",
+    date: "2026/10/08",
+    image: "./assets/images/memories/trait-05.jpg",
+    text: " ÛŒÙ‡ Ú†ÛŒØ²Ø§ÛŒÛŒ Ø±Ùˆ Ù…ÛŒØ¨ÛŒÙ†ÛŒ Ú©Ù‡ Ø®ÛŒÙ„ÛŒØ§ Ø§ØµÙ„Ø§ Ù…ØªÙˆØ¬Ù‡Ø´ Ù†Ù…ÛŒØ´Ù† <br> ÙˆØ§Ù‚Ø¹Ø§ Ø¨Ù‡ Ø¢Ø¯Ù… Ù‡Ø§ Ùˆ Ø§ØªÙØ§Ù‚ Ù‡Ø§ÛŒÛŒ Ú©Ù‡ Ø§Ø·Ø±Ø§ÙØª Ù…ÛŒÙˆÙØªÙ‡ ØªÙˆØ¬Ù‡ Ù…ÛŒÚ©Ù†ÛŒ",
+  },
+  {
+    title: "Ø®ÙˆØ¯ Ø®ÙˆØ¯Øª",
+    date: "2026/10/08",
+    image: "./assets/images/memories/trait-06.jpg",
+    text: " ØªÙˆØ¶ÛŒØ­ Ø®Ø§ØµÛŒ Ù†Ø¯Ø§Ø±Ù…ØŒ Ø®ÙˆØ¯ Ù…Ù‡Ø¯ÛŒÙ‡ Ø¨ÙˆØ¯Ù† Ø®ÙˆØ¯Ø´ Ø®Ø§Øµ ØªØ±ÛŒÙ† Ú†ÛŒØ²ÛŒÙ‡ Ú©Ù‡ Ø¢Ø¯Ù… Ù…ÛŒØªÙˆÙ†Ù‡ Ø¨Ø¨ÛŒÙ†Ù‡ <br> Ù…Ù† Ø®ÙˆØ¯ Ù…Ù‡Ø¯ÛŒÙ‡ Ù‡Ø±Ø·ÙˆØ±ÛŒ Ú©Ù‡ Ù‡Ø³Øª Ø±Ùˆ Ø®ÛŒÙ„ÛŒ Ø¯ÙˆØ³Ø´ Ø¯Ø§Ø±Ù….â¤ï¸",
+  },
+  {
+    title: "Ù‚Ø¯ Ø¨Ù„Ù†Ø¯ Ø±Ø¹Ù†Ø§",
+    date: "2026/10/08",
+    image: "./assets/images/memories/trait-07.jpg",
+    text: " ÛŒÙ‡ Ø¯Ø®ØªØ± Û±Û°/Û±Û° Ú†ÛŒÙ‡ØŸ <br> ÛŒÙ‡ Ø¯Ø®ØªØ±ÛŒÙ‡ Ú©Ù‡ Ù‚Ø¯Ø´ Ø¨Ù„Ù†Ø¯Ù‡ Ùˆ Ø®ÙˆØ´ Ø§Ù†Ø¯Ø§Ù… :) <br> Ø®Ø¯Ø§ ÙÙ‚Ø· Ø¢Ø¯Ù…Ø§ÛŒ Ø®Ø§Øµ Ø±Ùˆ Ù‚Ø¯ Ø¨Ù„Ù†Ø¯ Ù…ÛŒÚ©Ù†Ù‡ Ú©Ù‡ ÛŒÚ©ÛŒØ´Ù… Ø¯Ø®ØªØ± Ø®ÙˆØ´Ú¯Ù„ Ù…Ù†Ù‡ðŸ˜Œ",
+  },
+  {
+    //ÙˆÛŒØ¯ÛŒÙˆ!
+    title: "ÙˆØ±ÙˆØ¬Ú© Ø¯ÙˆØ³Øª Ø¯Ø§Ø´ØªÙ†ÛŒ",
+    date: "2026/10/08",
+    image: "./assets/images/memories/trait-071.jpg",
+    text: " ÛŒÙ‡ ÙˆØ±ÙˆØ¬Ú© Ú©ÙˆÚ†ÙˆÙ„Ùˆ Ú¯ÙˆØ´Ù‡ Ø´Ø®ØµÛŒØªØª Ø¯Ø§Ø±Ù‡ Ø²Ù†Ø¯Ú¯ÛŒ Ù…ÛŒÚ©Ù†Ù‡ØŒ Ù†Ù…ÛŒØ®ÙˆØ§Ù… Ù‡ÛŒÚ†ÙˆÙ‚Øª Ø¨Ø²Ø±Ú¯ Ø´Ù‡ <br> Ú†ÙˆÙ† Ù…ÛŒØ¯ÙˆÙ†ÛŒ <br> Ù…Ù† Ø§ÛŒÙ† ÙˆØ±Ú˜Ù† Ù†ÛŒÙ†ÛŒ Ú©ÙˆÚ†ÙˆÙ„ÙˆÙ… Ø±Ùˆ Ø®ÛŒÙ„ÛŒ Ø¯ÙˆØ³ Ø¯Ø§Ø±Ù….â¤ï¸",
+  },
+  {
+    title: "Ú†ÛŒØ²ÛŒ Ú©Ù‡ Ø®ÙˆØ¯Øª Ù†Ù…ÛŒØ¨ÛŒÙ†ÛŒ!",
+    date: "2026/10/08",
+    image: "./assets/images/memories/trait-08.jpg",
+    text: " Ø¢Ø® Ø¢Ø® <br> Ù‚ÙˆÛŒ Ø¨ÙˆØ¯ Ø§ÛŒÙ† Ù†ÛŒØ³Øª Ú©Ù‡ Ù‡ÛŒÚ†ÙˆÙ‚Øª Ø®Ø³ØªÙ‡ Ù†Ø´ÛŒ ÛŒØ§ Ù†Ø´Ú©Ù†ÛŒ<br> Ø§ÛŒÙ†Ù‡ Ú©Ù‡ Ø¨Ø§ ÙˆØ¬ÙˆØ¯ Ù‡Ù…Ù‡ Ø§ÛŒÙ†Ø§ Ø®ÙˆØ¯ØªÙˆ Ø¬Ù…Ø¹ Ú©Ù†ÛŒ Ùˆ Ø§Ø¯Ø§Ù…Ù‡ Ø¨Ø¯ÛŒ! <br> Ú©Ø§Ø´ Ù…ÛŒØ´Ø¯ Ø¨Ø±Ø§ÛŒ Ú†Ù†Ø¯ Ø¯Ù‚ÛŒÙ‚Ù‡ Ø®ÙˆØ¯Øª Ø±Ùˆ Ø§Ø² Ú†Ø´Ù… Ù…Ù† Ø¨Ø¨ÛŒÙ†ÛŒØŒ Ø§ÙˆÙ† Ù…ÙˆÙ‚Ø¹ Ø®ÙˆØ¯Øª Ù‡Ù… Ø¨Ù‡ Ø®ÙˆØ¯Øª Ø§ÙØªØ®Ø§Ø± Ù…ÛŒÚ©Ø±Ø¯ÛŒðŸ’›",
+  },
+  {
+    title: "Ú¯ÙˆØ´ Ù…ÛŒØ¯ÛŒØŒ Ù†Ù‡ Ú©Ù‡ ÙÙ‚Ø· Ø¨Ø´Ù†ÙˆÛŒ",
+    date: "2026/10/08",
+    image: "./assets/images/memories/trait-09.jpg",
+    text: " Ø´Ù†ÙˆÙ†Ø¯Ù‡ Ø®ÙˆØ¨ÛŒ Ù‡Ø³ØªÛŒ Ø¨Ø±Ø§ÛŒ Ø§Ø·Ø±Ø§ÙÛŒØ§Ù†Øª <br> Ú©Ø§Ù…Ù„ Ø¨Ù‡ Ø­Ø±ÙØ§Ø´ÙˆÙ† Ú¯ÙˆØ´ Ù…ÛŒØ¯ÛŒ <br>â€ŒÙ…ÛŒØ´Ù†ÙˆÛŒ Ø¨Ø¨ÛŒÙ†ÛŒ Ú©ÛŒ Ø¨Ù‡ Ú†ÛŒ Ø¯Ø±Ú¯ÛŒØ±Ù‡ <br> Ø§ÛŒÙ† ÙˆÛŒÚ˜Ú¯ÛŒ Ø®Ø§Øµ ØªÙˆØ±Ùˆ Ø®ÛŒÙ„ÛŒØ§ Ù†Ø¯Ø§Ø±Ù†! <br> Ù‚Ø¯Ø±Ø´Ùˆ Ø¨Ø¯ÙˆÙ†âœ¨",
+  },
+  {
+    title: "Ù‚Ù„Ø¨ Ø§Ø­Ø³Ø§Ø³Ø§ØªÛŒ",
+    date: "2026/10/08",
+    image: "./assets/images/memories/trait-10.jpg",
+    text: " Ù‚Ø±Ø¨ÙˆÙ† Ù‚Ù„Ø¨ Ø§Ø­Ø³Ø§Ø³Ø§ØªÛŒØª Ø¨Ø±Ù… Ù…Ù†ØŒ Ø§Ø­Ø³Ø§Ø³Ø§Øª Ø®ÙˆØ´Ú¯Ù„ØªÙˆ Ø¬ÙˆØ±ÛŒ Ù†Ø´ÙˆÙ† Ù…ÛŒØ¯ÛŒ <br> Ø¬ÙˆØ±ÛŒ Ø¨Ø±ÙˆØ² Ù…ÛŒØ¯ÛŒ Ø§Ø¯Ù… Ø¯Ù„Ø´ Ø¶Ø¹Ù Ù…ÛŒØ±Ù‡ <br> Ù…Ø«Ù„ Ø®ÙˆØ´Ø­Ø§Ù„ÛŒØªØŒ Ù†Ø§Ø±Ø§Ø­ØªÛŒØªØŒ Ø¹ØµØ¨Ø§Ù†ÛŒØªØªØŒ Ø°ÙˆÙ‚ Ø²Ø¯Ú¯ÛŒØª <br> ØªÚ© ØªÚ© Ø§ÛŒÙ†Ø§ Ø®ÛŒÙ„ÛŒ Ø®Ø§Øµ Ùˆ Ù‚Ø´Ù†Ú¯Ù†ðŸ˜‰",
+  },
+  {
+    title: "Ú©ÛŒÙˆØª Ø¨Ø§Ù…Ø²Ù‡",
+    date: "2026/10/08",
+    image: "./assets/images/memories/trait-111.jpg",
+    text: " Ú©ÛŒÙˆÙˆÙˆÙˆØªØŒ Ø®Ø¯Ø§ÛŒØ§ Ù‡Ø±Ú†ÛŒ Ø¨Ø§Ù…Ø²Ú¯ÛŒ Ùˆ Ù†Ù…Ú©ÛŒ Ø¨ÙˆØ¯Ù‡ Ø±ÛŒØ®ØªÙ‡ ØªÙˆ Ø§ÛŒÙ† Ø¨Ø´Ø± <br> ÛŒØ¬ÙˆØ±ÛŒ Ú©ÛŒÙˆØªÛŒ Ø§Ø¯Ù… Ù…ÛŒÚ¯Ù‡ Ø¨Ú¯ÛŒØ±Ù… Ø¨Ú†Ù„ÙˆÙ†Ù…Ø´ðŸ˜­",
+  },
+  {
+    title: "Ø¯Ø±ÛŒØ§ÛŒÛŒØŒ Ø¯Ø±ÛŒØ§",
+    date: "2026/10/08",
+    image: "./assets/images/memories/trait-11.jpg",
+    text: " Ø¢Ø±ÙˆÙ…ÛŒ Ù…Ø«Ù„ Ø¯Ø±ÛŒØ§ <br> Ø¢Ø±Ø§Ù…Ø´ÛŒ Ú©Ù‡ ØªÙˆ Ú†Ù‡Ø±Ù‡ Ù…Ø¹ØµÙˆÙ…Øª Ù‡Ø³Øª ÙˆØ§ÛŒØ¨ Ø§Ø±ÙˆÙ… Ø¯Ø±ÛŒØ§ Ø±Ùˆ Ù…ÛŒØ¯Ù‡ <br> Ø§Ø¯Ù… ÙˆÙ‚ØªÛŒ Ú©Ù†Ø§Ø±Øª Ø³Ø§Ú©ØªÙ‡ Ø§Ù†Ú¯Ø§Ø± ØµØ¯Ø§ÛŒ Ù…ÙˆØ¬ Ù‡Ø§ÛŒ Ø¯Ø±ÛŒØ§ Ú©Ù†Ø§Ø± Ú¯ÙˆØ´Ø´ Ø²Ù…Ø²Ù…Ù‡ Ù…ÛŒÚ©Ù†Ù†.ðŸŒŠ",
+  },
+  {
+    title: "Ø±Ø§Ù‡ÛŒ Ú©Ù‡ Ø§ÙˆÙ…Ø¯ÛŒ",
+    date: "2026/10/08",
+    image: "./assets/images/memories/trait-12.jpg",
+    text: " Ù…ÛŒØ¯ÙˆÙ†Ù… Ù…Ø³ÛŒØ±ÛŒ Ú©Ù‡ Ø§ÙˆÙ…Ø¯ÛŒ Ø¢Ø³ÙˆÙ† Ù†Ø¨ÙˆØ¯Ù‡ØŒ Ø§Ù…Ø§ Ù‡Ù†ÙˆØ² Ø¯Ø§Ø±ÛŒ Ø¬Ù„Ùˆ Ù…ÛŒØ±ÛŒ  <br> Ø´Ø§ÛŒØ¯ Ø®ÙˆØ¯Øª Ù…ØªÙˆØ¬Ù‡Ø´ Ù†Ø¨Ø§Ø´ÛŒ Ø§Ù…Ø§ Ø¨Ù‡ Ø¹Ù‚Ø¨ Ú©Ù‡ Ù†Ú¯Ø§Ù‡ Ù…ÛŒÚ©Ù†Ù…ØŒ Ù…ÛŒØ¨ÛŒÙ†Ù… Ø±Ø§Ù‡ Ø®ÛŒÙ„ÛŒ Ø²ÛŒØ§Ø¯ÛŒ Ø§ÙˆÙ…Ø¯ÛŒ <br> Ø¨Ø²Ø±Ú¯ Ø´Ø¯ÛŒØŒ Ø¹ÙˆØ¶ Ø´Ø¯ÛŒØŒ Ø®ÛŒÙ„ÛŒ Ú†ÛŒØ²Ø§ ÛŒØ§Ø¯ Ú¯Ø±ÙØªÛŒ <br> Ø¨Ù‡Øª Ø§ÙØªØ®Ø§Ø± Ù…ÛŒÚ©Ù†Ù… Ø¬ÙˆØ¬Ù‡ Ú©ÙˆÚ†ÙˆÙ„ÙˆÙ…ðŸ¥",
+  },
+  {
+    title: "Ù‡Ø³ØªÛŒØŒ Ø­ØªÛŒ Ø§Ø² Ø¯ÙˆØ±",
+    date: "2026/10/08",
+    image: "./assets/images/memories/trait-13.jpg",
+    text: " Ø­ØªÛŒ Ø§Ú¯Ù‡ Ù†Ø²Ø¯ÛŒÚ© Ù‡Ù… Ù†Ø¨Ø§Ø´ÛŒØŒ Ù‡Ø³ØªÛŒ <br> Ø®Ø¯Ø§ ØªÙˆØ±Ùˆ ÛŒÙ‡ ÙØ±Ø´ØªÙ‡ Ø¢ÙØ±ÛŒØ¯Ù‡ Ú©Ù‡ Ø­ØªÛŒ Ø§Ø² Ø¯ÙˆØ± Ù‡Ù… Ù…ÛŒØ´Ù‡ Ø­Ø³Øª Ú©Ø±Ø¯ðŸª½",
+  },
+  {
+    title: "Ø¯Ù„ ÙÙ‡Ù…ÛŒ",
+    date: "2026/10/08",
+    image: "./assets/images/memories/trait-14.jpg",
+    text: " Ù…ÛŒØ¯ÙˆÙ†ÛŒ ØªÙˆ Ø§Ù†Ú¯Ø§Ø± Ù…ÛŒØ¯ÙˆÙ†ÛŒ Ú©ÛŒ Ø¯Ø§Ø±Ù‡ Ú†ÛŒ Ø±Ùˆ Ø­Ø³ Ù…ÛŒÚ©Ù†Ù‡ØŒ Ø­Ø³Ø´ Ù…ÛŒÚ©Ù†ÛŒ Ùˆ Ù…ÛŒÙÙ‡Ù…ÛŒ <br> Ù†Ø§Ø±Ø§Ø­ØªÛŒ Ùˆ Ø®ÙˆØ´Ø­Ø§Ù„ÛŒ Ø§Ø·Ø±Ø§ÙÛŒØ§Ù†Øª Ø±Ùˆ Ø®ÙˆØ¨ ØªØ´Ø®ÛŒØµ Ù…ÛŒØ¯ÛŒ Ùˆ Ù‡Ù…Ø¯Ù„ÛŒ Ú©Ø±Ø¯Ù† Ø±Ùˆ Ø®ÙˆØ¨ Ø¨Ù„Ø¯ÛŒ.ðŸ«€",
+  },
+  {
+    title: "Ú†Ø´Ù… Ù‚Ø¯Ø±Ø´Ù†Ø§Ø³",
+    date: "2026/10/08",
+    image: "./assets/images/memories/trait-15.jpg",
+    text: " Ù‚Ø¯Ø±Ø´Ù†Ø§Ø³ÛŒ! <br> Ø®ÙˆØ¨ Ø¨Ù„Ø¯ÛŒ Ù‚Ø¯Ø± ÛŒÙ‡ Ú†ÛŒØ²ÛŒÙˆ Ø¨Ø¯ÙˆÙ†ÛŒ <br> Ø®ÙˆØ¨ Ø¨Ù„Ø¯ÛŒ Ø§Ø² ÛŒÙ‡ Ú†ÛŒØ²ÛŒ Ù…Ø±Ø§Ù‚Ø¨Øª Ú©Ù†ÛŒ Ùˆ Ù†Ø²Ø§Ø±ÛŒ Ø¨Ù‡Ø´ Ø¢Ø³ÛŒØ¨ Ø¨Ø±Ø³Ù‡ <br> Ù…Ù†Ù… Ù‚Ø¯Ø± Ø®Ø¯Ø§Ø±Ùˆ Ù…ÛŒØ¯ÙˆÙ†Ù… Ø¨Ø§ Ø§ÛŒÙ† Ù†Ø¹Ù…ØªÛŒ Ú©Ù‡ ØªÙˆ Ø²Ù†Ø¯Ú¯ÛŒÙ… Ø¯Ø§Ø±Ù…ðŸ’›",
+  },
+  {
+    //ÙˆÛŒØ¯ÛŒÙˆ!
+    title: "Ø¨Ø®Ø´Ù†Ø¯Ù‡ Ùˆ Ù…Ù‡Ø±Ø¨ÙˆÙ†",
+    date: "2026/10/08",
+    image: "./assets/images/memories/trait-151.jpg",
+    text: " Ø¯Ù„ Ù…Ù‡Ø±Ø¨ÙˆÙ† ØªÙˆ Ø®ÛŒÙ„ÛŒ Ø¨Ø²Ø±Ú¯ Ùˆ ØµØ§ÙÙ‡ØŒ Ø®ÛŒÙ„ÛŒ Ø¨Ø®Ø´Ù†Ø¯Ù‡ ØªØ± Ø§Ø² Ú†ÛŒØ²ÛŒ Ù‡Ø³ØªÛŒ Ú©Ù‡ ÙÚ©Ø± Ù…ÛŒÚ©Ù†ÛŒ <br> Ù…Ø±Ø³ÛŒ Ú©Ù‡ ÙˆØ¬ÙˆØ¯ Ø¯Ø§Ø±ÛŒ Ø®ÙˆØ´ Ù‚Ù„Ø¨ Ù…Ù†ðŸ«€",
+  },
+  {
+    title: "Ø®ÙˆÙ†Ù‡ Ø§Ù…Ù†",
+    date: "2026/10/08",
+    image: "./assets/images/memories/trait-16.jpg",
+    text: " Ø®ÙˆÙ†Ù‡ ÛŒÙ†ÛŒ Ú†ÛŒØŸ ÛŒØ¹Ù†ÛŒ ÛŒÙ‡ Ø¬Ø§ÛŒ Ø§Ù…Ù† ÛŒØ¹Ù†ÛŒ Ù¾Ù†Ø§Ù‡ <br> ØªÙˆ Ø®ÙˆÙ†Ù‡ Ø§Ù…Ù†ÛŒ Ù‡Ø³ØªÛŒ Ú©Ù‡ Ø§Ø¯Ù… Ù…ÛŒØªÙˆÙ†Ù‡ Ø¨Ù‡Øª Ù¾Ù†Ø§Ù‡ Ø¨ÛŒØ§Ø±Ù‡ Ùˆ Ø¨Ú¯Ù‡ Ø¢Ø®ÛŒØ´Ø´Ø´Ø´!ðŸ˜Œ",
+  },
+  {
+    title: "Ø¯Ù†ÛŒØ§ÛŒ Ù…ØªÙØ§ÙˆØª ØªÙˆ",
+    date: "2026/10/08",
+    image: "./assets/images/memories/trait-17.jpg",
+    text: " Ø¯Ù†ÛŒØ§Ø±Ùˆ ÛŒÙ‡ Ø¬ÙˆØ± Ø¯ÛŒÚ¯Ù‡ Ø¬Ø°Ø§Ø¨ Ù…ÛŒØ¨ÛŒÙ†ÛŒ Ú†Ø´Ù… Ø¢Ù‡ÙˆÛŒÛŒØŒ Ø§Ø² Ù‡Ù…Ù‡ Ø¢Ø¯Ù…Ù‡Ø§ÛŒÛŒ Ú©Ù‡ ØªØ§Ø­Ø§Ù„Ø§ Ø¯ÛŒØ¯Ù… Ø®Ø§Øµ ØªØ±ÛŒ <br> Ø§Ù†Ú¯Ø§Ø± Ú†Ø´Ù… Ø¢Ù‡ÙˆÛŒÛŒ Ù‚ØµÙ‡ Ù…Ø§ Ø¯Ù†ÛŒØ§Ø±Ùˆ Ø¨Ø§ ÙˆØ¬ÙˆØ¯ Ù‚Ø´Ù†Ú¯Ø´ Ø®Ø§Øµ ØªØ± Ù…ÛŒÚ©Ù†Ù‡ðŸ‘ŒðŸ¼",
+  },
+  {
+    title: "Ø§Ø±Ø§Ø¯Ù‡ Ù…Ø­Ú©Ù…",
+    date: "2026/10/08",
+    image: "./assets/images/memories/trait-18.jpg",
+    text: " Ù…Ù‡Ø¯ÛŒÙ‡ Ù‚Ø´Ù†Ú¯ Ù…Ù†ØŒ Ø§Ø±Ø§Ø¯Ù‡ Ø§ÛŒ Ú©Ù‡ ØªÙˆ Ø¯Ø§Ø±ÛŒ Ù‡ÛŒÚ†Ú©Ø³ Ù†Ø¯Ø§Ø±Ù‡ Ø®ÙˆØ¨ Ø¨Ù„Ø¯ÛŒ Ú©ÛŒ Ù…Ø³Ù…Ù… Ø¨Ø´ÛŒ Ùˆ ØªØµÙ…ÛŒÙ…ØªÙˆ Ø¨Ú¯ÛŒØ±ÛŒ<br> ØªØ­Ø³ÛŒÙ†Øª Ù…ÛŒÚ©Ù†Ù… Ø¨Ø§Ø¨Øª Ø§Ø±Ø§Ø¯Ù‡ Ø§ÛŒ Ú©Ù‡ Ø¯Ø§Ø±ÛŒ Ù¾Ø± Ù‚Ø¯Ø±Øª Ø§Ø¯Ø§Ù…Ù‡ Ø¨Ø¯Ù‡ Ù…Ø§Ù‡ Ù…Ù†ðŸ‘ŒðŸ¼",
+  },
+  {
+    title: "ØµØ¯Ø§ÛŒ Ù‚Ø´Ù†Ú¯Øª",
+    date: "2026/10/08",
+    image: "./assets/images/memories/trait-19.jpg",
+    text: " ÛŒÙ‡ ØµØ¯Ø§ÛŒÛŒ Ø´Ù†ÛŒØ¯Ù…ØŒ Ø¯Ø±Ø³Øª Ù…Ø«Ù„ Ø²Ù…Ø²Ù…Ù‡ Ùˆ Ù†ÙˆØ§ÛŒ Ø¨Ù‡Ø´ØªÛŒ Ø¨ÙˆØ¯ <br> Ø§Ú¯Ù‡ Ø§Ø´ØªØ¨Ø§Ù‡ Ù†Ú©Ù†Ù… ØµØ¯Ø§ÛŒ ÛŒÙ‡ ÙØ±Ø´ØªÙ‡ Ù…Ù‡Ø±Ù…Ø§Ù‡ÛŒ Ø¨ÙˆØ¯ðŸ˜­",
+    voice: "assets/audio/mahdieh-voice.OGG",
+  },
+];
+/* =========================
+   OPEN MEMORY
+   ========================= */
+
+function openMemory(index) {
+  const panel = document.getElementById("memory-panel");
+
+  const memory = memories[index];
+
+  if (!panel || !memory) {
+    return;
+  }
+
+  /* =========================
+       Ø¨Ø®Ø´ Ù¾ÙˆÙ„Ø§Ø±ÙˆÛŒØ¯ â€” ÙÙ‚Ø· Ø§Ú¯Ù‡ Ø¹Ú©Ø³ Ø¯Ø§Ø±Ù‡
+       ========================= */
+
+  const polaroidHTML = memory.image
+    ? `
+                <div class="polaroid">
+
+                    <div class="polaroid-photo">
+
+                        <img
+                            src="${memory.image}"
+                            alt=""
+                        >
+
+                    </div>
+
+
+                    <div class="polaroid-caption">
+
+                        <div class="polaroid-title">
+                            ${memory.title}
+                        </div>
+
+                        <div class="polaroid-date">
+                            ${memory.date}
+                        </div>
+
+                    </div>
+
+                </div>
+            `
+    : `
+                <div class="memory-no-photo">
+
+                    <div class="polaroid-title">
+                        ${memory.title}
+                    </div>
+
+                    <div class="polaroid-date">
+                        ${memory.date}
+                    </div>
+
+                </div>
+            `;
+
+  panel.innerHTML = `
+
+        <div class="memory-overlay">
+
+            <div class="memory-card">
+
+                <button
+                    class="memory-close"
+                    aria-label="Close memory"
+                >
+                    Ã—
+                </button>
+
+
+                ${polaroidHTML}
+
+
+                <!-- MEMORY TEXT -->
+
+                <div class="memory-story">
+
+                    <p>
+                        ${memory.text}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+    `;
+
+  const overlay = panel.querySelector(".memory-overlay");
+
+  const closeButton = panel.querySelector(".memory-close");
+
+  /* =========================
+       SHOW PANEL
+       ========================= */
+
+  requestAnimationFrame(() => {
+    overlay.classList.add("visible");
+  });
+  /* âœ… Ø§Ú¯Ù‡ ÙØ§ÛŒÙ„ ØµÙˆØªÛŒ Ø¯Ø§Ø´ØªØŒ Ù¾Ù„ÛŒ Ú©Ù† */
+
+  if (memory.voice && typeof AudioSystem !== "undefined") {
+    AudioSystem.duckAndPlay(memory.voice);
+  }
+
+  /* =========================
+       CLOSE
+       ========================= */
+
+  closeButton.addEventListener("click", closeMemory);
+
+  /* ÙØ¹Ø§Ù„â€ŒØ³Ø§Ø²ÛŒ Ø³ÙˆØ§ÛŒÙ¾ Ø¨Ø±Ø§ÛŒ Ø¨Ø³ØªÙ† */
+
+  enableSwipeToClose(overlay);
+
+  overlay.addEventListener("click", (event) => {
+    if (event.target === overlay) {
+      closeMemory();
+    }
+  });
+}
+
+/* =========================
+   CLOSE MEMORY
+   ========================= */
+
+function closeMemory() {
+  const panel = document.getElementById("memory-panel");
+
+  if (!panel) {
+    return;
+  }
+
+  const overlay = panel.querySelector(".memory-overlay");
+
+  if (!overlay) {
+    return;
+  }
+
+  /* âœ… ØªÙˆÙ‚Ù ØµØ¯Ø§ÛŒ Ù…Ù‡Ø¯ÛŒÙ‡ */
+
+  if (typeof AudioSystem !== "undefined" && AudioSystem.stopAllVoices) {
+    AudioSystem.stopAllVoices();
+  }
+
+  overlay.classList.remove("visible");
+
+  setTimeout(() => {
+    panel.innerHTML = "";
+  }, 700);
+}
+/* =========================
+   SWIPE DOWN TO CLOSE
+   Ø³ÙˆØ§ÛŒÙ¾ Ø¨Ù‡ Ù¾Ø§ÛŒÛŒÙ† Ø¨Ø±Ø§ÛŒ Ø¨Ø³ØªÙ†
+   ========================= */
+
+function enableSwipeToClose(overlay) {
+  let startY = 0;
+  let currentY = 0;
+  let isDragging = false;
+
+  const card = overlay.querySelector(".memory-card");
+
+  if (!card) {
+    return;
+  }
+
+  overlay.addEventListener(
+    "touchstart",
+    (event) => {
+      startY = event.touches[0].clientY;
+      currentY = startY;
+      isDragging = true;
+
+      card.style.transition = "none";
+    },
+    { passive: true },
+  );
+
+  overlay.addEventListener(
+    "touchmove",
+    (event) => {
+      if (!isDragging) {
+        return;
+      }
+
+      currentY = event.touches[0].clientY;
+
+      const delta = currentY - startY;
+
+      /* ÙÙ‚Ø· Ø³ÙˆØ§ÛŒÙ¾ Ø¨Ù‡ Ù¾Ø§ÛŒÛŒÙ† */
+
+      if (delta > 0) {
+        card.style.transform = `translateY(${delta}px)`;
+
+        card.style.opacity = Math.max(0.3, 1 - delta / 400);
+      }
+    },
+    { passive: true },
+  );
+
+  overlay.addEventListener("touchend", () => {
+    if (!isDragging) {
+      return;
+    }
+
+    isDragging = false;
+
+    const delta = currentY - startY;
+
+    card.style.transition = "";
+
+    /* Ø§Ú¯Ù‡ Ø¨ÛŒØ´ØªØ± Ø§Ø² Û±Û°Û° Ù¾ÛŒÚ©Ø³Ù„ Ú©Ø´ÛŒØ¯ØŒ Ø¨Ø¨Ù†Ø¯ */
+
+    if (delta > 100) {
+      card.style.transform = "";
+      card.style.opacity = "";
+
+      closeMemory();
+    } else {
+      /* Ø¨Ø±Ú¯Ø±Ø¯ Ø¨Ù‡ Ø­Ø§Ù„Øª Ø§ÙˆÙ„ */
+
+      card.style.transform = "";
+      card.style.opacity = "";
+    }
+  });
+}
+
+/* =========================
+   ESCAPE TO CLOSE
+   ========================= */
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    const panel = document.getElementById("memory-panel");
+
+    if (panel && panel.querySelector(".memory-overlay.visible")) {
+      closeMemory();
+    }
+  }
+});
+
+========== Js\parallax.js ==========
+/* =========================
+   GYROSCOPE PARALLAX
+   Ù¾Ø§Ø±Ø§Ù„Ø§Ú©Ø³ Ø¨Ø§ Ú˜ÛŒØ±ÙˆØ³Ú©ÙˆÙ¾ Ù…ÙˆØ¨Ø§ÛŒÙ„
+   ========================= */
+
+const Parallax = (() => {
+  /* =========================
+       ØªÙ†Ø¸ÛŒÙ…Ø§Øª
+       ========================= */
+
+  /* Ø­Ø³Ø§Ø³ÛŒØª Ú©Ù„ÛŒ (Ù‡Ø±Ú†ÛŒ Ø¨ÛŒØ´ØªØ±ØŒ Ø­Ø±Ú©Øª Ø¨ÛŒØ´ØªØ±) */
+  const SENSITIVITY = 1.0;
+
+  /* Ù…Ø­Ø¯ÙˆØ¯ÛŒØª Ø­Ø¯Ø§Ú©Ø«Ø± Ø­Ø±Ú©Øª (Ù¾ÛŒÚ©Ø³Ù„) */
+  const MAX_MOVE = 30;
+
+  /* Ù†Ø±Ù…â€ŒÚ©Ù†Ù†Ø¯Ù‡ (0 = Ø¨Ø¯ÙˆÙ† Ù†Ø±Ù…â€ŒØ³Ø§Ø²ÛŒØŒ 1 = Ø®ÛŒÙ„ÛŒ Ù†Ø±Ù…) */
+  const SMOOTHING = 0.85;
+
+  /* =========================
+       ÙˆØ¶Ø¹ÛŒØª ÙØ¹Ù„ÛŒ
+       ========================= */
+
+  let targetX = 0;
+  let targetY = 0;
+
+  let currentX = 0;
+  let currentY = 0;
+
+  let isActive = false;
+  let animationFrame = null;
+
+  /* =========================
+       Ù„Ø§ÛŒÙ‡â€ŒÙ‡Ø§ Ùˆ Ù…Ù‚Ø¯Ø§Ø± Ø­Ø±Ú©Øª
+       ========================= */
+
+  const layers = [
+    /* Ø¯ÙˆØ±ØªØ±ÛŒÙ† Ù„Ø§ÛŒÙ‡â€ŒÙ‡Ø§ â€” Ø­Ø±Ú©Øª Ú©Ù… */
+    { selector: ".stars", depth: 0.1 },
+    { selector: ".moon", depth: 0.15 },
+    { selector: ".clouds", depth: 0.2 },
+    { selector: ".clouds-over", depth: 0.2 },
+
+    /* Ù„Ø§ÛŒÙ‡â€ŒÙ‡Ø§ÛŒ Ù…ÛŒØ§Ù†ÛŒ */
+    { selector: ".meadow", depth: 0.3 },
+    { selector: ".atmosphere-layer", depth: 0.35 },
+    { selector: ".light-layer", depth: 0.35 },
+
+    /* Ú¯Ù„â€ŒÙ‡Ø§ÛŒ Ø¯Ø´Øª */
+    { selector: "#flowers", depth: 0.55 },
+
+    /* Ù¾ÛŒØ´â€ŒØ²Ù…ÛŒÙ†Ù‡ â€” Ø­Ø±Ú©Øª Ø²ÛŒØ§Ø¯ */
+    { selector: ".particles", depth: 0.75 },
+    { selector: ".leaves", depth: 0.9 },
+    { selector: ".bloom-flower", depth: 0.7 },
+  ];
+
+  /* =========================
+       Ø°Ø®ÛŒØ±Ù‡â€ŒÛŒ Ø§Ù„Ù…Ø§Ù†â€ŒÙ‡Ø§
+       ========================= */
+
+  let elements = [];
+
+  /* =========================
+       Ø¨Ù‡â€ŒØ±ÙˆØ²Ø±Ø³Ø§Ù†ÛŒ Ù…ÙˆÙ‚Ø¹ÛŒØª
+       ========================= */
+
+  function update() {
+    if (!isActive) return;
+
+    /* Ù†Ø±Ù…â€ŒØ³Ø§Ø²ÛŒ Ø­Ø±Ú©Øª */
+
+    currentX += (targetX - currentX) * (1 - SMOOTHING);
+    currentY += (targetY - currentY) * (1 - SMOOTHING);
+
+    /* Ø§Ø¹Ù…Ø§Ù„ Ø±ÙˆÛŒ Ù‡Ø± Ù„Ø§ÛŒÙ‡ */
+
+    elements.forEach((item) => {
+      if (!item.el) return;
+
+      const x = currentX * item.depth;
+      const y = currentY * item.depth;
+
+      /* âœ… ÙÙ‚Ø· transform Ø§Ø¶Ø§ÙÙ‡ Ú©Ù†ØŒ Ø¨Ø¯ÙˆÙ† Ø§Ø² Ø¯Ø³Øª Ø¯Ø§Ø¯Ù† transform Ø§ØµÙ„ÛŒ */
+
+      item.el.style.setProperty("--parallax-x", `${x}px`);
+      item.el.style.setProperty("--parallax-y", `${y}px`);
+    });
+
+    animationFrame = requestAnimationFrame(update);
+  }
+
+  /* =========================
+       Ø´Ø±ÙˆØ¹
+       ========================= */
+
+  function start() {
+    /* Ø°Ø®ÛŒØ±Ù‡â€ŒÛŒ Ø§Ù„Ù…Ø§Ù†â€ŒÙ‡Ø§ */
+
+    elements = layers
+      .map((layer) => ({
+        el: document.querySelector(layer.selector),
+        depth: layer.depth,
+      }))
+      .filter((item) => item.el);
+
+    console.log("ðŸ“± Ù¾Ø§Ø±Ø§Ù„Ø§Ú©Ø³ ÙØ¹Ø§Ù„ â€” ØªØ¹Ø¯Ø§Ø¯ Ù„Ø§ÛŒÙ‡â€ŒÙ‡Ø§:", elements.length);
+
+    /* Ø¯Ø±Ø®ÙˆØ§Ø³Øª Ø¯Ø³ØªØ±Ø³ÛŒ Ø¨Ù‡ Ú˜ÛŒØ±ÙˆØ³Ú©ÙˆÙ¾ (Ø¨Ø±Ø§ÛŒ iOS) */
+
+    if (
+      typeof DeviceOrientationEvent !== "undefined" &&
+      typeof DeviceOrientationEvent.requestPermission === "function"
+    ) {
+      /* iOS 13+ */
+
+      DeviceOrientationEvent.requestPermission()
+        .then((permission) => {
+          if (permission === "granted") {
+            enable();
+          } else {
+            console.log("âš ï¸ Ú©Ø§Ø±Ø¨Ø± Ø§Ø¬Ø§Ø²Ù‡â€ŒÛŒ Ú˜ÛŒØ±ÙˆØ³Ú©ÙˆÙ¾ Ù†Ø¯Ø§Ø¯");
+          }
+        })
+        .catch((err) => {
+          console.log("âš ï¸ Ø®Ø·Ø§ Ø¯Ø± Ø¯Ø³ØªØ±Ø³ÛŒ Ú˜ÛŒØ±ÙˆØ³Ú©ÙˆÙ¾:", err);
+        });
+    } else if (typeof DeviceOrientationEvent !== "undefined") {
+      /* Ø§Ù†Ø¯Ø±ÙˆÛŒØ¯ Ùˆ Ø³Ø§ÛŒØ± */
+
+      enable();
+    } else {
+      console.log("âš ï¸ Ú˜ÛŒØ±ÙˆØ³Ú©ÙˆÙ¾ Ù¾Ø´ØªÛŒØ¨Ø§Ù†ÛŒ Ù†Ù…ÛŒâ€ŒØ´Ù‡");
+    }
+  }
+
+  /* =========================
+       ÙØ¹Ø§Ù„â€ŒØ³Ø§Ø²ÛŒ listener
+       ========================= */
+
+  function enable() {
+    isActive = true;
+
+    window.addEventListener("deviceorientation", handleOrientation, true);
+
+    update();
+  }
+
+  /* =========================
+       Ù…Ø¯ÛŒØ±ÛŒØª Ø­Ø±Ú©Øª Ú¯ÙˆØ´ÛŒ
+       ========================= */
+
+  function handleOrientation(event) {
+    /* gamma = Ú†Ù¾-Ø±Ø§Ø³Øª (Ú©Ø¬ Ú©Ø±Ø¯Ù† Ú¯ÙˆØ´ÛŒ Ø¨Ù‡ Ú†Ù¾/Ø±Ø§Ø³Øª) */
+    /* beta  = Ø¨Ø§Ù„Ø§-Ù¾Ø§ÛŒÛŒÙ† (Ú©Ø¬ Ú©Ø±Ø¯Ù† Ú¯ÙˆØ´ÛŒ Ø¨Ù‡ Ø¬Ù„Ùˆ/Ø¹Ù‚Ø¨) */
+
+    const gamma = event.gamma || 0; /* -90 ØªØ§ +90 */
+    const beta = event.beta || 0; /* -180 ØªØ§ +180 */
+
+    /* Ù…Ø­Ø¯ÙˆØ¯ Ú©Ø±Ø¯Ù† Ø¨Ù‡ Ø¨Ø§Ø²Ù‡â€ŒÛŒ -45 ØªØ§ +45 */
+
+    const clampedGamma = Math.max(-45, Math.min(45, gamma));
+    const clampedBeta = Math.max(
+      -45,
+      Math.min(45, beta - 45),
+    ); /* beta Ø¨Ù‡ Ø·ÙˆØ± Ù¾ÛŒØ´â€ŒÙØ±Ø¶ 45-60 Ù‡Ø³Øª ØªÙˆ Ø­Ø§Ù„Øª Ø¹Ø§Ø¯ÛŒ */
+
+    /* Ù…Ø­Ø§Ø³Ø¨Ù‡â€ŒÛŒ Ù…ÙˆÙ‚Ø¹ÛŒØª Ù‡Ø¯Ù */
+
+    targetX = (clampedGamma / 45) * MAX_MOVE * SENSITIVITY;
+    targetY = (clampedBeta / 45) * MAX_MOVE * SENSITIVITY;
+  }
+
+  /* =========================
+       ØªÙˆÙ‚Ù
+       ========================= */
+
+  function stop() {
+    isActive = false;
+
+    window.removeEventListener("deviceorientation", handleOrientation);
+
+    if (animationFrame) {
+      cancelAnimationFrame(animationFrame);
+    }
+  }
+
+  /* =========================
+       API Ø¹Ù…ÙˆÙ…ÛŒ
+       ========================= */
+
+  return {
+    start,
+    stop,
+  };
+})();
+
+========== Js\particles.js ==========
+/* =========================
+   FLOATING PARTICLES
+   Ú¯Ø±Ø¯Ù‡ / ØºØ¨Ø§Ø± Ø±ÙˆÛŒØ§ÛŒÛŒ
+   ========================= */
+
+function createParticles() {
+
+    const container =
+        document.getElementById("particles");
+
+    if (!container) {
+        return;
+    }
+
+
+    /* =========================
+       ØªØ¹Ø¯Ø§Ø¯ Ø¨Ø± Ø§Ø³Ø§Ø³ Ø§Ù†Ø¯Ø§Ø²Ù‡ ØµÙØ­Ù‡
+       ========================= */
+
+    const isMobile =
+        window.matchMedia("(max-width: 600px)").matches;
+
+    /* Ø±ÙˆÛŒ Ø¯Ø³Ú©ØªØ§Ù¾ Û±Û¸ ØªØ§ØŒ Ø±ÙˆÛŒ Ù…ÙˆØ¨Ø§ÛŒÙ„ Û±Û² ØªØ§ */
+    const count =
+        isMobile ? 15 : 20;
+
+
+    /* =========================
+       Ù¾Ø§Ú© Ú©Ø±Ø¯Ù† Ù‚Ø¨Ù„ÛŒâ€ŒÙ‡Ø§
+       (Ø¨Ø±Ø§ÛŒ resize Ø§Ù…Ù†)
+       ========================= */
+
+    container.innerHTML = "";
+
+
+    /* =========================
+       Ø³Ø§Ø®Øª Ø°Ø±Ø§Øª
+       ========================= */
+
+    for (let i = 0; i < count; i++) {
+
+        const particle =
+            document.createElement("span");
+
+        particle.className = "particle";
+
+
+        /* Ù…ÙˆÙ‚Ø¹ÛŒØª Ø§ÙˆÙ„ÛŒÙ‡ Ø±Ù†Ø¯ÙˆÙ… Ø¯Ø± Ú©Ù„ ØµÙØ­Ù‡ */
+        particle.style.left =
+            `${Math.random() * 100}%`;
+
+        particle.style.top =
+            `${Math.random() * 100}%`;
+
+
+        /* Ù…Ø¯Øª Ø²Ù…Ø§Ù† Ø§Ù†ÛŒÙ…ÛŒØ´Ù†: Û±Û° ØªØ§ Û²Û² Ø«Ø§Ù†ÛŒÙ‡ */
+        particle.style.setProperty(
+            "--duration",
+            `${10 + Math.random() * 12}s`
+        );
+
+
+        /* ØªØ£Ø®ÛŒØ± Ø´Ø±ÙˆØ¹: Û° ØªØ§ Û±Ûµ Ø«Ø§Ù†ÛŒÙ‡ */
+        particle.style.setProperty(
+            "--delay",
+            `${Math.random() * 15}s`
+        );
+
+
+        /* Ø¬Ù‡Øª Ø´Ù†Ø§ÙˆØ±ÛŒ: Ú©Ù… Ùˆ Ù…Ù„Ø§ÛŒÙ… */
+        particle.style.setProperty(
+            "--drift-x",
+            `${-40 + Math.random() * 80}px`
+        );
+
+        particle.style.setProperty(
+            "--drift-y",
+            `${-60 - Math.random() * 60}px`
+        );
+
+
+        /* Ø§ÙˆØ¬ Ø´ÙØ§ÙÛŒØª: Ø¨ÛŒÙ† Û°.Û´ ØªØ§ Û°.Û¸ */
+        particle.style.setProperty(
+            "--peak-opacity",
+            (0.4 + Math.random() * 0.4).toFixed(2)
+        );
+
+
+        /* Ø§Ù†Ø¯Ø§Ø²Ù‡ Ú©Ù…ÛŒ Ù…ØªÙØ§ÙˆØª Ø¨Ø±Ø§ÛŒ ØªÙ†ÙˆØ¹ */
+        const scale =
+            0.8 + Math.random() * 0.8;
+
+        particle.style.width =
+            `${5 * scale}px`;
+        particle.style.height =
+            `${5 * scale}px`;
+
+
+        container.appendChild(particle);
+    }
+
+
+    /* =========================
+       Ù†Ù…Ø§ÛŒØ´ Ø¢Ø±ÙˆÙ… Ø¨Ø¹Ø¯ Ø§Ø² Ù„ÙˆØ¯
+       ========================= */
+
+    requestAnimationFrame(() => {
+
+        setTimeout(() => {
+            container.classList.add("ready");
+        }, 400);
+
+    });
+}
+
+
+/* =========================
+   Ø§Ø¬Ø±Ø§ Ø¯Ø± Ù„ÙˆØ¯ ØµÙØ­Ù‡
+   ========================= */
+
+window.addEventListener(
+    "load",
+    createParticles
+);
+
+
+/* =========================
+   Ø¨Ø§Ø²Ø³Ø§Ø²ÛŒ Ø¯Ø± ØªØºÛŒÛŒØ± Ø§Ù†Ø¯Ø§Ø²Ù‡ / Ú†Ø±Ø®Ø´ ØµÙØ­Ù‡
+   ========================= */
+
+let particleResizeTimer;
+
+window.addEventListener(
+    "resize",
+    () => {
+
+        clearTimeout(particleResizeTimer);
+
+        particleResizeTimer =
+            setTimeout(() => {
+
+                const container =
+                    document.getElementById(
+                        "particles"
+                    );
+
+                if (container) {
+                    container.classList.remove(
+                        "ready"
+                    );
+                }
+
+                createParticles();
+
+            }, 400);
+    }
+);
+
+========== Js\petals.js ==========
+/* =========================
+   BLOOM FLOWER SYSTEM
+   Ú¯Ù„ Ø¨Ø§Ø¨ÙˆÙ†Ù‡â€ŒÛŒ Ø¯Ø± Ø­Ø§Ù„ Ø´Ú©ÙØªÙ†
+   ========================= */
+
+const BloomFlower = (() => {
+  let flowerEl = null;
+  let petalsLayer = null;
+  let currentCountEl = null;
+
+  let totalPetals = 0;
+  let currentPetals = 0;
+  let petalScale = 1;
+  let clickAttached = false;
+
+  /* =========================
+       Ø³Ø§Ø®Øª Ú¯Ù„
+       ========================= */
+
+  function create(total) {
+    totalPetals = total;
+
+    const world = document.getElementById("world");
+    if (!world) {
+      console.warn("âš ï¸ #world Ù¾ÛŒØ¯Ø§ Ù†Ø´Ø¯");
+      return;
+    }
+
+    const old = world.querySelector(".bloom-flower");
+    if (old) old.remove();
+
+    flowerEl = document.createElement("div");
+    flowerEl.className = "bloom-flower";
+
+    flowerEl.innerHTML = `
+            <div class="stem"></div>
+            <div class="bud"></div>
+            <div class="petals-layer"></div>
+            <div class="core"></div>
+            <div class="bloom-count">
+                <span class="bloom-current">0</span>
+                <span class="bloom-separator">/</span>
+                <span class="bloom-total">${total}</span>
+            </div>
+        `;
+
+    world.appendChild(flowerEl);
+
+    petalsLayer = flowerEl.querySelector(".petals-layer");
+    currentCountEl = flowerEl.querySelector(".bloom-current");
+
+    updatePetalScale();
+
+    setTimeout(() => {
+      flowerEl.classList.add("visible");
+    }, 2000);
+  }
+
+  function updatePetalScale() {
+    if (!flowerEl) return;
+
+    const size = flowerEl.offsetWidth;
+
+    petalScale = size / 70;
+
+    if (petalScale < 0.7) petalScale = 0.7;
+    if (petalScale > 1.2) petalScale = 1.2;
+  }
+
+  /* =========================
+       Ø§Ø¶Ø§ÙÙ‡ Ú©Ø±Ø¯Ù† Ú¯Ù„Ø¨Ø±Ú¯
+       ========================= */
+
+  function addPetal(fromX, fromY) {
+    if (!flowerEl || !petalsLayer) {
+      console.warn("âš ï¸ Ú¯Ù„ Ù¾Ø§ÛŒØ§Ù†ÛŒ Ù‡Ù†ÙˆØ² Ø³Ø§Ø®ØªÙ‡ Ù†Ø´Ø¯Ù‡");
+      return;
+    }
+
+    currentPetals++;
+
+    updateCounter();
+
+    if (fromX !== undefined && fromY !== undefined) {
+      flyPetal(fromX, fromY, () => {
+        placePetal(currentPetals);
+      });
+    } else {
+      placePetal(currentPetals);
+    }
+
+    if (currentPetals >= totalPetals) {
+      setTimeout(bloom, 1600);
+    }
+  }
+
+  /* =========================
+       Ù¾Ø±ÙˆØ§Ø² Ú¯Ù„Ø¨Ø±Ú¯
+       ========================= */
+
+  function flyPetal(startX, startY, onArrive) {
+    if (!flowerEl) return;
+
+    const rect = flowerEl.getBoundingClientRect();
+
+    const endX = rect.left + rect.width / 2;
+    const endY = rect.top + rect.height / 2;
+
+    const petal = document.createElement("div");
+    petal.className = "flying-petal";
+
+    petal.style.left = `${startX}px`;
+    petal.style.top = `${startY}px`;
+
+    document.body.appendChild(petal);
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const dx = endX - startX;
+        const dy = endY - startY;
+
+        petal.style.transform = `translate(${dx}px, ${dy}px) rotate(540deg) scale(0.6)`;
+
+        petal.style.opacity = "0.4";
+      });
+    });
+
+    setTimeout(() => {
+      petal.remove();
+      if (onArrive) onArrive();
+    }, 1300);
+  }
+
+  /* =========================
+       Ù‚Ø±Ø§Ø± Ø¯Ø§Ø¯Ù† Ú¯Ù„Ø¨Ø±Ú¯ Ø¯ÙˆØ± Ú¯Ù„
+       ========================= */
+
+  function placePetal(index) {
+    if (!petalsLayer) return;
+
+    const angle = ((index - 1) / totalPetals) * 360;
+
+    const petal = document.createElement("span");
+    petal.className = "petal";
+
+    petal.style.setProperty("--petal-angle", `${angle}deg`);
+    petal.style.setProperty("--petal-scale", petalScale);
+
+    petalsLayer.appendChild(petal);
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        petal.classList.add("placed");
+      });
+    });
+  }
+
+  /* =========================
+       Ø¢Ù¾Ø¯ÛŒØª Ø´Ù…Ø§Ø±Ù†Ø¯Ù‡
+       ========================= */
+
+  function updateCounter() {
+    if (!currentCountEl) return;
+
+    /* âœ… Ø§Ø¶Ø§ÙÙ‡ Ú©Ø±Ø¯Ù† ØµÙØ± Ù‚Ø¨Ù„ Ø§Ø² Ø§Ø¹Ø¯Ø§Ø¯ Û± ØªØ§ Û¹ */
+
+    const displayNumber =
+      currentPetals < 10 ? `0${currentPetals}` : `${currentPetals}`;
+
+    currentCountEl.textContent = displayNumber;
+
+    currentCountEl.classList.add("pulse");
+
+    setTimeout(() => {
+      currentCountEl.classList.remove("pulse");
+    }, 400);
+  }
+
+  /* =========================
+       Ø´Ú©ÙˆÙÙ‡â€ŒÛŒ Ù†Ù‡Ø§ÛŒÛŒ
+       ========================= */
+
+  function bloom() {
+    if (!flowerEl) return;
+
+    flowerEl.classList.add("blooming");
+
+    attachBloomClick();
+
+    /* Ù¾ÛŒØ§Ù… ØªØ¨Ø±ÛŒÚ© â€” Ø¨Ø¹Ø¯ Ø§Ø² Ø¨Ø³ØªÙ‡ Ø´Ø¯Ù† Ù¾Ù†Ù„ */
+
+    const tryShowMessage = () => {
+      const panel = document.getElementById("memory-panel");
+
+      if (panel && panel.querySelector(".memory-overlay.visible")) {
+        setTimeout(tryShowMessage, 500);
+        return;
+      }
+
+      if (typeof showBirthdayMessage === "function") {
+        showBirthdayMessage();
+      }
+    };
+
+    setTimeout(tryShowMessage, 1500);
+  }
+
+  /* =========================
+       Ú©Ù„ÛŒÚ© Ø±ÙˆÛŒ Ú¯Ù„ Ù†Ù‡Ø§ÛŒÛŒ
+       ========================= */
+
+  function attachBloomClick() {
+    if (!flowerEl) return;
+
+    if (clickAttached) return;
+
+    clickAttached = true;
+
+    /* Ú©Ù„ÛŒÚ© Ú©ÙˆØªØ§Ù‡ â€” ÛŒÙ‡ Ø¨Ø§Ø± Ù¾Ø®Ø´ */
+
+    flowerEl.addEventListener("click", (event) => {
+      event.stopPropagation();
+      burstPetals();
+    });
+  }
+  /* =========================
+   AUTO BURST
+   Ù¾Ø®Ø´ Ø®ÙˆØ¯Ú©Ø§Ø± Ú¯Ù„Ø¨Ø±Ú¯ (ØªØ§ ÙˆÙ‚ØªÛŒ Ù¾Ù†Ù„ Ø¨Ø§Ø²Ù‡)
+   ========================= */
+
+  let autoBurstInterval = null;
+
+  function startAutoBurst() {
+    if (autoBurstInterval) return;
+
+    autoBurstInterval = setInterval(() => {
+      burstPetals();
+    }, 500);
+  }
+
+  function stopAutoBurst() {
+    if (autoBurstInterval) {
+      clearInterval(autoBurstInterval);
+      autoBurstInterval = null;
+    }
+  }
+
+  /* =========================
+       Ù¾Ø®Ø´ Ú¯Ù„Ø¨Ø±Ú¯â€ŒÙ‡Ø§
+       ========================= */
+
+  function burstPetals() {
+    if (!flowerEl) return;
+
+    const rect = flowerEl.getBoundingClientRect();
+
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    const count = 12;
+
+    for (let i = 0; i < count; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const distance = 60 + Math.random() * 70;
+
+      const dx = Math.cos(angle) * distance;
+      const dy = Math.sin(angle) * distance;
+
+      const petal = document.createElement("div");
+      petal.className = "burst-petal";
+
+      petal.style.left = `${centerX}px`;
+      petal.style.top = `${centerY}px`;
+
+      document.body.appendChild(petal);
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          petal.style.transform = `translate(${dx}px, ${dy}px) rotate(${Math.random() * 720}deg) scale(0.4)`;
+
+          petal.style.opacity = "0";
+        });
+      });
+
+      setTimeout(() => {
+        petal.remove();
+      }, 1400);
+    }
+  }
+
+  /* =========================
+       API Ø¹Ù…ÙˆÙ…ÛŒ
+       ========================= */
+
+  /* =========================
+   RESET
+   Ø±ÛŒØ³Øª Ú©Ø±Ø¯Ù† state
+   ========================= */
+
+  function reset() {
+    currentPetals = 0;
+    clickAttached = false;
+
+    if (flowerEl) {
+      flowerEl.classList.remove("blooming");
+    }
+  }
+
+  return {
+    create,
+    addPetal,
+    reset,
+    startAutoBurst,
+    stopAutoBurst,
+
+    get total() {
+      return totalPetals;
+    },
+    get current() {
+      return currentPetals;
+    },
+    get element() {
+      return flowerEl;
+    },
+  };
+})();
+
+========== Js\preload.js ==========
+/* =========================
+   PRELOAD ASSETS
+   Ù¾ÛŒØ´â€ŒØ¨Ø§Ø±Ú¯Ø°Ø§Ø±ÛŒ Ø¹Ú©Ø³â€ŒÙ‡Ø§
+   ========================= */
+
+function preloadImages(urls) {
+
+    if (!urls || !urls.length) {
+        return;
+    }
+
+    urls.forEach((url) => {
+
+        if (!url) {
+            return;
+        }
+
+        const img = new Image();
+
+        img.src = url;
+
+        /* Ø¹Ù…Ø¯Ø§Ù‹ await Ù†Ù…ÛŒâ€ŒÚ©Ù†ÛŒÙ…
+           Ú©Ù‡ Ù„ÙˆØ¯ ØµÙØ­Ù‡ Ø±Ùˆ Ù…Ø¹Ø·Ù„ Ù†Ú©Ù†Ù‡ */
+
+    });
+}
+
+
+function preloadAll() {
+
+    /* =========================
+       Ø¹Ú©Ø³ Ø®Ø§Ø·Ø±Ø§Øª
+       ========================= */
+
+    if (
+        typeof memories !== "undefined" &&
+        Array.isArray(memories)
+    ) {
+
+        const memoryImages =
+            memories
+                .map((m) => m.image)
+                .filter(Boolean);
+
+        preloadImages(memoryImages);
+    }
+
+
+    /* =========================
+       Ø¹Ú©Ø³ Ú¯Ù„ Ø¨Ø§Ø²
+       ========================= */
+
+    preloadImages([
+        "assets/images/flowers/chamomile-open.png"
+    ]);
+
+}
+
+
+/* =========================
+   Ø§Ø¬Ø±Ø§ Ø¨Ø¹Ø¯ Ø§Ø² Ù„ÙˆØ¯ Ø§ÙˆÙ„ÛŒÙ‡
+   ========================= */
+
+window.addEventListener("load", () => {
+
+    /* ÛŒÙ‡ Ú©Ù… ØªØ£Ø®ÛŒØ±ØŒ Ú©Ù‡ Ø¨Ø§ Ø§Ù†ÛŒÙ…ÛŒØ´Ù†â€ŒÙ‡Ø§ÛŒ
+       Ø§ÙˆÙ„ÛŒÙ‡â€ŒÛŒ ØµÙØ­Ù‡ Ø¯Ø±Ú¯ÛŒØ± Ù†Ø´Ù‡ */
+
+    setTimeout(preloadAll, 1500);
+
+});
+
+========== Js\scene.js ==========
+
+========== Js\sky.js ==========
+function setSkyState(state, progress = 0) {
+  const world = document.getElementById("world");
+
+  if (!world) {
+    return;
+  }
+
+  world.dataset.time = state;
+
+  world.style.setProperty("--time-progress", progress);
+}
+
+========== Js\time.js ==========
+const timeStates = {
+  night: {
+    name: "night",
+    start: 0,
+    end: 4.5,
+  },
+
+  dawn: {
+    name: "dawn",
+    start: 4.5,
+    end: 6,
+  },
+
+  day: {
+    name: "day",
+    start: 6,
+    end: 16,
+  },
+
+  golden: {
+    name: "golden",
+    start: 16,
+    end: 18,
+  },
+
+  twilight: {
+    name: "twilight",
+    start: 18,
+    end: 18.75,
+  },
+
+  nightAfter: {
+    name: "night",
+    start: 18.75,
+    end: 24,
+  },
+};
+
+function getCurrentHour() {
+  const now = new Date();
+
+  const hours = now.getHours();
+  const minutes = now.getMinutes();
+  const seconds = now.getSeconds();
+
+  return hours + minutes / 60 + seconds / 3600;
+}
+
+function getTimeProgress() {
+  const hour = getCurrentHour();
+
+  let state = "night";
+  let progress = 0;
+
+  /* =========================
+       DAWN
+       ========================= */
+
+  if (hour >= 4.5 && hour < 6) {
+    state = "dawn";
+
+    progress = (hour - 4.5) / (6 - 4.5);
+  } else if (hour >= 6 && hour < 16) {
+    /* =========================
+       DAY
+       ========================= */
+    state = "day";
+
+    progress = (hour - 6) / (16 - 6);
+  } else if (hour >= 16 && hour < 18) {
+    /* =========================
+       GOLDEN HOUR
+       (Ø­Ø§Ù„Ø§ Ø§Ø² Û±Û¶ ØªØ§ Û±Û¸)
+       ========================= */
+    state = "golden";
+
+    progress = (hour - 16) / (18 - 16);
+  } else if (hour >= 18 && hour < 18.75) {
+    /* =========================
+       TWILIGHT
+       ========================= */
+    state = "twilight";
+
+    progress = (hour - 18) / (18.75 - 18);
+  } else {
+    /* =========================
+       NIGHT
+       ========================= */
+    state = "night";
+
+    if (hour >= 18.75) {
+      progress = (hour - 18.75) / (24 - 18.75);
+    } else {
+      progress = hour / 4.5;
+    }
+  }
+
+  return {
+    state: state,
+
+    progress: Math.max(0, Math.min(1, progress)),
+
+    hour: hour,
+  };
+}
+
+========== Js\welcome.js ==========
+/* =========================
+   WELCOME OVERLAY
+   Ù¾ÛŒØ§Ù… ÙˆØ±ÙˆØ¯ÛŒ
+   ========================= */
+
+function initWelcome() {
+  const world = document.getElementById("world");
+
+  if (!world) return;
+
+  /* =========================
+       Ø³Ø§Ø®Øª Ø§Ù„Ù…Ø§Ù†
+       ========================= */
+
+  const overlay = document.createElement("div");
+  overlay.className = "welcome-overlay";
+
+  overlay.innerHTML = `
+        <div class="welcome-card">
+
+            <div class="welcome-icon">ðŸŒ¼</div>
+
+            <h1 class="welcome-title" dir="rtl">
+             Ø³Ù„Ø§Ø§Ø§Ø§Ø§Ø§Ø§Ù… Ø®Ø§Ù†ÙˆÙ… ØªÙˆÙ„Ø¯ÛŒØ§Ù†ÛŒðŸ¥³
+            </h1>
+
+            <p class="welcome-message" dir="rtl">
+                Û²Û³ ØªØ§ Ú¯Ù„ Ø¨Ø§Ø¨ÙˆÙ†Ù‡ Ú©Ø§Ø´ØªÙ‡ Ø´Ø¯Ù‡ Ú©Ù‡ Ú©Ø´ÙØ´ Ú©Ù†ÛŒ.<br>
+                Ù‡Ø± Ú©Ø¯ÙˆÙ… ÛŒÙ‡ Ú†ÛŒØ² Ø®Ø§Øµ Ø§Ø² ØªÙˆØ¦Ù‡.<br>
+                Ú©Ø§ÙÛŒÙ‡ Ø±ÙˆØ´ÙˆÙ† Ù„Ù…Ø³ Ú©Ù†ÛŒ...
+            </p>
+
+            <button class="welcome-button" dir="rtl">
+               Ø¨Ø²Ù† Ø¨Ø±ÛŒÙ…ðŸ‘©ðŸ»â€ðŸ¦¯
+            </button>
+
+        </div>
+    `;
+
+  document.body.appendChild(overlay);
+
+  /* =========================
+       Ù†Ù…Ø§ÛŒØ´ Ø¢Ø±ÙˆÙ…
+       ========================= */
+
+  setTimeout(() => {
+    overlay.classList.add("visible");
+  }, 400);
+
+  /* =========================
+       Ú©Ù„ÛŒÚ© Ø±ÙˆÛŒ Ø¯Ú©Ù…Ù‡
+       ========================= */
+
+  const button = overlay.querySelector(".welcome-button");
+
+  button.addEventListener("click", () => {
+    /* Ø´Ø±ÙˆØ¹ Ø¢Ù‡Ù†Ú¯ (Ø§Ø¬Ø§Ø²Ù‡â€ŒÛŒ Ú©Ø§Ø±Ø¨Ø±) */
+
+    if (typeof AudioSystem !== "undefined") {
+      AudioSystem.startAmbient();
+    }
+
+    /* âœ… Ø´Ø±ÙˆØ¹ Ù¾Ø§Ø±Ø§Ù„Ø§Ú©Ø³ Ú˜ÛŒØ±ÙˆØ³Ú©ÙˆÙ¾ */
+
+    if (typeof Parallax !== "undefined") {
+      Parallax.start();
+    }
+
+    /* Ù…Ø­Ùˆ Ú©Ø±Ø¯Ù† Ù¾ÛŒØ§Ù… */
+
+    overlay.classList.add("hidden");
+
+    setTimeout(() => {
+      if (overlay.parentNode) {
+        overlay.remove();
+      }
+    }, 1300);
+  });
+}
+
+/* =========================
+   Ø§Ø¬Ø±Ø§
+   ========================= */
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initWelcome);
+} else {
+  initWelcome();
+}
+
+========== index.html ==========
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>All of Youâœ§</title>
+
+    <link rel="stylesheet" href="Css/style.css" />
+    <link rel="stylesheet" href="Css/meadow.css" />
+    <link rel="stylesheet" href="Css/flowers.css" />
+    <link rel="stylesheet" href="Css/panel.css" />
+    <link rel="stylesheet" href="Css/particles.css" />
+    <link rel="stylesheet" href="Css/leaves.css" />
+    <link rel="stylesheet" href="Css/guide.css" />
+    <link rel="stylesheet" href="Css/petals.css" />
+    <link rel="stylesheet" href="Css/audio.css" />
+    <link rel="stylesheet" href="Css/magic.css" />
+    <link rel="stylesheet" href="Css/welcome.css" />
+    <link rel="stylesheet" href="Css/parallax.css" />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>ðŸŒ¼</text></svg>"
+    />
+  </head>
+
+  <body>
+    <main id="world">
+      <div class="meadow"></div>
+
+      <div class="sky-layer"></div>
+      <div class="atmosphere-layer"></div>
+      <div class="light-layer"></div>
+
+      <div class="clouds">
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+        <div class="cloud cloud-3"></div>
+      </div>
+
+      <div class="stars"></div>
+      <div class="star-dim"></div>
+      <div class="moon"></div>
+
+      <div class="clouds-over">
+        <div class="cloud-over cloud-over-1"></div>
+        <div class="cloud-over cloud-over-2"></div>
+        <div class="cloud-over cloud-over-3"></div>
+        <div class="cloud-over cloud-over-4 reverse"></div>
+        <div class="cloud-over cloud-over-5 reverse"></div>
+      </div>
+
+      <div class="particles" id="particles"></div>
+      <div class="leaves" id="leaves"></div>
+
+      <div id="flowers"></div>
+
+      <div id="memory-panel"></div>
+    </main>
+
+    <script src="Js/time.js"></script>
+    <script src="Js/sky.js"></script>
+    <script src="Js/flowers.js"></script>
+    <script src="Js/petals.js"></script>
+    <script src="Js/memories.js"></script>
+    <script src="Js/preload.js"></script>
+    <script src="Js/particles.js"></script>
+    <script src="Js/leaves.js"></script>
+    <script src="Js/hint.js"></script>
+    <script src="Js/audio.js"></script>
+    <script src="Js/magic.js"></script>
+    <script src="Js/welcome.js"></script>
+    <script src="Js/parallax.js"></script>
+    <script src="Js/main.js"></script>
+  </body>
+</html>
+

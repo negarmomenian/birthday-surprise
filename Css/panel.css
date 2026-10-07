@@ -1,0 +1,559 @@
+/* =========================
+   MEMORY OVERLAY
+   ========================= */
+
+.memory-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 18px calc(24px + env(safe-area-inset-bottom));
+
+  /* ✅ پس‌زمینه‌ی تیره‌تر برای کنتراست بلور */
+  background: rgba(20, 15, 10, 0.25);
+
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+
+/* =========================
+   VISIBLE
+   ========================= */
+
+.memory-overlay.visible {
+  opacity: 1;
+
+  pointer-events: auto;
+}
+
+/* =========================
+   GLASS CONTAINER
+   ========================= */
+
+.memory-card {
+  position: relative;
+
+  width: min(100%, 470px);
+
+  max-height: 90vh;
+
+  overflow-y: auto;
+
+  padding: 22px 20px 24px;
+
+  border: 1px solid rgba(255, 255, 255, 0.34);
+
+  border-radius: 28px;
+
+  background: rgba(255, 255, 255, 0.16);
+
+  /* ✅ بلور از اول اعمال شه */
+  backdrop-filter: blur(20px) saturate(130%);
+  -webkit-backdrop-filter: blur(20px) saturate(130%);
+
+  /* ✅ برای اینکه GPU از اول رندر کنه */
+  will-change: transform, opacity;
+
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.42);
+
+  transform: translateY(28px) scale(0.97);
+
+  opacity: 0;
+
+  /* ✅ فقط opacity و transform انیمیت شن، نه backdrop */
+  transition:
+    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.75s ease;
+}
+
+/* =========================
+   CARD OPEN
+   ========================= */
+
+.memory-overlay.visible .memory-card {
+  transform: translateY(0) scale(1);
+
+  opacity: 1;
+}
+
+/* =========================
+   CLOSE BUTTON
+   ========================= */
+
+.memory-close {
+  position: absolute;
+
+  top: 12px;
+  right: 12px;
+
+  z-index: 5;
+
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.28);
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.18);
+
+  color: rgba(40, 45, 50, 0.72);
+
+  font-size: 20px;
+
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    transform 0.3s ease;
+}
+
+.memory-close:hover {
+  background: rgba(255, 255, 255, 0.38);
+
+  transform: rotate(90deg);
+}
+
+/* =========================
+   POLAROID
+   ========================= */
+
+.polaroid {
+  width: min(100%, 360px);
+
+  margin: 4px auto 24px;
+
+  padding: 12px 12px 18px;
+
+  background: #f7f5ee;
+
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.18);
+
+  transform: none;
+}
+
+/* =========================
+   PHOTO
+   ========================= */
+
+.polaroid-photo {
+  width: 100%;
+
+  /* ✅ نسبت ثابت حذف شد — عکس با نسبت خودش نشون داده می‌شه */
+
+  overflow: hidden;
+
+  background: #e9e7df;
+
+  /* ارتفاع خودکار بر اساس عکس */
+  height: auto;
+}
+
+.polaroid-photo img {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  object-fit: contain;
+  /* ✅ افکت قدیمی */
+  filter: sepia(0.15) saturate(1.1) contrast(1.05) brightness(1.02);
+}
+/* =========================
+   POLAROID CAPTION
+   ========================= */
+
+.polaroid-caption {
+  padding: 13px 5px 0;
+
+  text-align: center;
+}
+
+.polaroid-title {
+  font-size: 18px;
+
+  line-height: 1.4;
+
+  color: #34352f;
+
+  letter-spacing: 0.01em;
+}
+
+.polaroid-date {
+  margin-top: 5px;
+
+  font-size: 11px;
+
+  letter-spacing: 0.14em;
+
+  color: #77786f;
+
+  text-transform: uppercase;
+}
+
+/* =========================
+   MEMORY STORY
+   ========================= */
+
+.memory-story {
+  width: min(100%, 390px);
+
+  margin: 0 auto;
+
+  padding: 2px 8px 4px;
+
+  color: rgba(255, 255, 255, 0.94);
+
+  text-align: center;
+
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+}
+
+.memory-story p {
+  margin: 0;
+
+  font-size: 16px;
+
+  line-height: 1.9;
+
+  font-weight: 400;
+}
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 480px) {
+  .memory-overlay {
+    padding: 16px 12px calc(16px + env(safe-area-inset-bottom));
+  }
+
+  .memory-card {
+    width: 100%;
+
+    max-height: 92vh;
+
+    padding: 18px 14px 20px;
+
+    border-radius: 25px;
+  }
+
+  .polaroid {
+    width: min(100%, 330px);
+
+    padding: 10px 10px 16px;
+
+    margin-bottom: 20px;
+  }
+
+  .polaroid-title {
+    font-size: 17px;
+  }
+
+  .polaroid-date {
+    font-size: 10px;
+  }
+
+  .memory-story p {
+    font-size: 15px;
+
+    line-height: 1.85;
+  }
+}
+/* =========================
+   MEMORY WITHOUT PHOTO
+   خاطره‌ی بدون عکس
+   ========================= */
+
+.memory-no-photo {
+  width: min(100%, 360px);
+
+  margin: 4px auto 24px;
+
+  padding: 20px 12px;
+
+  text-align: center;
+}
+
+.memory-no-photo .polaroid-title {
+  font-size: 22px;
+  color: rgba(255, 255, 255, 0.96);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+}
+
+.memory-no-photo .polaroid-date {
+  margin-top: 8px;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+}
+.birthday-overlay {
+  position: absolute;
+  inset: 0;
+
+  z-index: 100; /* ← بالاترین لایه */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  background: rgba(15, 10, 5, 0.45);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: opacity 1s ease;
+}
+
+.birthday-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.birthday-close {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  /* فاصله از متن بالای خودش */
+  margin-top: 28px;
+
+  padding: 8px 22px;
+
+  border: 1px solid rgba(255, 240, 190, 0.55);
+  border-radius: 30px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 235, 170, 0.32) 0%,
+    rgba(255, 215, 130, 0.22) 100%
+  );
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  color: rgba(60, 45, 20, 0.95);
+
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 500;
+
+  letter-spacing: 0.05em;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 6px 16px rgba(180, 130, 40, 0.18),
+    inset 0 1px 0 rgba(255, 255, 240, 0.6);
+
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s ease,
+    background 0.35s ease;
+}
+
+.birthday-close:hover {
+  transform: translateY(-2px) scale(1.04);
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 240, 180, 0.45) 0%,
+    rgba(255, 220, 140, 0.32) 100%
+  );
+
+  box-shadow:
+    0 10px 22px rgba(180, 130, 40, 0.26),
+    inset 0 1px 0 rgba(255, 255, 240, 0.7);
+}
+
+.birthday-close:active {
+  transform: translateY(0) scale(0.98);
+}
+/* =========================
+   RTL TEXT
+   راست‌به‌چپ
+   ========================= */
+
+.birthday-title,
+.birthday-message,
+.memory-story,
+.memory-story p,
+.polaroid-caption,
+.polaroid-title,
+.polaroid-date {
+  direction: rtl;
+  unicode-bidi: embed;
+}
+/* =========================
+   AFTER MESSAGE
+   پیام بعد از تبریک
+   ========================= */
+
+.after-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 90;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  background: rgba(15, 10, 5, 0.25);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition: opacity 1.2s ease;
+}
+
+.after-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.after-card {
+  width: min(100%, 380px);
+
+  padding: 36px 28px 30px;
+
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  border-radius: 28px;
+
+  background: rgba(255, 255, 255, 0.14);
+
+  backdrop-filter: blur(20px) saturate(130%);
+  -webkit-backdrop-filter: blur(20px) saturate(130%);
+
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+
+  text-align: center;
+
+  transform: translateY(20px) scale(0.96);
+  opacity: 0;
+
+  transition:
+    transform 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 1s ease;
+}
+
+.after-overlay.visible .after-card {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.after-text {
+  font-size: 17px;
+  line-height: 2;
+
+  color: rgba(255, 255, 255, 0.96);
+
+  margin-bottom: 26px;
+
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.15);
+}
+
+.after-replay {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 11px 32px;
+
+  border: 1px solid rgba(255, 240, 190, 0.5);
+  border-radius: 30px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 235, 170, 0.3) 0%,
+    rgba(255, 215, 130, 0.2) 100%
+  );
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  color: rgba(60, 45, 20, 0.95);
+
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 500;
+
+  letter-spacing: 0.05em;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 22px rgba(180, 130, 40, 0.18),
+    inset 0 1px 0 rgba(255, 255, 240, 0.6);
+
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s ease,
+    background 0.35s ease;
+}
+
+.after-replay:hover {
+  transform: translateY(-2px) scale(1.04);
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 240, 180, 0.45) 0%,
+    rgba(255, 220, 140, 0.3) 100%
+  );
+
+  box-shadow:
+    0 12px 30px rgba(180, 130, 40, 0.28),
+    inset 0 1px 0 rgba(255, 255, 240, 0.7);
+}
+
+.after-replay:active {
+  transform: translateY(0) scale(0.98);
+}
+
+@media (max-width: 600px) {
+  .after-card {
+    padding: 30px 22px 26px;
+    border-radius: 24px;
+  }
+
+  .after-text {
+    font-size: 16px;
+    margin-bottom: 22px;
+  }
+
+  .after-replay {
+    padding: 10px 26px;
+    font-size: 13px;
+  }
+}
