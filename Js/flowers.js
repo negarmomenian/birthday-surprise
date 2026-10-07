@@ -1,16 +1,16 @@
 /* =========================
    FLOWER POSITIONS
-   چیدمان رندوم ۲۳ گل
+   چیدمان رندوم ۲۳ گل — با ناحیه‌ی امن
    ========================= */
 
 function generateFlowerPositions() {
   const positions = [];
 
-  /* ۲ گل پیش‌زمینه (کنارها) */
+  /* ۲ گل پیش‌زمینه (کنارها) — بالاتر از تسک‌بار */
 
   positions.push({
     x: 6,
-    y: 97,
+    y: 85,
     rotation: -12,
     scale: 1.0,
     opacity: 0.98,
@@ -21,7 +21,7 @@ function generateFlowerPositions() {
 
   positions.push({
     x: 94,
-    y: 97,
+    y: 85,
     rotation: 9,
     scale: 0.98,
     opacity: 0.98,
@@ -30,7 +30,7 @@ function generateFlowerPositions() {
     state: "closed",
   });
 
-  /* تولید بقیه به صورت رندوم */
+  /* تولید بقیه به صورت رندوم — حداکثر تا y: 85 */
 
   const totalFlowers = 23;
   let attempts = 0;
@@ -40,16 +40,16 @@ function generateFlowerPositions() {
     attempts++;
 
     const x = 3 + Math.random() * 94;
-    const y = 55 + Math.random() * 43;
+    const y = 50 + Math.random() * 35; /* y: 50 تا 85 */
 
     /* فیلتر ۱: ناحیه‌ی غنچه (پایین-چپ) */
-    if (x < 28 && y > 82) continue;
+    if (x < 28 && y > 75) continue;
 
     /* فیلتر ۲: صورت و موهای مهدیه */
     if (x > 28 && x < 75 && y > 25 && y < 60) continue;
 
     /* فیلتر ۳: بدن و لباس مهدیه */
-    if (x > 33 && x < 72 && y > 58 && y < 95) continue;
+    if (x > 33 && x < 72 && y > 58 && y < 85) continue;
 
     /* فیلتر ۴: فاصله از گل‌های قبلی */
     let tooClose = false;
@@ -65,7 +65,7 @@ function generateFlowerPositions() {
 
     if (tooClose) continue;
 
-    const depthFactor = (y - 55) / 43;
+    const depthFactor = (y - 50) / 35;
 
     const scale = 0.5 + depthFactor * 0.4 + Math.random() * 0.2;
     const opacity = 0.68 + depthFactor * 0.3;
@@ -155,13 +155,11 @@ function createFlowers() {
       event.preventDefault();
       event.stopPropagation();
 
-      /* اگه قبلاً باز شده بود، فقط پنل رو باز کن */
       if (flower.classList.contains("opened")) {
         openMemory(index % memories.length);
         return;
       }
 
-      /* اولین کلیک: گل رو باز کن */
       flower.classList.add("opened");
 
       image.src = "assets/images/flowers/chamomile-open.png";
@@ -174,11 +172,9 @@ function createFlowers() {
         BloomFlower.addPetal(centerX, centerY);
       }
 
-      /* چک کن این گل چندمین گل باز شده */
       const openedCount = document.querySelectorAll(".flower.opened").length;
       const isFinalFlower = openedCount === totalFlowers;
 
-      /* ذرات طلایی */
       if (typeof MagicParticles !== "undefined") {
         if (isFinalFlower) {
           MagicParticles.finalBurst(centerX, centerY);
@@ -191,7 +187,6 @@ function createFlowers() {
         }
       }
 
-      /* پنل رو با تأخیر باز کن */
       const delay = isFinalFlower ? 1400 : 600;
 
       setTimeout(() => {
@@ -199,7 +194,6 @@ function createFlowers() {
       }, delay);
     });
 
-    /* برای موبایل */
     flower.addEventListener(
       "touchstart",
       () => {
@@ -258,8 +252,6 @@ function showBirthdayMessage() {
   requestAnimationFrame(() => {
     overlay.classList.add("visible");
   });
-
-  /* شروع پخش خودکار گلبرگ */
 
   if (typeof BloomFlower !== "undefined" && BloomFlower.startAutoBurst) {
     setTimeout(() => {
@@ -320,14 +312,9 @@ function showAfterMessage() {
     overlay.classList.add("visible");
   });
 
-  /* ✅ دکمه‌ی دوباره */
-
   const replayBtn = overlay.querySelector(".after-replay");
 
   replayBtn.addEventListener("click", () => {
-    console.log("👆 دکمه دوباره ببین کلیک شد");
-
-    /* محو کردن overlay */
     overlay.classList.remove("visible");
 
     setTimeout(() => {
@@ -336,7 +323,6 @@ function showAfterMessage() {
       }
     }, 700);
 
-    /* ریست کردن گل‌ها */
     resetFlowers();
   });
 }
@@ -346,14 +332,10 @@ function showAfterMessage() {
    ========================= */
 
 function resetFlowers() {
-  console.log("🔄 resetFlowers شروع شد");
-
-  /* ۱. توقف پخش خودکار */
   if (typeof BloomFlower !== "undefined" && BloomFlower.stopAutoBurst) {
     BloomFlower.stopAutoBurst();
   }
 
-  /* ۲. بستن گل‌های دشت */
   document.querySelectorAll(".flower").forEach((f) => {
     f.classList.remove("opened");
     f.classList.remove("hint");
@@ -364,27 +346,21 @@ function resetFlowers() {
     }
   });
 
-  /* ۳. حذف گل پایانی قدیمی */
   const oldBloom = document.querySelector(".bloom-flower");
   if (oldBloom) {
     oldBloom.remove();
   }
 
-  /* ۴. ریست state داخلی */
   if (typeof BloomFlower !== "undefined" && BloomFlower.reset) {
     BloomFlower.reset();
   }
 
-  /* ۵. ساخت گل پایانی جدید */
   if (typeof BloomFlower !== "undefined") {
     window.__bloomFlowerCreated = false;
 
     setTimeout(() => {
       BloomFlower.create(totalFlowers);
       window.__bloomFlowerCreated = true;
-      console.log("🌸 گل پایانی جدید ساخته شد");
     }, 500);
   }
-
-  console.log("✅ resetFlowers تموم شد");
 }

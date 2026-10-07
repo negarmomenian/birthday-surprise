@@ -140,7 +140,7 @@ const memories = [
     date: "2026/10/08",
     image: "./assets/images/memories/trait-19.jpg",
     text: " یه صدایی شنیدم، درست مثل زمزمه و نوای بهشتی بود <br> اگه اشتباه نکنم صدای یه فرشته مهرماهی بود😭",
-    voice: "assets/audio/mahdieh-voice.OGG",
+    voice: "assets/audio/mahdieh-voice.mp3",
   },
 ];
 /* =========================
